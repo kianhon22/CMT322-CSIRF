@@ -1,6 +1,6 @@
-# CMT322 Project - VCSIRF
+# CMT322 Project - CSIRF
 
-Virtual Computer Science Internship & Recruitment Fair is an annual event exhibiting a series of career talks sponsored by major companies to provide industrial training placement opportunities for the third year students and to supply employment opportunities for the other students of the School of Computer Sciences, Universiti Sains Malaysia. It enables students to explore opportunities conveniently and gain valuable insights into their future careers.
+Computer Science Internship & Recruitment Fair is an annual event exhibiting a series of career talks sponsored by major companies to provide industrial training placement opportunities for the third year students and to supply employment opportunities for the other students of the School of Computer Sciences, Universiti Sains Malaysia. It enables students to explore opportunities conveniently and gain valuable insights into their future careers.
 
 ## Get started
 
