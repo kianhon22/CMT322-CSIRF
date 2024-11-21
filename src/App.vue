@@ -1,7 +1,7 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import RegisterPage from './components/RegisterPage.vue'
+import HelloWorld from '@/components/HelloWorld.vue'
+import TheWelcome from '@/components/TheWelcome.vue'
+import NavigationBar from '@/components/NavigationBar.vue';
 </script>
 
 <!-- <template>
@@ -12,14 +12,19 @@ import RegisterPage from './components/RegisterPage.vue'
       <HelloWorld msg="You did it!" />
     </div>
   </header>
-
   <main>
-    <TheWelcome />
+  <TheWelcome />
+    <router-link to="/">Home</router-link>|
+    <router-link to="/about">About</router-link> | 
+    <router-view></router-view>
   </main>
 </template> -->
 
 <template>
-  <RegisterPage />
+  <NavigationBar />
+  <main>
+    <router-view></router-view>
+  </main>
 </template>
 
 <style scoped>
