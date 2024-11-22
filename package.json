@@ -11,6 +11,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.9",
     "flowbite": "^2.5.2",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5"
