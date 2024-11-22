@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply">
+  <section class="bg-center bg-no-repeat bg-[url('/src/assets/neon-purple-modern-city-iegjsguqr41ak8ee.jpg')] bg-gray-700 bg-blend-multiply h-screen w-full">
       <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
         <a href="/" class="flex items-center">
             <img src="/csirf-logo.png" class="mr-3 h-6 sm:h-9" alt="CSIRF Logo" />
