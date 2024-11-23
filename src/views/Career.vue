@@ -14,6 +14,14 @@
           <p class="mb-5 font-normal text-gray-700">
             {{ job.position }}
           </p>
+          <div class="flex justify-start gap-2 mb-3">
+            <span class="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-100 rounded-full">
+              {{ job.type }}
+            </span>
+            <span class="px-2 py-1 text-xs font-semibold text-green-800 bg-green-100 rounded-full">
+              {{ job.mode }}
+            </span>
+          </div>
           <button class="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors duration-300">
             Apply Now
             <svg class="w-4 h-4 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -50,31 +58,41 @@ export default {
           id: 1,
           company: 'TechCorp Solutions',
           position: 'Senior Frontend Developer',
-          description: 'Responsible for developing and maintaining the frontend of our web applications.'
+          description: 'Responsible for developing and maintaining the frontend of our web applications.',
+          type: 'Internship',
+          mode: 'On-site'
         },
         {
           id: 2,
           company: 'DataFlow Systems',
           position: 'Machine Learning Engineer',
-          description: 'Design and implement machine learning models to improve our data processing capabilities.'
+          description: 'Design and implement machine learning models to improve our data processing capabilities.',
+          type: 'Internship',
+          mode: 'On-site'
         },
         {
           id: 3,
           company: 'CloudNine Technologies',
           position: 'DevOps Specialist',
-          description: 'Manage and optimize our cloud infrastructure and CI/CD pipelines.'
+          description: 'Manage and optimize our cloud infrastructure and CI/CD pipelines.',
+          type: 'Internship',
+          mode: 'On-site'
         },
         {
           id: 4,
           company: 'Quantum Innovations',
           position: 'Full Stack Developer',
-          description: 'Work on both frontend and backend development to deliver full-fledged applications.'
+          description: 'Work on both frontend and backend development to deliver full-fledged applications.',
+          type: 'Full-time',
+          mode: 'Hybrid'
         },
         {
           id: 5,
           company: 'CyberGuard Security',
           position: 'Security Engineer',
-          description: 'Ensure the security of our systems and protect against cyber threats.'
+          description: 'Ensure the security of our systems and protect against cyber threats.',
+          type: 'Full-time',
+          mode: 'Hybrid'
         }
       ],
       isModalOpen: false,
