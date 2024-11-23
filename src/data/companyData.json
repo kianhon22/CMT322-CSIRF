@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Fusionex",
+        "category": "gold",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "website": "",
+        "description": "",
+        "sponsorID": 1
+    },
+    {
+        "name": "Universiti Sains Malaysia",
+        "category": "platinum",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "website": "",
+        "description": "",
+        "sponsorID": 1
+    },
+    {
+        "name": "Micron",
+        "category": "platinum",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "website": "",
+        "description": "",
+        "sponsorID": 2
+    },
+    {
+        "name": "Intel",
+        "category": "silver",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "website": "",
+        "description": "",
+        "sponsorID": 5
+    },
+    {
+        "name": "Vitrox",
+        "category": "bronze",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "website": "",
+        "description": "",
+        "sponsorID": 3
+    },
+    {
+        "name": "Veecotech",
+        "category": "gold",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "website": "",
+        "description": "",
+        "sponsorID": 6
+    },
+    {
+        "name": "Jabil",
+        "category": "gold",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "website": "",
+        "description": "",
+        "sponsorID": 7
+    }
+]

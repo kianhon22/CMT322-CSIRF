@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "Software Engineer",
+        "description": "engineering",
+        "mode": "hybrid",
+        "companyID": 1
+    },
+    {
+        "id": 2,
+        "name": "Software Tester",
+        "description": "testing",
+        "mode": "onsite",
+        "companyID": 3
+    }
+]

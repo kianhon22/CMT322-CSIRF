@@ -28,7 +28,7 @@
                 id="email"
                 name="email"
                 type="email"
-                v-model="registerData.email"
+                v-model="userData.email"
                 placeholder="name@company.com"
                 required=""
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -91,12 +91,12 @@
 </template>
 
 <script>
-import registerData from '../data/RegisterData.json';
+import userData from '../data/userData.json';
 
 export default {
   data() {
     return {
-      registerData: registerData,
+      userData: userData,
       email: '',
       password: '',
       terms: false,
