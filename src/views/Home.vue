@@ -3,7 +3,7 @@
         <div class="grid max-w-screen-xl px-8 py-8 mx-auto lg:gap-8 xl:gap-16 lg:grid-cols-12 items-center">
             <div class="h-56 w-56 lg:col-span-5 flex justify-start lg:pl-12">
                 <img src="/csirf-logo-white.png" alt="CSIRF Logo" />
-            </div> 
+            </div>
             <div class="lg:col-span-7 text-center lg:text-left">
                 <h1 class="text-white max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
                     CSIRF
@@ -22,15 +22,16 @@
                     <router-link to="/career"
                     class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-[#1E1B4B] rounded-lg bg-white hover:bg-orange-500">
                     Explore Career
-                    </router-link>  
+                    </router-link>
                 </div>
             </div>
         </div>
     </section>
     <section class="bg-center bg-[#1E1B4B] h-screen w-full">
+        <h1 class="pt-5 text-4xl font-bold text-center mb-12 text-white">Company</h1>
     </section>
   </template>
-  
+
   <script>
   export default {};
   </script>

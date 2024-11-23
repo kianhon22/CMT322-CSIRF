@@ -7,16 +7,18 @@
         "linkedin": "",
         "website": "",
         "description": "",
+        "logo": "../assets/Fusionex logo.png",
         "sponsorID": 1
     },
     {
-        "name": "Universiti Sains Malaysia",
+        "name": "National Instruments",
         "category": "platinum",
         "email": "",
         "phone": "",
         "linkedin": "",
         "website": "",
-        "description": "",
+        "description": "../assets/NI logo.png",
+        "logo": "",
         "sponsorID": 1
     },
     {
@@ -27,6 +29,7 @@
         "linkedin": "",
         "website": "",
         "description": "",
+        "logo": "../assets/Micron logo.png",
         "sponsorID": 2
     },
     {
@@ -37,6 +40,7 @@
         "linkedin": "",
         "website": "",
         "description": "",
+        "logo": "../assets/Intel logo.png",
         "sponsorID": 5
     },
     {
@@ -47,6 +51,7 @@
         "linkedin": "",
         "website": "",
         "description": "",
+        "logo": "../assets/Vitrox logo.png",
         "sponsorID": 3
     },
     {
@@ -57,6 +62,7 @@
         "linkedin": "",
         "website": "",
         "description": "",
+        "logo": "../assets/Veecotech logo.png",
         "sponsorID": 6
     },
     {
@@ -67,6 +73,7 @@
         "linkedin": "",
         "website": "",
         "description": "",
+        "logo": "../assets/Jabil logo.png",
         "sponsorID": 7
     }
 ]
