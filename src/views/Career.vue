@@ -5,7 +5,8 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
       <fwb-card v-for="job in jobs"
                 :key="job.id"
-                class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                @click="openModal(job)">
         <div class="p-6">
           <h5 class="mb-3 text-2xl font-bold tracking-tight text-gray-900">
             {{ job.company }}
@@ -22,41 +23,72 @@
         </div>
       </fwb-card>
     </div>
+
+    <!-- Modal Component -->
+    <Modal
+      :isOpen="isModalOpen"
+      :title="selectedJob?.company"
+      :description="selectedJob?.position"
+      :jobDescription="selectedJob?.description"
+      @close="closeModal"
+    />
   </section>
 </template>
 
 <script>
+import Modal from '@/components/Modal.vue';
+
 export default {
   name: 'CareerView',
+  components: {
+    Modal
+  },
   data() {
     return {
       jobs: [
         {
           id: 1,
           company: 'TechCorp Solutions',
-          position: 'Senior Frontend Developer'
+          position: 'Senior Frontend Developer',
+          description: 'Responsible for developing and maintaining the frontend of our web applications.'
         },
         {
           id: 2,
           company: 'DataFlow Systems',
-          position: 'Machine Learning Engineer'
+          position: 'Machine Learning Engineer',
+          description: 'Design and implement machine learning models to improve our data processing capabilities.'
         },
         {
           id: 3,
           company: 'CloudNine Technologies',
-          position: 'DevOps Specialist'
+          position: 'DevOps Specialist',
+          description: 'Manage and optimize our cloud infrastructure and CI/CD pipelines.'
         },
         {
           id: 4,
           company: 'Quantum Innovations',
-          position: 'Full Stack Developer'
+          position: 'Full Stack Developer',
+          description: 'Work on both frontend and backend development to deliver full-fledged applications.'
         },
         {
           id: 5,
           company: 'CyberGuard Security',
-          position: 'Security Engineer'
+          position: 'Security Engineer',
+          description: 'Ensure the security of our systems and protect against cyber threats.'
         }
-      ]
+      ],
+      isModalOpen: false,
+      selectedJob: null
+    }
+  },
+  methods: {
+    openModal(job) {
+      this.selectedJob = job;
+      this.isModalOpen = true;
+    },
+    closeModal() {
+      this.isModalOpen = false;
+      this.selectedJob = null;
     }
   }
 }
