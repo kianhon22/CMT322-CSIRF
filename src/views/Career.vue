@@ -2,8 +2,25 @@
   <section class="min-h-screen bg-center bg-no-repeat bg-[url('/src/assets/neon-purple-modern-city-iegjsguqr41ak8ee.jpg')] bg-gray-500 bg-blend-multiply p-8">
     <h1 class="text-4xl font-bold text-center mb-12 text-white">Career Opportunities</h1>
 
+    <!-- Search Bar -->
+    <div class="max-w-2xl mx-auto mb-8">
+      <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          </svg>
+        </div>
+        <input
+          type="text"
+          v-model="searchQuery"
+          class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white/90 backdrop-blur-sm focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Search for positions, companies..."
+        >
+      </div>
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-      <fwb-card v-for="job in jobs"
+      <fwb-card v-for="job in filteredJobs"
                 :key="job.id"
                 class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
                 @click="openModal(job)">
@@ -53,6 +70,7 @@ export default {
   },
   data() {
     return {
+      searchQuery: '',
       jobs: [
         {
           id: 1,
@@ -97,6 +115,18 @@ export default {
       ],
       isModalOpen: false,
       selectedJob: null
+    }
+  },
+  computed: {
+    filteredJobs() {
+      const query = this.searchQuery.toLowerCase().trim();
+      if (!query) return this.jobs;
+
+      return this.jobs.filter(job => {
+        return job.position.toLowerCase().includes(query) ||
+               job.company.toLowerCase().includes(query) ||
+               job.description.toLowerCase().includes(query);
+      });
     }
   },
   methods: {
