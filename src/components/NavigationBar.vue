@@ -1,8 +1,8 @@
 <template>
-  <nav class="bg-black border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+  <nav class="bg-[#1E1B4B] border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
         <a href="/" class="flex items-center">
-            <img src="/csirf-logo.png" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+            <img src="/csirf-logo-white.png" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">CSIRF</span>
         </a>
         <div class="flex items-center">
@@ -17,44 +17,81 @@
             <ul class="flex flex-col mt-4 text-lg lg:flex-row lg:space-x-8 lg:mt-0 ml-60">
                 <li>
                   <router-link to="/"
-                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg hover:bg-orange-500 lg:border-0 lg:hover:bg-orange-500"
-                    active-class="bg-orange-500"
+                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
+                    active-class="bg-orange-500 text-[#1E1B4B]"
                   > Home
                   </router-link>
                 </li>
+                <div v-if="this.currentUser && this.currentUser.role=='admin'">
+                  <li>
+                    <router-link to="/dashboard"
+                      class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
+                      active-class="bg-orange-500 text-[#1E1B4B]"
+                    > Dashboard
+                    </router-link>
+                  </li>
+                </div>
                 <li>
                   <router-link to="/event"
-                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg hover:bg-orange-500 lg:border-0 lg:hover:bg-orange-500"
-                    active-class="bg-orange-500"
+                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
+                    active-class="bg-orange-500 text-[#1E1B4B]"
                   > Events
                   </router-link>
                 </li>
                 <li>
                   <router-link to="/career"
-                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg hover:bg-orange-500 lg:border-0 lg:hover:bg-orange-500"
-                    active-class="bg-orange-500"
+                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
+                    active-class="bg-orange-500 text-[#1E1B4B]"
                   > Career
                   </router-link>
                 </li>
                 <li>
                   <router-link to="/company"
-                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg hover:bg-orange-500 lg:border-0 lg:hover:bg-orange-500"
-                    active-class="bg-orange-500"
+                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
+                    active-class="bg-orange-500 text-[#1E1B4B]"
                   > Company
                   </router-link>
                 </li>
-                <li>
-                  <router-link to="/register"
-                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg hover:bg-orange-500 lg:border-0 lg:hover:bg-orange-500"
-                    active-class="bg-orange-500"
-                  > Get Started
-                  </router-link>
-                </li>
+                <div v-if="this.currentUser">
+                  <li>
+                    <button @click="logout"
+                      class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
+                      active-class="bg-orange-500 text-[#1E1B4B]"
+                    > Logout
+                    </button>
+                  </li>
+                </div>
+                <div v-else>
+                  <li>
+                    <router-link to="/login"
+                      class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
+                      active-class="bg-orange-500 text-[#1E1B4B]"
+                    > Get Started
+                    </router-link>
+                  </li>
+                </div>
             </ul>
         </div>
     </div>
   </nav>
 </template>
+
+<script>
+import { inject } from 'vue';
+
+export default {
+  setup() {
+    const currentUser = inject('currentUser')
+    return { currentUser }
+  },
+
+  methods: {
+    logout() {
+      this.currentUser = null
+    }
+  },
+}
+</script>
 
 <style scoped> 
 /* Add custom styles if needed */

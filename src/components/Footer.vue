@@ -4,7 +4,7 @@
             <div class="md:flex md:justify-evenly items-center">
                 <div class="mb-6 md:mb-0 text-center md:text-left">
                     <a href="/" class="flex items-center md:items-start">
-                        <img src="/csirf-logo.png" class="h-24 mb-2" alt="CSIRF Logo" />
+                        <img src="/csirf-logo-white.png" class="h-24 mb-2" alt="CSIRF Logo" />
                         <span class="ml-4 text-white self-center text-4xl font-semibold whitespace-nowrap">CSIRF</span>
                     </a>
                 </div>

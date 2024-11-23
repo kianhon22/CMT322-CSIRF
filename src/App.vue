@@ -1,6 +1,12 @@
 <script setup>
+import { provide, ref } from 'vue'
+
 import NavigationBar from '@/components/NavigationBar.vue';
 import Footer from '@/components/Footer.vue';
+import userData from "@/data/userData";
+
+// Wrap currentUser in a ref for reactivity
+provide('currentUser', ref(userData.currentUser));
 </script>
 
 <template>

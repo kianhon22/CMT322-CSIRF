@@ -1,10 +1,19 @@
 {
+    "currentUser": 
+    {
+        "id": 1,
+        "role": "admin",
+        "name": "Admin",
+        "email": "admin@csirf.com",
+        "password": "csirfusm"
+    },
     "admin": [
     {
         "id": 1,
         "role": "admin",
         "name": "Admin",
-        "email": "admin@csirf.com"
+        "email": "admin@csirf.com",
+        "password": "csirfusm"
     }
     ],
     "sponsor": [
@@ -13,6 +22,7 @@
         "role": "sponsor",
         "name": "Sponsor 1",
         "email": "sponsor1@csirf.com",
+        "password": "csirfusm",
         "companyID": 1
     },
     {
@@ -20,6 +30,7 @@
         "role": "sponsor",
         "name": "Sponsor 2",
         "email": "sponsor2@csirf.com",
+        "password": "csirfusm",
         "companyID": 2
     }
     ],
@@ -29,6 +40,7 @@
         "role": "student",
         "name": "Student 1",
         "email": "student1@student.usm.my",
+        "password": "csirfusm",
         "phone": "0123456789",
         "year": 3,
         "registered": true
@@ -38,6 +50,7 @@
         "role": "student",
         "name": "Student 2",
         "email": "student2@student.usm.my",
+        "password": "csirfusm",
         "phone": "0123456789",
         "year": 2,
         "registered": true
@@ -47,6 +60,7 @@
         "role": "student",
         "name": "Student 3",
         "email": "student3@student.usm.my",
+        "password": "csirfusm",
         "phone": "0123456789",
         "year": 3,
         "registered": true
@@ -56,6 +70,7 @@
         "role": "student",
         "name": "Student 4",
         "email": "student4@student.usm.my",
+        "password": "csirfusm",
         "phone": "0123456789",
         "year": 2,
         "registered": true
@@ -65,6 +80,7 @@
         "role": "student",
         "name": "Student 6",
         "email": "student6@student.usm.my",
+        "password": "csirfusm",
         "phone": "0123456789",
         "year": 4,
         "registered": true

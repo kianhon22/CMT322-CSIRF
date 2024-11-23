@@ -1,35 +1,32 @@
 <template>
-  <section class="bg-dark dark:bg-gray-900">
+  <section class="bg-[#1E1B4B]">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <a
-        href="#"
-        class="flex items-center mb-6 text-2xl font-semibold text-white dark:text-white"
-      >
-        <img
-          class="w-8 h-8 mr-2"
-          src="/csirf-logo.png"
-          alt="CSIRF logo"
-        />
-        CSIRF
-      </a>
-      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-            Create an account
-          </h1>
-          <form class="space-y-4 md:space-y-6" @submit.prevent="register()">
+          <a
+            href="#"
+            class="flex items-center justify-center text-3xl font-semibold text-black"
+          >
+            <img
+              class="w-12 h-14 mr-2"
+              src="/csirf-logo-purple.png"
+              alt="CSIRF logo"
+            />
+            CSIRF
+          </a>
+          <form class="space-y-4 md:space-y-6" @submit.prevent="login()">
             <div>
               <label
                 for="email"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Your email
+                >Email <span class="text-red-700">*</span>
               </label>
               <input
                 id="email"
                 name="email"
                 type="email"
-                v-model="userData.email"
-                placeholder="name@company.com"
+                v-model="email"
+                placeholder="abc@usm.my"
                 required=""
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
@@ -38,17 +35,20 @@
               <label
                 for="password"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Password
+                >Password <span class="text-red-700">*</span>
               </label>
               <input
                 id="password"
                 name="password"
                 type="password"
                 v-model="password"
-                placeholder="••••••••"
+                placeholder="Enter your password"
                 required=""
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
+            </div>
+            <div v-if="errorMessage" class="text-red-600 text-sm">
+              {{ errorMessage }}
             </div>
             <div class="flex items-start">
               <div class="flex items-center h-5">
@@ -56,8 +56,7 @@
                   id="terms"
                   aria-describedby="terms"
                   type="checkbox"
-                  v-model="terms"
-                  class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                  class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-[#1E1B4B] text-[#1E1B4B]"
                   required=""
                 />
               </div>
@@ -66,7 +65,7 @@
                   I accept the
                   <a
                     href="#"
-                    class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    class="font-medium text-[#1E1B4B] hover:underline"
                     >Terms and Conditions
                   </a>
                 </label>
@@ -74,13 +73,13 @@
             </div>
             <button
               type="submit"
-              class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >Create Account
+              class="w-full text-white bg-[#2f2975] hover:bg-[#1E1B4B] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              >Start Exploring
             </button>
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-              Already have an account?
-              <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >Login here
+              Haven't registered?
+              <a href="#" class="font-medium text-[#1E1B4B] hover:underline"
+                >Register Now
               </a>
             </p>
           </form>
@@ -92,24 +91,54 @@
 
 <script>
 import userData from '../data/userData.json';
+import { inject } from 'vue';
 
 export default {
+  setup() {
+    const currentUser = inject('currentUser')
+    return { currentUser }
+  },
+
   data() {
     return {
-      userData: userData,
       email: '',
       password: '',
-      terms: false,
+      errorMessage: '',
     }
   },
+
   methods: {
-    register() {
-      console.log('Registering new user')
-      console.log('email:', this.email,)
-      console.log('password:', this.password)
-      alert('Account registered successfully!')
+    login() {
+      this.errorMessage = '';   // Reset the error message
+
+      const roles = ['admin', 'sponsor', 'student'];
+      for (let role of roles) {
+        // Find a user that matches the email and password
+        const user = userData[role].find(
+          (user) => user.email == this.email && user.password == this.password
+        );
+
+        if (user) {
+          // If a match is found, assign the user to currentUser and exit the loop
+          this.currentUser = user;  // Update the currentUser in userData
+          this.$router.push('/');  
+          return;
+        }
+      }
+
+      // If no match was found, set the error message
+      this.errorMessage = 'Invalid email or password. Please try again.';
     },
   },
+
+  // computed: {
+  //   currentUser() {
+  //     return this.mockData.currentUser || {
+  //       name: "Guest",
+  //       role: "guest",
+  //     };
+  //   },
+  // },
 }
 </script>
 
