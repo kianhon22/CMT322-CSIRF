@@ -27,11 +27,77 @@
             </div>
         </div>
     </section>
-    <section class="bg-center bg-[#1E1B4B] h-screen w-full">
-        <h1 class="pt-5 text-4xl font-bold text-center mb-12 text-white">Company</h1>
-    </section>
+    <section class="bg-center bg-[#1E1B4B] py-8 w-full">
+    <h1 class="text-4xl font-bold text-center mb-8 text-white">Company</h1>
+    <div class="grid grid-cols-4 gap-6 pl-20 pr-20">
+      <router-link
+        v-for="(company, index) in companies"
+        :key="index"
+        :to="{ name: 'Company', params: { id: company.sponsorID }}"
+        class="bg-white rounded-lg shadow-lg flex flex-col items-center p-4 hover:shadow-xl transition-shadow">
+        <h3 class="text-lg font-semibold text-gray-800">{{ company.name }}</h3>
+        <span :class="categoryClass(company.category)" class="px-3 py-1 mt-2 rounded-full text-sm font-medium">
+          {{ capitalize(company.category) }}
+        </span>
+      </router-link>
+    </div>
+  </section>
+    <!-- <section class="bg-center bg-[#1E1B4B] py-12 px-6 w-full">
+    <h1 class="text-4xl font-bold text-center mb-12 text-white">Company</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div v-for="(company, index) in companies" :key="index" class="bg-white rounded-lg shadow-lg flex flex-col items-center p-4">
+         <h3 class="text-lg font-semibold text-black">{{ company.name }}</h3>
+         <span :class="categoryClass(company.category)" class="px-3 py-1 mt-2 rounded-full text-sm font-medium">
+          {{ capitalize(company.category) }}
+        </span>
+      </div>
+    </div>
+  </section> -->
+  <!-- <section class="bg-center bg-[#1E1B4B] py-12 px-6 w-full">
+    <h1 class="text-4xl font-bold text-center mb-12 text-white">Company</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div v-for="(company, index) in companies" :key="index" class="bg-white rounded-lg shadow-lg flex flex-col items-center p-4">
+        <img :src="require(`${company.logo}`)" :alt="company.name" class="h-24 w-24 object-contain rounded-full mb-4" @error="handleImageError"/>
+         <h3 class="text-lg font-semibold text-gray-800">{{ company.name }}</h3>
+        <span :class="categoryClass(company.category)" class="px-3 py-1 mt-2 rounded-full text-sm font-medium">
+          {{ capitalize(company.category) }}
+        </span>
+      </div>
+    </div>
+  </section> -->
   </template>
 
-  <script>
-  export default {};
-  </script>
+<script>
+import companyData from "@/data/companyData.json";
+
+export default {
+  data() {
+    return {
+      companies: companyData,
+    };
+  },
+  methods: {
+    categoryClass(category) {
+      switch (category) {
+        case "platinum":
+          return "bg-purple-200 text-purple-800";
+        case "gold":
+          return "bg-yellow-200 text-yellow-800";
+        case "silver":
+          return "bg-gray-200 text-gray-800";
+        case "bronze":
+          return "bg-orange-200 text-orange-800";
+        default:
+          return "bg-green-200 text-green-800";
+      }
+    },
+    capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    },
+    handleImageError(event) {
+      event.target.src = "/path-to-placeholder.png"; // Replace with a valid placeholder path
+    },
+  },
+};
+</script>
+
