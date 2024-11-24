@@ -1,6 +1,5 @@
 {
-    "currentUser": 
-    {
+    "currentUser": {
         "id": 1,
         "role": "admin",
         "name": "Admin",
@@ -8,82 +7,87 @@
         "password": "csirfusm"
     },
     "admin": [
-    {
-        "id": 1,
-        "role": "admin",
-        "name": "Admin",
-        "email": "admin@csirf.com",
-        "password": "csirfusm"
-    }
+        {
+            "id": 1,
+            "role": "admin",
+            "name": "Admin",
+            "email": "admin@csirf.com",
+            "password": "csirfusm"
+        }
     ],
     "sponsor": [
-    {
-        "id": 1,
-        "role": "sponsor",
-        "name": "Sponsor 1",
-        "email": "sponsor1@csirf.com",
-        "password": "csirfusm",
-        "companyID": 1
-    },
-    {
-        "id": 2,
-        "role": "sponsor",
-        "name": "Sponsor 2",
-        "email": "sponsor2@csirf.com",
-        "password": "csirfusm",
-        "companyID": 2
-    }
+        {
+            "id": 1,
+            "role": "sponsor",
+            "name": "Sponsor 1",
+            "email": "sponsor1@csirf.com",
+            "password": "csirfusm",
+            "companyID": 1
+        },
+        {
+            "id": 2,
+            "role": "sponsor",
+            "name": "Sponsor 2",
+            "email": "sponsor2@csirf.com",
+            "password": "csirfusm",
+            "companyID": 2
+        }
     ],
     "student": [
-    {
-        "id": 1,
-        "role": "student",
-        "name": "Student 1",
-        "email": "student1@student.usm.my",
-        "password": "csirfusm",
-        "phone": "0123456789",
-        "year": 3,
-        "registered": true
-    },
-    {
-        "id": 2,
-        "role": "student",
-        "name": "Student 2",
-        "email": "student2@student.usm.my",
-        "password": "csirfusm",
-        "phone": "0123456789",
-        "year": 2,
-        "registered": true
-    },
-    {
-        "id": 3,
-        "role": "student",
-        "name": "Student 3",
-        "email": "student3@student.usm.my",
-        "password": "csirfusm",
-        "phone": "0123456789",
-        "year": 3,
-        "registered": true
-    },
-    {
-        "id": 4,
-        "role": "student",
-        "name": "Student 4",
-        "email": "student4@student.usm.my",
-        "password": "csirfusm",
-        "phone": "0123456789",
-        "year": 2,
-        "registered": true
-    },
-    {
-        "id": 6,
-        "role": "student",
-        "name": "Student 6",
-        "email": "student6@student.usm.my",
-        "password": "csirfusm",
-        "phone": "0123456789",
-        "year": 4,
-        "registered": true
-    }
+        {
+            "id": 1,
+            "role": "student",
+            "name": "Student 1",
+            "email": "student1@student.usm.my",
+            "password": "csirfusm",
+            "phone": "0123456789",
+            "year": 3,
+            "resume": "testResume.pdf",
+            "registered": true
+        },
+        {
+            "id": 2,
+            "role": "student",
+            "name": "Student 2",
+            "email": "student2@student.usm.my",
+            "password": "csirfusm",
+            "phone": "0123456789",
+            "year": 2,
+            "resume": null,
+            "registered": true
+        },
+        {
+            "id": 3,
+            "role": "student",
+            "name": "Student 3",
+            "email": "student3@student.usm.my",
+            "password": "csirfusm",
+            "phone": "0123456789",
+            "year": 3,
+            "resume": null,
+            "registered": true
+        },
+        {
+            "id": 4,
+            "role": "student",
+            "name": "Student 4",
+            "email": "student4@student.usm.my",
+            "password": "csirfusm",
+            "phone": "0123456789",
+            "year": 2,
+            "resume": null,
+            "registered": true
+        },
+        {
+            "id": 6,
+            "role": "student",
+            "name": "Student 6",
+            "email": "student6@student.usm.my",
+            "password": "csirfusm",
+            "phone": "0123456789",
+            "year": 4,
+            "resume": null,
+            "registered": true
+        }
     ]
-  }  
+}

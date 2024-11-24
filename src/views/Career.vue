@@ -26,7 +26,7 @@
                 @click="openModal(job)">
         <div class="p-6">
           <h5 class="mb-3 text-2xl font-bold tracking-tight text-gray-900">
-            {{ job.company }}
+            {{ job.name }}
           </h5>
           <p class="mb-5 font-normal text-gray-700">
             {{ job.position }}
@@ -52,7 +52,7 @@
     <!-- Modal Component -->
     <Modal
       :isOpen="isModalOpen"
-      :title="selectedJob?.company"
+      :title="selectedJob?.name"
       :description="selectedJob?.position"
       :jobDescription="selectedJob?.description"
       @close="closeModal"
@@ -62,6 +62,7 @@
 
 <script>
 import Modal from '@/components/Modal.vue';
+import jobData from '../data/jobData.json';
 
 export default {
   name: 'CareerView',
@@ -71,48 +72,7 @@ export default {
   data() {
     return {
       searchQuery: '',
-      jobs: [
-        {
-          id: 1,
-          company: 'TechCorp Solutions',
-          position: 'Senior Frontend Developer',
-          description: 'Responsible for developing and maintaining the frontend of our web applications.',
-          type: 'Internship',
-          mode: 'On-site'
-        },
-        {
-          id: 2,
-          company: 'DataFlow Systems',
-          position: 'Machine Learning Engineer',
-          description: 'Design and implement machine learning models to improve our data processing capabilities.',
-          type: 'Internship',
-          mode: 'On-site'
-        },
-        {
-          id: 3,
-          company: 'CloudNine Technologies',
-          position: 'DevOps Specialist',
-          description: 'Manage and optimize our cloud infrastructure and CI/CD pipelines.',
-          type: 'Internship',
-          mode: 'On-site'
-        },
-        {
-          id: 4,
-          company: 'Quantum Innovations',
-          position: 'Full Stack Developer',
-          description: 'Work on both frontend and backend development to deliver full-fledged applications.',
-          type: 'Full-time',
-          mode: 'Hybrid'
-        },
-        {
-          id: 5,
-          company: 'CyberGuard Security',
-          position: 'Security Engineer',
-          description: 'Ensure the security of our systems and protect against cyber threats.',
-          type: 'Full-time',
-          mode: 'Hybrid'
-        }
-      ],
+      jobs: jobData,
       isModalOpen: false,
       selectedJob: null
     }
@@ -124,7 +84,7 @@ export default {
 
       return this.jobs.filter(job => {
         return job.position.toLowerCase().includes(query) ||
-               job.company.toLowerCase().includes(query) ||
+               job.name.toLowerCase().includes(query) ||
                job.description.toLowerCase().includes(query);
       });
     }

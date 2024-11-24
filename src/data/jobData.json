@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "TechCorp Solutions",
+        "position": "Senior Frontend Developer",
+        "description": "Responsible for developing and maintaining the frontend of our web applications.",
+        "type": "Internship",
+        "mode": "On-Site"
+    },
+    {
+        "id": 2,
+        "name": "DataFlow Systems",
+        "position": "Machine Learning Engineer",
+        "description": "Design and implement machine learning models to improve our data processing capabilities.",
+        "type": "Internship",
+        "mode": "On-Site"
+    },
+    {
+        "id": 3,
+        "name": "CloudNine Technologies",
+        "position": "DevOps Specialist",
+        "description": "Manage and optimize our cloud infrastructure and CI/CD pipelines.",
+        "type": "Internship",
+        "mode": "On-Site"
+    },
+    {
+        "id": 4,
+        "name": "Quantum Innovations",
+        "position": "Full Stack Developer",
+        "description": "Work on both frontend and backend development to deliver full-fledged applications.",
+        "type": "Full-Time",
+        "mode": "Hybrid"
+    },
+    {
+        "id": 5,
+        "name": "CyberGuard Security",
+        "position": "Security Engineer",
+        "description": "Ensure the security of our systems and protect against cyber threats.",
+        "type": "Full-Time",
+        "mode": "Hybrid"
+    },
+    {
+        "id": 6,
+        "name": "CyberGuard Security",
+        "position": "Security Engineer",
+        "description": "Ensure the security of our systems and protect against cyber threats.",
+        "type": "Full-Time",
+        "mode": "Hybrid"
+    }
+]

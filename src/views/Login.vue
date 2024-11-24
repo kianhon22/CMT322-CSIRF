@@ -79,7 +79,7 @@
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
               Haven't registered?
               <a href="#" class="font-medium text-[#1E1B4B] hover:underline"
-                >Register Now
+                >Get Started
               </a>
             </p>
           </form>
