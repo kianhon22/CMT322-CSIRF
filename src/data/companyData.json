@@ -6,8 +6,9 @@
         "phone": "",
         "linkedin": "",
         "website": "",
-        "description": "",
-        "logo": "Fusionex logo.png",
+        "shortDescription": "Automated Test and Measurement Systems",
+        "description": "Fusionex is an established multi-award-winning data technology leader specializing in Analytics, Big Data Management, IR 4.0, Internet of Things, Machine Learning, and Artificial Intelligence.",
+        "logo": "/Fusionex logo.png",
         "sponsorID": 1
     },
     {
@@ -17,19 +18,21 @@
         "phone": "",
         "linkedin": "",
         "website": "",
-        "description": "",
-        "logo": "NI logo.jpeg",
-        "sponsorID": 1
+        "shortDescription": "Automated Test and Measurement Systems",
+        "description": "National Instruments Corp (NI) is a provider of software-defined platform, automated test equipment, and virtual instrumentation products for engineers and scientists.",
+        "logo": "/NI logo.jpeg",
+        "sponsorID": 4
     },
     {
-        "name": "Micron",
+        "name": "Micro Modular System",
         "category": "platinum",
         "email": "",
         "phone": "",
         "linkedin": "",
         "website": "",
-        "description": "",
-        "logo": "Micron logo.png",
+        "shortDescription": "Leading Machine Design And Manufacturing Corporation",
+        "description": "Micro Modular System Sdn Bhd (MMS) is one of the fastest growing companies in design and manufacture of Industrial Automation Systems and Machinery focusing on LED and semiconductor industries.",
+        "logo": "/MMS logo.png",
         "sponsorID": 2
     },
     {
@@ -39,8 +42,9 @@
         "phone": "",
         "linkedin": "",
         "website": "",
-        "description": "",
-        "logo": "Intel logo.png",
+        "shortDescription": "Leading American Brand And Manufacturer of Semiconductor Computer Circuit",
+        "description": "Intel Corporation is an American multinational corporation and technology company headquartered in Santa Clara, California, and incorporated in Delaware. Intel designs, manufactures, and sells computer components and related products for business and consumer markets.",
+        "logo": "/Intel logo.png",
         "sponsorID": 5
     },
     {
@@ -50,8 +54,9 @@
         "phone": "",
         "linkedin": "",
         "website": "",
-        "description": "",
-        "logo": "Vitrox logo.png",
+        "shortDescription": "Malaysian Technology Company",
+        "description": "ViTrox Corporation Berhad (ViTrox Corp) is a technology company that designs and manufactures automated vision inspection equipment and system-on-chip embedded electronic devices. ",
+        "logo": "/Vitrox logo.png",
         "sponsorID": 3
     },
     {
@@ -61,8 +66,9 @@
         "phone": "",
         "linkedin": "",
         "website": "",
-        "description": "",
-        "logo": "Veecotech logo.png",
+        "shortDescription": "Leading Malaysia IT Solution Company",
+        "description": "VeecoTech | Custom Software & App Development Agency. business forward A proud Malaysian agency. We're a software development and marketing agency that will guide you to online success. A proud Malaysian agency.",
+        "logo": "/Veecotech logo.png",
         "sponsorID": 6
     },
     {
@@ -72,8 +78,9 @@
         "phone": "",
         "linkedin": "",
         "website": "",
-        "description": "",
-        "logo": "Jabil logo.png",
+        "shortDescription": "American Multinational Manufacturing Company",
+        "description": "Jabil Inc. is an American multinational manufacturing company involved in the design, engineering, and manufacturing of electronic circuit board assemblies and systems, along with supply chain services, primarily serving original equipment manufacturers.",
+        "logo": "/Jabil logo.png",
         "sponsorID": 7
     }
 ]

@@ -1,22 +1,21 @@
 <template>
     <section class="pt-12 bg-center bg-no-repeat bg-[url('/src/assets/neon-purple-modern-city-iegjsguqr41ak8ee.jpg')] bg-gray-500 bg-blend-multiply m-h-screen w-full flex flex-col items-center justify-center overflow-y-auto">
-      <div class="flex items-center space-x-10">
+      <div v-if="company" class="flex items-center space-x-10">
         <!-- Logo -->
         <a href="https://www.ni.com/en.html?srsltid=AfmBOop8ibaz67DwGZZCiBc5O5kIgxtTyLUzwztKtg38RYomfSEcFf_o" target="_blank" class="flex-shrink-0">
-          <img src="/NI logo.jpeg" class="h-25" alt="NI Logo" />
+          <img :src="company.logo" class="h-25" :alt="company.name" />
         </a>
         <!-- Text Section -->
         <div class="text-left">
-          <span class="block text-4xl font-semibold whitespace-nowrap text-white">NI Malaysia Sdn. Bhd.</span>
-          <p class="text-xl text-gray-300">Automated Test and Measurement Systems</p>
+          <span class="block text-4xl font-semibold whitespace-nowrap text-white">{{ company.name }}</span>
+          <p class="text-xl text-gray-300">{{ company.shortDescription }}</p>
         </div>
       </div>
        <!-- Company Description -->
-    <div class="mt-10 max-w-3xl">
+    <div v-if="company" class="mt-10 max-w-3xl">
     <h2 class="text-2xl font-semibold text-white mb-4">Company Description</h2>
     <p class="text-lg text-gray-300 leading-relaxed">
-        For more than 40 years, NI has developed automated test and automated measurement systems that help engineers solve the world's toughest challenges.
-        Let's work together to find creative solutions to help your organization succeed today, tomorrow, and for the next 100 years.
+        {{ company.description }}
     </p>
     </div>
     <div id="default-carousel" class="relative w-1/3" data-carousel="slide">
@@ -98,5 +97,31 @@
 </template>
 
 <script>
-export default {};
+import companyData from '@/data/companyData.json';
+
+export default {
+  props: ['id'], // Receive `id` from the route
+  data() {
+    return {
+      company: null, // Store the specific company data
+    };
+  },
+  mounted() {
+    this.loadCompanyData();
+  },
+  watch: {
+    id() {
+      // Reload data when the route parameter changes
+      this.loadCompanyData();
+    },
+  },
+  methods: {
+    loadCompanyData() {
+      // Find the company matching the `id` from the route
+      this.company = companyData.find(
+        (company) => company.sponsorID === Number(this.id)
+      );
+    },
+  },
+};
 </script>
