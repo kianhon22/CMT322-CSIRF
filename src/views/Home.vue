@@ -35,6 +35,7 @@
         :key="index"
         :to="{ name: 'Company', params: { id: company.sponsorID }}"
         class="bg-white rounded-lg shadow-lg flex flex-col items-center p-4 hover:shadow-xl transition-shadow">
+        <img :src="company.logo" :alt="company.name" class="h-24 w-24 object-contain rounded-full mb-4"/>
         <h3 class="text-lg font-semibold text-gray-800">{{ company.name }}</h3>
         <span :class="categoryClass(company.category)" class="px-3 py-1 mt-2 rounded-full text-sm font-medium">
           {{ capitalize(company.category) }}
@@ -42,29 +43,6 @@
       </router-link>
     </div>
   </section>
-    <!-- <section class="bg-center bg-[#1E1B4B] py-12 px-6 w-full">
-    <h1 class="text-4xl font-bold text-center mb-12 text-white">Company</h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div v-for="(company, index) in companies" :key="index" class="bg-white rounded-lg shadow-lg flex flex-col items-center p-4">
-         <h3 class="text-lg font-semibold text-black">{{ company.name }}</h3>
-         <span :class="categoryClass(company.category)" class="px-3 py-1 mt-2 rounded-full text-sm font-medium">
-          {{ capitalize(company.category) }}
-        </span>
-      </div>
-    </div>
-  </section> -->
-  <!-- <section class="bg-center bg-[#1E1B4B] py-12 px-6 w-full">
-    <h1 class="text-4xl font-bold text-center mb-12 text-white">Company</h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div v-for="(company, index) in companies" :key="index" class="bg-white rounded-lg shadow-lg flex flex-col items-center p-4">
-        <img :src="require(`${company.logo}`)" :alt="company.name" class="h-24 w-24 object-contain rounded-full mb-4" @error="handleImageError"/>
-         <h3 class="text-lg font-semibold text-gray-800">{{ company.name }}</h3>
-        <span :class="categoryClass(company.category)" class="px-3 py-1 mt-2 rounded-full text-sm font-medium">
-          {{ capitalize(company.category) }}
-        </span>
-      </div>
-    </div>
-  </section> -->
   </template>
 
 <script>
@@ -93,9 +71,6 @@ export default {
     },
     capitalize(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
-    },
-    handleImageError(event) {
-      event.target.src = "/path-to-placeholder.png"; // Replace with a valid placeholder path
     },
   },
 };

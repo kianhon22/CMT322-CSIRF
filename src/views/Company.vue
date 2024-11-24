@@ -3,7 +3,7 @@
       <div class="flex items-center space-x-10">
         <!-- Logo -->
         <a href="https://www.ni.com/en.html?srsltid=AfmBOop8ibaz67DwGZZCiBc5O5kIgxtTyLUzwztKtg38RYomfSEcFf_o" target="_blank" class="flex-shrink-0">
-          <img src="../assets/NI logo.jpeg" class="h-25" alt="NI Logo" />
+          <img src="/NI logo.jpeg" class="h-25" alt="NI Logo" />
         </a>
         <!-- Text Section -->
         <div class="text-left">
