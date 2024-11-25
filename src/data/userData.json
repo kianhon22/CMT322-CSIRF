@@ -22,7 +22,8 @@
             "name": "Sponsor 1",
             "email": "sponsor1@csirf.com",
             "password": "csirfusm",
-            "companyID": 1
+            "companyID": 1,
+            "logo": "/Fusionex logo.png"
         },
         {
             "id": 2,
@@ -30,7 +31,8 @@
             "name": "Sponsor 2",
             "email": "sponsor2@csirf.com",
             "password": "csirfusm",
-            "companyID": 2
+            "companyID": 2,
+            "logo": "/NI logo.jpeg"
         }
     ],
     "student": [

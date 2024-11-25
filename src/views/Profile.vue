@@ -147,6 +147,29 @@
               </div>
             </div>
           </div>
+
+          <!--sponsor section -->
+          <div class="space-y-6" v-if="currentUser.role === 'sponsor'">
+            <div class="space-y-4">
+              <h2 class="text-xl font-semibold text-[#1E1B4B]">Company Logo</h2>
+              <div class="flex justify-center items-center p-4 bg-gray-50 rounded-lg">
+                <img
+                  :src="newLogoURL || currentUser.logo"
+                  :alt="currentUser.name"
+                  class="max-w-[200px] max-h-[200px] object-contain"
+                />
+              </div>
+              <div v-if="isEditing" class="space-y-2">
+                <input
+                  type="file"
+                  @change="handleLogoUpload"
+                  accept="image/png, image/jpeg, image/jpg, image/gif"
+                  class="w-full text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#1E1B4B] file:text-white hover:file:bg-[#312e81]"
+                />
+                <p v-if="logoError" class="text-red-500 text-sm mt-1">{{ logoError }}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -167,7 +190,9 @@ export default {
     return {
       isEditing: false,
       editedUser: {},
-      newResumeFile: null
+      newResumeFile: null,
+      newLogoURL: null,
+      logoError: ''
     }
   },
 
@@ -199,18 +224,40 @@ export default {
       }
     },
 
+    handleLogoUpload(event) {
+      const file = event.target.files[0];
+      this.logoError = '';
+
+      if (file) {
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
+        if (!allowedTypes.includes(file.type)) {
+          this.logoError = 'Please upload a valid image file (PNG, JPEG, JPG, or GIF)';
+          event.target.value = '';
+          return;
+        }
+
+        const maxSize = 5 * 1024 * 1024;
+        if (file.size > maxSize) {
+          this.logoError = 'File size should not exceed 5MB';
+          event.target.value = '';
+          return;
+        }
+
+        const fileURL = URL.createObjectURL(file);
+        this.newLogoURL = fileURL;
+        this.editedUser.logo = fileURL;
+      }
+    },
+
     saveChanges() {
       try {
-        // Handle resume file if changed
         if (this.newResumeFile) {
           const fileURL = URL.createObjectURL(this.newResumeFile);
           localStorage.setItem(`resume_${this.editedUser.resume}`, fileURL);
         }
 
-        // Update currentUser
         Object.assign(this.currentUser, this.editedUser);
 
-        // Update userData
         const studentIndex = userData.student.findIndex(s => s.id === this.currentUser.id);
         if (studentIndex !== -1) {
           userData.student[studentIndex] = { ...this.currentUser };

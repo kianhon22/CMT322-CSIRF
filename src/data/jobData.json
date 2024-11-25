@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "name": "TechCorp Solutions",
+        "name": "Fusionex",
         "position": "Senior Frontend Developer",
         "description": "Responsible for developing and maintaining the frontend of our web applications.",
         "type": "Internship",
@@ -9,7 +9,7 @@
     },
     {
         "id": 2,
-        "name": "DataFlow Systems",
+        "name": "National Instruments",
         "position": "Machine Learning Engineer",
         "description": "Design and implement machine learning models to improve our data processing capabilities.",
         "type": "Internship",

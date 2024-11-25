@@ -25,12 +25,22 @@
                 class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
                 @click="openModal(job)">
         <div class="p-6">
-          <h5 class="mb-3 text-2xl font-bold tracking-tight text-gray-900">
-            {{ job.name }}
-          </h5>
-          <p class="mb-5 font-normal text-gray-700">
-            {{ job.position }}
-          </p>
+          <div class="flex items-center gap-4 mb-4">
+            <img
+              v-if="getCompanyLogo(job.name)"
+              :src="getCompanyLogo(job.name)"
+              :alt="job.name"
+              class="w-16 h-16 object-contain rounded-lg"
+            />
+            <div>
+              <h5 class="text-2xl font-bold tracking-tight text-gray-900">
+                {{ job.name }}
+              </h5>
+              <p class="font-normal text-gray-700">
+                {{ job.position }}
+              </p>
+            </div>
+          </div>
           <div class="flex justify-start gap-2 mb-3">
             <span class="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-100 rounded-full">
               {{ job.type }}
@@ -63,6 +73,7 @@
 <script>
 import Modal from '@/components/Modal.vue';
 import jobData from '../data/jobData.json';
+import companyData from '../data/companyData.json';
 
 export default {
   name: 'CareerView',
@@ -97,6 +108,10 @@ export default {
     closeModal() {
       this.isModalOpen = false;
       this.selectedJob = null;
+    },
+    getCompanyLogo(jobCompanyName) {
+      const company = companyData.find(obj => obj.name === jobCompanyName);
+      return company ? company.logo : null;
     }
   }
 }
