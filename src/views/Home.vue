@@ -28,6 +28,9 @@
         </div>
     </section>
     <section class="bg-center bg-[#1E1B4B] py-8 w-full">
+        <h1 class="text-4xl font-bold text-center mb-8 text-white">Event Description</h1> 
+    </section>
+    <section class="bg-center bg-[#1E1B4B] py-8 w-full">
     <h1 class="text-4xl font-bold text-center mb-8 text-white">Company</h1>
     <div class="grid grid-cols-4 gap-6 pl-20 pr-20">
       <router-link
@@ -43,10 +46,12 @@
       </router-link>
     </div>
   </section>
+  <Itinerary/>
   </template>
 
 <script>
 import companyData from "@/data/companyData.json";
+import Itinerary from "@/views/Itinerary.vue";
 
 export default {
   data() {
@@ -54,6 +59,9 @@ export default {
       companies: companyData,
     };
   },
+  components: {
+       Itinerary, 
+    },
   methods: {
     categoryClass(category) {
       switch (category) {
