@@ -1,19 +1,24 @@
 <template>
     <section class="bg-center bg-cover bg-no-repeat bg-[url('/csirf-background.png')] h-screen w-full flex items-center justify-center">
-        <div class="flex flex-col items-center text-center px-8 py-8">
-            <!-- <div class="h-56 w-56 lg:col-span-5 flex justify-start lg:pl-12">
-                <img src="/csirf-logo-white.png" alt="CSIRF Logo" />
-            </div> -->
+      <div class="flex flex-col items-center text-center px-8 py-8">
             <div class="lg:col-span-7 text-center lg:text-center">
                 <h1 class="text-white w-full mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-7xl">
-                    COMPUTER SCIENCE INTERNSHIP & RECRUITMENT FAIR
+                  COMPUTER SCIENCE INTERNSHIP & RECRUITMENT FAIR
                 </h1>
                 <p class="text-white w-full mb-6 font-light md:text-lg lg:text-2xl">
                     Fulfilling Dreams, Empowering Your Future
                 </p>
+                <div class="mt-6 mb-6 inline-block p-4 border-2 border-orange-500 rounded-full max-w-3xl w-full">
+                <p class="text-white w-full mt-6 mb-6 font-medium md:text-md lg:text-3xl text-center">
+                    Happening on <span class="font-bold text-orange-500">2 & 3 January 2025</span>
+                </p>
+                <p class="text-white w-full mb-6 font-normal md:text-md lg:text-3xl">
+                    Dewan Utama Pelajar, Universiti Sains Malaysia
+                </p>
+                </div>
                 <div class="flex flex-col lg:flex-row justify-center gap-4 mt-12">
                     <router-link to="/event"
-                    class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-[#1E1B4B] rounded-lg bg-orange-500 border border-transparent hover:bg-transparent hover:text-white hover:border-orange-500 focus:ring-4">
+                    class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-[#1E1B4B] rounded-lg bg-orange-500 border border-transparent hover:bg-transparent hover:text-orange-500 hover:border-orange-500 focus:ring-4">
                     Exciting Events
                     <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>

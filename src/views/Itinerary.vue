@@ -12,7 +12,7 @@
         <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white"></div>
         <time class="mb-1 text-sm font-normal leading-none text-white">10.00 AM</time>
         <h3 class="text-lg font-semibold text-orange-500">Opening Ceremony</h3>
-        <p class="mb-2 text-base font-thin text-white">Speeches from the Project Director, Advisor of CS Society, Dean of School of Computer Sciences & Diamond Sponsor</p>
+        <p class="mb-2 text-base font-thin text-white">Speeches from the Project Director, Advisor of CS Society, Dean of School of Computer Sciences & Platinum Sponsor</p>
         <p class="mb-2 text-base font-thin text-white">Company Appreciation</p>
         <p class="mb-2 text-base font-thin text-white">Best Intern Award Ceremony</p>
       </li>
