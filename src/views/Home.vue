@@ -13,14 +13,14 @@
                 </p>
                 <div class="flex flex-col lg:flex-row justify-center gap-4 mt-12">
                     <router-link to="/event"
-                    class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-[#1E1B4B] rounded-lg bg-orange-500 hover:bg-orange-700 focus:ring-4">
+                    class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-[#1E1B4B] rounded-lg bg-orange-500 border border-transparent hover:bg-transparent hover:text-white hover:border-orange-500 focus:ring-4">
                     Exciting Events
                     <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                     </svg>
                     </router-link>
                     <router-link to="/career"
-                    class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-[#1E1B4B] rounded-lg bg-white hover:bg-orange-500">
+                    class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-[#1E1B4B] border border-transparent rounded-lg bg-white hover:bg-transparent hover:border-white hover:text-white">
                     Explore Career
                     </router-link>
                 </div>
@@ -28,9 +28,15 @@
         </div>
     </section>
     <section class="bg-center bg-[#1E1B4B] py-8 w-full">
-        <h1 class="text-4xl font-bold text-center mb-8 text-white">Event Description</h1> 
+        <h1 class="text-4xl font-bold text-center mb-8 text-white">About Us</h1> 
+        <p class="text-white max-w-2xl mx-auto mb-6 font-light text-center text-justify md:text-lg lg:text-xl">
+          The <span class="text-orange-500"> Computer Science Internship & Recruitment Fair (CSIRF) </span>
+          is a two-day flagship event organised by the Computer Science Society (CS Society USM). 
+          It consists of a series of career talks and booth exhibitions tailored for third and 
+          final-year undergraduates from the School of Computer Sciences, Universiti Sains Malaysia.
+        </p>
     </section>
-    <section class="bg-center bg-[#1E1B4B] py-8 w-full">
+    <section class="bg-center bg-orange-500 py-8 w-full">
     <h1 class="text-4xl font-bold text-center mb-8 text-white">Company</h1>
     <div class="grid grid-cols-4 gap-6 pl-20 pr-20">
       <router-link
