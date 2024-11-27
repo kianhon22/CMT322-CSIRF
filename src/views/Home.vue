@@ -25,8 +25,8 @@
             </div>
         </div>
     </section>
-    <section class="bg-center bg-[#1E1B4B] py-12 w-full flex flex-col items-center">
-      <div class="bg-[#2A2B4D] rounded-lg shadow-lg border-2 border-orange-500 max-w-3xl w-full px-6 py-8 text-center">
+    <section class="bg-center bg-[#1E1B4B] py-16 w-full flex flex-col items-center">
+      <div class="mt-6 bg-[#2A2B4D] happening-banner rounded-lg shadow-lg border-2 border-orange-500 max-w-3xl w-full px-6 py-8 text-center">
         <p class="text-white font-medium md:text-lg lg:text-4xl">
           Happening on <span class="font-bold text-orange-500">2 & 3 January 2025</span>
         </p>
@@ -34,13 +34,13 @@
           Dewan Utama Pelajar, Universiti Sains Malaysia
         </p>
       </div>
-      <div class="mt-12">
-        <CountdownClock />
-      </div>
+    </section>
+    <section class="py-10 bg-[#1E1B4B]">
+      <CountdownClock />
     </section>
     <section class="bg-center bg-[#1E1B4B] py-8 w-full">
-        <h1 class="text-4xl font-bold text-center mb-8 text-white">About Us</h1> 
-        <p class="text-white max-w-2xl mx-auto mb-6 font-light text-center text-justify md:text-lg lg:text-xl">
+        <h1 class="text-4xl font-bold text-center mt-10 mb-8 text-white">About Us</h1> 
+        <p class="text-white max-w-2xl mx-auto mb-20 font-light text-center text-justify md:text-lg lg:text-xl">
           The <span class="text-orange-500"> Computer Science Internship & Recruitment Fair (CSIRF) </span>
           is a two-day flagship event organised by the Computer Science Society (CS Society USM). 
           It consists of a series of career talks and booth exhibitions tailored for third and 
@@ -48,8 +48,8 @@
         </p>
     </section>
     <section class="bg-center bg-orange-500 py-8 w-full">
-    <h1 class="text-4xl font-bold text-center mb-8 text-white">Company</h1>
-    <div class="grid grid-cols-4 gap-6 pl-20 pr-20">
+    <h1 class="text-4xl font-bold text-center mt-2 mb-12 text-white">Company</h1>
+    <div class="mb-6 grid grid-cols-4 gap-6 pl-20 pr-20">
       <router-link
         v-for="(company, index) in companies"
         :key="index"
@@ -147,5 +147,10 @@ export default {
   animation-delay: 1.5s;
 }
 
+.happening-banner {
+  border: 2px solid transparent;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.052) 50%, rgba(255, 153, 0, 0.229) 100%);
+  border-radius: 16px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
 </style>
-

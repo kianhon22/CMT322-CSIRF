@@ -1,18 +1,18 @@
 <template>
-  <div id="countdown-clock" class="bg-center bg-no-repeat bg-cover flex flex-col justify-center w-full py-12">
+  <div id="countdown-clock" class="bg-center bg-no-repeat bg-cover flex flex-col justify-center w-2/3 mx-auto text-center py-12 border-t border-b border-orange-700">
     <div class="wrapper text-center text-white">
       <div class="mb-2">
-        <h2 class="text-3xl lg:text-5xl font-extrabold text-white">
+        <h2 class="text-3xl lg:text-4xl font-medium text-white">
           CSIRF 2025
         </h2>
-        <p class="text-xl lg:text-2xl font-light mt-2 mb-2 text-gray-300">
+        <p class="text-xl lg:text-xl font-extralight mt-2 mb-8 text-white">
           Starts In
         </p>
       </div>
       </div>
 
       <!-- Countdown -->
-      <div class="clock grid grid-cols-4 gap-12 text-center">
+      <div class="clock grid grid-cols-4 gap-2 text-center">
         <!-- Days -->
         <div class="number">
           <span class="digit text-6xl lg:text-8xl font-extrabold text-orange-500">{{ days }}</span>
@@ -78,13 +78,13 @@
   
   <style scoped>
   .wrapper {
-    margin: auto;
-    padding: 20px;
+    margin: 0 auto;
+    padding: 0;
   }
   .clock {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    gap: 0.5rem;
   }
   .number {
     display: flex;
@@ -93,6 +93,7 @@
   }
   .label {
     color: #ffffff; /* White for the label */
+    margin-top: 0.25rem;
   }
   </style>
   
