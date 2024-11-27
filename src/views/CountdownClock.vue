@@ -16,22 +16,22 @@
         <!-- Days -->
         <div class="number">
           <span class="digit text-6xl lg:text-8xl font-extrabold text-orange-500">{{ days }}</span>
-          <span class="label text-2xl lg:text-3xl text-gray-300 mt-4">Days</span>
+          <span class="label text-2xl lg:text-2xl text-gray-300 mt-4">Days</span>
         </div>
         <!-- Hours -->
         <div class="number">
           <span class="digit text-6xl lg:text-8xl font-extrabold text-orange-500">{{ hours }}</span>
-          <span class="label text-2xl lg:text-3xl text-gray-300 mt-4">Hours</span>
+          <span class="label text-2xl lg:text-2xl text-gray-300 mt-4">Hours</span>
         </div>
         <!-- Minutes -->
         <div class="number">
           <span class="digit text-6xl lg:text-8xl font-extrabold text-orange-500">{{ minutes }}</span>
-          <span class="label text-2xl lg:text-3xl text-gray-300 mt-4">Minutes</span>
+          <span class="label text-2xl lg:text-2xl text-gray-300 mt-4">Minutes</span>
         </div>
         <!-- Seconds -->
         <div class="number">
           <span class="digit text-6xl lg:text-8xl font-extrabold text-orange-500">{{ seconds }}</span>
-          <span class="label text-2xl lg:text-3xl text-gray-300 mt-4">Seconds</span>
+          <span class="label text-2xl lg:text-2xl text-gray-300 mt-4">Seconds</span>
         </div>
         </div>
       
@@ -90,9 +90,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .digit {
-    color: #f97316; /* Orange text color */
   }
   .label {
     color: #ffffff; /* White for the label */

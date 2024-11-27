@@ -3,7 +3,7 @@
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
         <a href="/" class="flex items-center">
             <img src="/csirf-logo-white.png" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">CSIRF</span>
+            <span class="self-center text-xl font-semibold whitespace-nowrap text-white">CSIRF</span>
         </a>
         <div class="flex items-center">
           <!-- <a href="#" class="text-white bg-orange-500 hover:bg-orange-700 focus:ring-4 focus:ring-primary-300 rounded-lg text-lg px-4 py-2 lg:px-2 lg:py-1 mr-2 -700 focus:outline-none">Get started</a> -->
