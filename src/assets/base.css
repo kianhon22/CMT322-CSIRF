@@ -194,5 +194,90 @@ body {
     font-weight: 900;
     font-style: italic;
   }
-  
+
+  /* General Body & Wrapper Styling */
+body, html {
+  height: 100%;
+  margin: 0;
+  display: grid;
+  background-color: #181a27;
+  font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+/* Clock Styling */
+.clock {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 5%;
+  grid-row-gap: 0;
+}
+
+/* Number Styling */
+.number {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 5%;
+  grid-row-gap: 0;
+}
+
+/* Digit Container */
+.digit {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0;
+  grid-row-gap: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Digit Styling (SVGs) */
+.digit__svg {
+  width: 100%;
+  height: auto;
+  stroke: #e88565; /* Orange stroke color */
+  stroke-width: 2px;
+  fill: none;
+  display: block;
+}
+
+/* Clock Layout Responsiveness */
+@media screen and (max-width: 768px) {
+  .clock {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 2%;
+    grid-row-gap: 2%;
+  }
+
+  .number {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .clock {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    grid-column-gap: 1%;
+    grid-row-gap: 1%;
+  }
+}
+
+
 }

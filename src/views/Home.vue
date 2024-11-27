@@ -8,14 +8,6 @@
                 <p class="text-white w-full mb-6 font-light md:text-lg lg:text-2xl">
                     Fulfilling Dreams, Empowering Your Future
                 </p>
-                <div class="mt-6 mb-6 inline-block p-4 border-2 border-orange-500 rounded-full max-w-3xl w-full">
-                <p class="text-white w-full mt-6 mb-6 font-medium md:text-md lg:text-3xl text-center">
-                    Happening on <span class="font-bold text-orange-500">2 & 3 January 2025</span>
-                </p>
-                <p class="text-white w-full mb-6 font-normal md:text-md lg:text-3xl">
-                    Dewan Utama Pelajar, Universiti Sains Malaysia
-                </p>
-                </div>
                 <div class="flex flex-col lg:flex-row justify-center gap-4 mt-12">
                     <router-link to="/event"
                     class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-[#1E1B4B] rounded-lg bg-orange-500 border border-transparent hover:bg-transparent hover:text-orange-500 hover:border-orange-500 focus:ring-4">
@@ -31,6 +23,19 @@
                 </div>
             </div>
         </div>
+    </section>
+    <section class="bg-center bg-[#1E1B4B] py-12 w-full flex flex-col items-center">
+      <div class="bg-[#2A2B4D] rounded-lg shadow-lg border-2 border-orange-500 max-w-3xl w-full px-6 py-8 text-center">
+        <p class="text-white font-medium md:text-lg lg:text-4xl">
+          Happening on <span class="font-bold text-orange-500">2 & 3 January 2025</span>
+        </p>
+        <p class="text-white font-normal mt-4 md:text-md lg:text-2xl">
+          Dewan Utama Pelajar, Universiti Sains Malaysia
+        </p>
+      </div>
+      <div class="mt-12">
+        <CountdownClock />
+      </div>
     </section>
     <section class="bg-center bg-[#1E1B4B] py-8 w-full">
         <h1 class="text-4xl font-bold text-center mb-8 text-white">About Us</h1> 
@@ -63,6 +68,7 @@
 <script>
 import companyData from "@/data/companyData.json";
 import Itinerary from "@/views/Itinerary.vue";
+import CountdownClock from "@/views/CountdownClock.vue";
 
 export default {
   data() {
@@ -72,6 +78,7 @@ export default {
   },
   components: {
        Itinerary, 
+       CountdownClock,
     },
   methods: {
     categoryClass(category) {
