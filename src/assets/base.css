@@ -279,5 +279,9 @@ body, html {
   }
 }
 
+.parallax {
+  background-attachment: fixed;
+  background-size: cover;
+}
 
 }

@@ -1,14 +1,15 @@
 <template>
-    <section class="bg-center bg-cover bg-no-repeat bg-[url('/csirf-background.png')] h-screen w-full flex items-center justify-center">
+    <section class="bg-center bg-cover bg-no-repeat bg-[url('/csirf-background.png')] h-screen w-full flex items-center justify-center parallax">
       <div class="flex flex-col items-center text-center px-8 py-8">
             <div class="lg:col-span-7 text-center lg:text-center">
-                <h1 class="text-white w-full mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-7xl">
-                  COMPUTER SCIENCE INTERNSHIP & RECRUITMENT FAIR
+                <h1 class="text-white fade-in w-full mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-7xl">
+                  COMPUTER SCIENCE INTERNSHIP & RECRUITMENT FAIR 
+                  <span class="font-extrabold text-orange-500 blink">2025</span>
                 </h1>
-                <p class="text-white w-full mb-6 font-light md:text-lg lg:text-2xl">
+                <p class="text-white fade-in w-full mb-6 font-light md:text-lg lg:text-2xl">
                     Fulfilling Dreams, Empowering Your Future
                 </p>
-                <div class="flex flex-col lg:flex-row justify-center gap-4 mt-12">
+                <div class="fade-in-thin-air flex flex-col lg:flex-row justify-center gap-4 mt-12">
                     <router-link to="/event"
                     class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-[#1E1B4B] rounded-lg bg-orange-500 border border-transparent hover:bg-transparent hover:text-orange-500 hover:border-orange-500 focus:ring-4">
                     Exciting Events
@@ -101,4 +102,50 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+@keyframes fadeInThinAir {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in-thin-air {
+  opacity: 0; /* Ensure the element starts invisible */
+  animation: fadeInThinAir 2s ease-in-out forwards; /* Add animation */
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: blink 1s 1;
+  animation-delay: 1.5s;
+}
+
+</style>
 
