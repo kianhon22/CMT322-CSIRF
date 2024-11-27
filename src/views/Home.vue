@@ -27,7 +27,7 @@
     </section>
     <section class="bg-center bg-[#1E1B4B] py-16 w-full flex flex-col items-center">
       <div class="mt-6 bg-[#2A2B4D] happening-banner rounded-lg shadow-lg border-2 border-orange-500 max-w-3xl w-full px-6 py-8 text-center">
-        <p class="text-white font-medium md:text-lg lg:text-4xl typewriter">
+        <p id="typewriter1" class="text-white font-medium md:text-lg lg:text-4xl typewriter">
           Happening on <span class="font-bold text-orange-500">2 & 3 January 2025</span>
         </p>
         <p class="text-white font-normal mt-4 md:text-md lg:text-2xl">
@@ -100,6 +100,23 @@ export default {
       return str.charAt(0).toUpperCase() + str.slice(1);
     },
   },
+  mounted() {
+    const typewriter1 = document.getElementById("typewriter1");
+
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            typewriter1.classList.add("typewriter-active");
+            observer.disconnect(); // Stop observing after the animation starts
+          }
+        });
+      },
+      { threshold: 0.5 } // Trigger when 50% of the section is visible
+    );
+
+    observer.observe(typewriter1.parentElement); // Observe the parent container
+  },
 };
 </script>
 
@@ -167,7 +184,10 @@ export default {
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
-  animation: typewriter 3s steps(31, end);
+  animation: none;
   width: 100%; /* Initial width */
+}
+.typewriter-active {
+  animation: typewriter 3s steps(31, end) forwards;
 }
 </style>
