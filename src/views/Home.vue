@@ -27,7 +27,7 @@
     </section>
     <section class="bg-center bg-[#1E1B4B] py-16 w-full flex flex-col items-center">
       <div class="mt-6 bg-[#2A2B4D] happening-banner rounded-lg shadow-lg border-2 border-orange-500 max-w-3xl w-full px-6 py-8 text-center">
-        <p class="text-white font-medium md:text-lg lg:text-4xl">
+        <p class="text-white font-medium md:text-lg lg:text-4xl typewriter">
           Happening on <span class="font-bold text-orange-500">2 & 3 January 2025</span>
         </p>
         <p class="text-white font-normal mt-4 md:text-md lg:text-2xl">
@@ -152,5 +152,22 @@ export default {
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.052) 50%, rgba(255, 153, 0, 0.229) 100%);
   border-radius: 16px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.typewriter {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 3s steps(31, end);
+  width: 100%; /* Initial width */
 }
 </style>
