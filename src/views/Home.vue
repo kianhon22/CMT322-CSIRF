@@ -3,7 +3,7 @@
       <div class="flex flex-col items-center text-center px-8 py-8">
             <div class="lg:col-span-7 text-center lg:text-center">
                 <h1 class="text-white fade-in w-full mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-7xl">
-                  COMPUTER SCIENCE INTERNSHIP & RECRUITMENT FAIR 
+                  COMPUTER SCIENCE INTERNSHIP <br> & RECRUITMENT FAIR 
                   <span class="font-extrabold text-orange-500 blink">2025</span>
                 </h1>
                 <p class="text-white fade-in w-full mb-6 font-light md:text-lg lg:text-2xl">
@@ -36,13 +36,13 @@
       </div>
     </section>
     <section class="py-10 bg-[#1E1B4B]">
-      <CountdownClock />
+      <CountdownClock/>
     </section>
     <section class="bg-center bg-[#1E1B4B] py-8 w-full">
         <h1 class="text-4xl font-bold text-center mt-6 mb-8 text-white">About Us</h1> 
-        <p class="text-white max-w-2xl mx-auto mb-20 font-light text-center text-justify md:text-lg lg:text-xl">
+        <p class="text-white max-w-2xl mx-auto mb-20 font-light text-justify md:text-lg lg:text-xl">
           The <span class="text-orange-500"> Computer Science Internship & Recruitment Fair (CSIRF) </span>
-          is a two-day flagship event organised by the Computer Science Society (CS Society USM). 
+          is a two-day flagship event organised by the Computer Science Society (USM CS Society). 
           It consists of a series of career talks and booth exhibitions tailored for third and 
           final-year undergraduates from the School of Computer Sciences, Universiti Sains Malaysia.
         </p>
@@ -68,8 +68,8 @@
 
 <script>
 import companyData from "@/data/companyData.json";
-import Itinerary from "@/views/Itinerary.vue";
-import CountdownClock from "@/views/CountdownClock.vue";
+import Itinerary from "@/components/Itinerary.vue";
+import CountdownClock from "@/components/CountdownClock.vue";
 
 export default {
   data() {

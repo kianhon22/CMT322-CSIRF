@@ -22,7 +22,7 @@
                   > Home
                   </router-link>
                 </li>
-                <div v-if="this.currentUser && this.currentUser.role=='admin'">
+                <div v-if="currentUser && (currentUser.role=='admin' || currentUser.role=='sponsor')">
                   <li>
                     <router-link to="/dashboard"
                       class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
@@ -52,7 +52,7 @@
                   > Company
                   </router-link>
                 </li>
-                <div v-if="currentUser && (currentUser.role==='sponsor' || currentUser.role==='student')">
+                <div v-if="currentUser && (currentUser.role=='sponsor' || currentUser.role=='student')">
                   <li>
                     <router-link to="/profile"
                       class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
@@ -61,7 +61,7 @@
                     </router-link>
                   </li>
                 </div>
-                <div v-if="this.currentUser">
+                <div v-if="currentUser">
                   <li>
                     <button @click="logout"
                       class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
@@ -96,7 +96,7 @@ export default {
 
   methods: {
     logout() {
-      this.currentUser = null
+      currentUser = null
     }
   },
 }

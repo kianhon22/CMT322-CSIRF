@@ -6,7 +6,7 @@
   <!-- Day 1 Timeline -->
   <div>
     <h2 class="text-2xl font-medium text-white dark:text-white mb-2 text-center">Day 1</h2>
-    <h3 class="text-xl font-italic text-white dark:text-white mb-6 text-center">(2/1/2025)</h3>
+    <h3 class="text-xl font-italic text-white dark:text-white mb-6 text-center">2 Jan 2025</h3>
     <ol class="relative border-s border-gray-200">                  
       <li class="mb-10 ms-4">
         <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white"></div>
@@ -69,7 +69,7 @@
   <!-- Day 2 Timeline -->
   <div>
     <h2 class="text-2xl font-medium text-white mb-2 text-center">Day 2</h2>
-    <h3 class="text-xl font-italic text-white dark:text-white mb-6 text-center">(3/1/2025)</h3>
+    <h3 class="text-xl font-italic text-white dark:text-white mb-6 text-center">3 Jan 2025</h3>
     <ol class="relative border-s border-gray-200">                  
         <li class="mb-10 ms-4">
         <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white"></div>

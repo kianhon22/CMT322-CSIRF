@@ -60,12 +60,12 @@
             </div>
         </div>
         <hr class="border-gray-200 sm:mx-auto" />
-        <div class="my-4 mx-6 sm:flex sm:items-center sm:justify-between">
+        <div class="mx-6 sm:flex sm:items-center sm:justify-between">
             <span class="text-lg text-white sm:text-center">© 2024
                 <a href="https://cssocietyusm.com/" class="hover:text-orange-500">Computer Science Society</a>
                 @ Universiti Sains Malaysia
             </span>
-            <span class="text-lg text-white sm:text-center">
+            <span class="py-2 text-lg text-white sm:text-center">
                 All Rights Reserved.
             </span>
         </div>

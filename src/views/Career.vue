@@ -1,6 +1,12 @@
 <template>
   <section class="min-h-screen bg-center bg-no-repeat bg-[url('/src/assets/neon-purple-modern-city-iegjsguqr41ak8ee.jpg')] bg-gray-500 bg-blend-multiply p-8">
-    <h1 class="text-4xl font-bold text-center mb-12 text-white">Career Opportunities</h1>
+    <h1 class="text-5xl font-bold text-center mt-3 mb-2 text-white">Career Opportunities</h1>
+    <p class="text text-center mb-10 text-orange-500 flex justify-center items-center gap-2">
+      Click on the job for more details!
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 w-6 h-6 ">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" />
+      </svg>
+    </p>
 
     <!-- Search Bar -->
     <div class="max-w-2xl mx-auto mb-8">

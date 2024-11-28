@@ -8,7 +8,6 @@
         <div class="flex justify-between items-center border-b border-gray-200 pb-6">
           <div>
             <h1 class="text-3xl font-bold text-[#1E1B4B]">My Profile</h1>
-            <p class="text-gray-600 mt-1">Manage your personal information</p>
           </div>
           <button
             v-if="!isEditing"
@@ -71,14 +70,6 @@
                 />
                 <div v-else class="px-3 py-2 bg-gray-50 rounded-lg text-gray-900">
                   {{ currentUser.email }}
-                </div>
-              </div>
-
-              <!-- Role field (read-only) -->
-              <div class="space-y-2">
-                <label class="text-sm font-medium text-gray-700">Role</label>
-                <div class="px-3 py-2 bg-gray-50 rounded-lg text-gray-900 capitalize">
-                  {{ currentUser.role }}
                 </div>
               </div>
             </div>
