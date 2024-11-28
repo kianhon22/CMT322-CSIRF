@@ -18,7 +18,7 @@
         {{ company.description }}
     </p>
     </div>
-    <div id="default-carousel" class="relative w-1/3" data-carousel="slide">
+    <div id="default-carousel" class="relative w-2/5" data-carousel="slide">
         <!-- Carousel wrapper -->
         <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
             <!-- Item 1 -->
@@ -97,6 +97,7 @@
 </template>
 
 <script>
+import { initFlowbite } from 'flowbite'
 import companyData from '@/data/companyData.json';
 
 export default {
@@ -107,6 +108,7 @@ export default {
     };
   },
   mounted() {
+    initFlowbite();
     this.loadCompanyData();
   },
   watch: {
