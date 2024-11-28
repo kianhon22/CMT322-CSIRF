@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import Modal from '@/components/Modal.vue';
+import Modal from '@/components/JobModal.vue';
 import jobData from '../data/jobData.json';
 import companyData from '../data/companyData.json';
 
