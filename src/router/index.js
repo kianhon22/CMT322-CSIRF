@@ -6,6 +6,7 @@ import Career from '@/views/Career.vue'
 import Company from '@/views/Company.vue'
 import Login from '@/views/Login.vue'
 import Profile from '@/views/Profile.vue'
+import Announcement from '@/views/Announcement.vue'
 
 const routes = [
     { path: '/', name: 'Home', component: Home},
@@ -14,6 +15,7 @@ const routes = [
     { path: '/login', name: 'Login', component: Login},
     { path: '/company/:id', name: 'Company', component: Company, props: true},
     { path: '/profile', name: 'Profile', component: Profile},
+    { path: '/announcement', name: 'Announcement', component: Announcement},
 ];
 
 const router = createRouter({

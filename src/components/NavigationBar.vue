@@ -32,10 +32,10 @@
                   </li>
                 </div>
                 <li>
-                  <router-link to="/event"
+                  <router-link to="/announcement"
                     class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
                     active-class="!bg-orange-500 !text-[#1E1B4B]"
-                  > Events
+                  > Announcement
                   </router-link>
                 </li>
                 <li>
