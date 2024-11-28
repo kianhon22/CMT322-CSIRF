@@ -10,7 +10,7 @@
                     Fulfilling Dreams, Empowering Your Future
                 </p>
                 <div class="fade-in-thin-air flex flex-col lg:flex-row justify-center gap-4 mt-12">
-                    <router-link to="/event"
+                    <router-link to="/announcement"
                     class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-[#1E1B4B] rounded-lg bg-orange-500 border border-transparent hover:bg-transparent hover:text-orange-500 hover:border-orange-500 focus:ring-4">
                     Exciting Events
                     <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
