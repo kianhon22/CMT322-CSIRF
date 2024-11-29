@@ -1,6 +1,6 @@
 <template>
-    <div class="p-6 bg-[#1E1B4B] min-h-screen">
-        <h1 class="text-4xl font-bold text-center mb-4 text-white">Dashboard</h1>
+    <div class="p-6 bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply min-h-screen">
+        <h1 class="text-4xl font-bold text-center mb-8 text-white">Dashboard</h1>
         <div class="container mx-auto bg-white rounded-lg shadow">
             <!-- Tabs -->
             <div class="border-b">
