@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Fusionex",
-        "position": "Senior Frontend Developer",
+        "position": "Frontend Developer Intern",
         "description": "Responsible for developing and maintaining the frontend of our web applications.",
         "type": "Internship",
         "mode": "On-Site"
@@ -10,81 +10,81 @@
     {
         "id": 2,
         "name": "National Instruments",
-        "position": "Machine Learning Engineer",
+        "position": "Machine Learning Engineer Intern",
         "description": "Design and implement machine learning models to improve our data processing capabilities.",
         "type": "Internship",
         "mode": "On-Site"
     },
     {
         "id": 3,
-        "name": "CloudNine Technologies",
-        "position": "DevOps Specialist",
-        "description": "Manage and optimize our cloud infrastructure and CI/CD pipelines.",
+        "name": "Micro Modular System",
+        "position": "Automation Engineer Intern",
+        "description": "Design and implement automation solutions for LED and semiconductor manufacturing processes.",
         "type": "Internship",
         "mode": "On-Site"
     },
     {
         "id": 4,
-        "name": "Quantum Innovations",
-        "position": "Full Stack Developer",
-        "description": "Work on both frontend and backend development to deliver full-fledged applications.",
+        "name": "Intel",
+        "position": "Hardware Engineer",
+        "description": "Work on designing and testing computer components and semiconductor products.",
         "type": "Full-Time",
         "mode": "Hybrid"
     },
     {
         "id": 5,
-        "name": "CyberGuard Security",
-        "position": "Security Engineer",
-        "description": "Ensure the security of our systems and protect against cyber threats.",
+        "name": "Vitrox",
+        "position": "Vision System Engineer",
+        "description": "Develop and maintain automated vision inspection systems for quality control.",
         "type": "Full-Time",
-        "mode": "Hybrid"
+        "mode": "On-Site"
     },
     {
         "id": 6,
-        "name": "CyberGuard Security",
-        "position": "Security Engineer",
-        "description": "Ensure the security of our systems and protect against cyber threats.",
-        "type": "Full-Time",
-        "mode": "Hybrid"
+        "name": "Veecotech",
+        "position": "Software Developer Intern",
+        "description": "Develop custom software solutions for clients using modern technologies.",
+        "type": "Internship",
+        "mode": "Remote"
     },
     {
         "id": 7,
-        "name": "CyberGuard Security",
-        "position": "Security Engineer",
-        "description": "Ensure the security of our systems and protect against cyber threats.",
+        "name": "Jabil",
+        "position": "Manufacturing Engineer",
+        "description": "Support the design and optimization of manufacturing processes for electronic components.",
         "type": "Full-Time",
-        "mode": "Hybrid"
+        "mode": "On-Site"
     },
     {
         "id": 8,
-        "name": "CyberGuard Security",
-        "position": "Security Engineer",
-        "description": "Ensure the security of our systems and protect against cyber threats.",
-        "type": "Full-Time",
+        "name": "Keysight Technologies",
+        "position": "Test Engineer Intern",
+        "description": "Develop and implement test solutions for electronic measurement equipment.",
+        "type": "Internship",
         "mode": "Hybrid"
     },
     {
         "id": 9,
-        "name": "CyberGuard Security",
-        "position": "Security Engineer",
-        "description": "Ensure the security of our systems and protect against cyber threats.",
+        "name": "Motorola Solutions",
+        "position": "Communications Engineer",
+        "description": "Work on mission-critical communication systems and solutions.",
         "type": "Full-Time",
-        "mode": "Hybrid"
+        "mode": "On-Site"
     },
     {
         "id": 10,
-        "name": "CyberGuard Security",
-        "position": "Security Engineer",
-        "description": "Ensure the security of our systems and protect against cyber threats.",
+        "name": "Dell Technologies",
+        "position": "Systems Engineer",
+        "description": "Design and implement enterprise-level technology solutions for clients.",
         "type": "Full-Time",
         "mode": "Hybrid"
     },
     {
         "id": 11,
-        "name": "CyberGuard Security",
-        "position": "Security Engineer",
-        "description": "Ensure the security of our systems and protect against cyber threats.",
-        "type": "Full-Time",
-        "mode": "Hybrid"
+        "name": "AMD Malaysia",
+        "position": "Semiconductor Engineer Intern",
+        "description": "Work on research and development of next-generation computing technologies.",
+        "type": "Internship",
+        "mode": "On-Site"
     }
 ]
