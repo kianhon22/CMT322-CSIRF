@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <section class="bg-gradient-to-br from-[#1E1B4B] to-[#312e81] min-h-screen p-8">
+  <section class="bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply min-h-screen p-8">
     <div class="max-w-3xl mx-auto">
       <!-- Profile Card -->
       <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 space-y-8">
