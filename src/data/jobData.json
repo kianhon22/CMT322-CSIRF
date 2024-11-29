@@ -17,7 +17,7 @@
     },
     {
         "id": 3,
-        "name": "CloudNine Technologies",
+        "name": "Micro Modular System",
         "position": "DevOps Specialist",
         "description": "Manage and optimize our cloud infrastructure and CI/CD pipelines.",
         "type": "Internship",
@@ -25,7 +25,7 @@
     },
     {
         "id": 4,
-        "name": "Quantum Innovations",
+        "name": "Micro Modular System",
         "position": "Full Stack Developer",
         "description": "Work on both frontend and backend development to deliver full-fledged applications.",
         "type": "Full-Time",
@@ -33,7 +33,7 @@
     },
     {
         "id": 5,
-        "name": "CyberGuard Security",
+        "name": "Micro Modular System",
         "position": "Security Engineer",
         "description": "Ensure the security of our systems and protect against cyber threats.",
         "type": "Full-Time",
@@ -41,7 +41,7 @@
     },
     {
         "id": 6,
-        "name": "CyberGuard Security",
+        "name": "Intel",
         "position": "Security Engineer",
         "description": "Ensure the security of our systems and protect against cyber threats.",
         "type": "Full-Time",
@@ -49,7 +49,7 @@
     },
     {
         "id": 7,
-        "name": "CyberGuard Security",
+        "name": "Vitrox",
         "position": "Security Engineer",
         "description": "Ensure the security of our systems and protect against cyber threats.",
         "type": "Full-Time",
@@ -57,7 +57,7 @@
     },
     {
         "id": 8,
-        "name": "CyberGuard Security",
+        "name": "Vitrox",
         "position": "Security Engineer",
         "description": "Ensure the security of our systems and protect against cyber threats.",
         "type": "Full-Time",
@@ -65,7 +65,7 @@
     },
     {
         "id": 9,
-        "name": "CyberGuard Security",
+        "name": "Veecotech",
         "position": "Security Engineer",
         "description": "Ensure the security of our systems and protect against cyber threats.",
         "type": "Full-Time",
@@ -73,7 +73,7 @@
     },
     {
         "id": 10,
-        "name": "CyberGuard Security",
+        "name": "Jabil",
         "position": "Security Engineer",
         "description": "Ensure the security of our systems and protect against cyber threats.",
         "type": "Full-Time",
@@ -81,7 +81,7 @@
     },
     {
         "id": 11,
-        "name": "CyberGuard Security",
+        "name": "Keysight",
         "position": "Security Engineer",
         "description": "Ensure the security of our systems and protect against cyber threats.",
         "type": "Full-Time",

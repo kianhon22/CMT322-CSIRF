@@ -69,34 +69,113 @@
         </button>
     </div>
     </section>
+
+    <!-- Career Available -->
     <section>
-        <div class="container mx-auto px-4 py-12">
-            <h2 class="text-2xl font-semibold text-white mb-4">Career Available</h2>
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                <!-- Service 1 -->
-                <div class="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg">
-                    <img src="../assets/office.jpg" class="w-24 h-24 rounded-full" alt="...">
-                    <h3 class="text-lg font-semibold text-gray-800 mt-4">Service 1</h3>
-                    <p class="text-base text-gray-500 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-                <!-- Service 2 -->
-                <div class="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg">
-                    <img src="../assets/office.jpg" class="w-24 h-24 rounded-full" alt="...">
-                    <h3 class="text-lg font-semibold text-gray-800 mt-4">Service 2</h3>
-                    <p class="text-base text-gray-500 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-                <!-- Service 3 -->
-                <div class="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg">
-                    <img src="../assets/office.jpg" class="w-24 h-24 rounded-full" alt="...">
-                    <h3 class="text-lg font-semibold text-gray-800 mt-4">Service 3</h3>
-                    <p class="text-base text-gray-500 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
+        <div class="container mx-auto px-4 py-9 bg-[#1E1B4B]">
+            <h2 class="text-4xl font-semibold text-white mb-4 text-center">Career Available</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <fwb-card
+                    v-for="job in filteredJobs"
+                    :key="job.id"
+                    class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                    @click="openModal(job)">
+                    <div class="p-6">
+                        <div class="flex items-center gap-4 mb-4">
+                            <img
+                                v-if="getCompanyLogo(job.name)"
+                                :src="getCompanyLogo(job.name)"
+                                :alt="job.name"
+                                class="w-16 h-16 object-contain rounded-lg"
+                            />
+                            <div>
+                                <h5 class="text-2xl font-bold tracking-tight text-gray-900">
+                                    {{ job.name }}
+                                </h5>
+                                <p class="font-normal text-gray-700">
+                                    {{ job.position }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex justify-start gap-2 mb-3">
+                            <span class="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-100 rounded-full">
+                                {{ job.type }}
+                            </span>
+                            <span class="px-2 py-1 text-xs font-semibold text-green-800 bg-green-100 rounded-full">
+                                {{ job.mode }}
+                            </span>
+                        </div>
+                        <button class="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors duration-300">
+                            Apply Now
+                            <svg class="w-4 h-4 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            </svg>
+                        </button>
+                    </div>
+                </fwb-card>
             </div>
+
+            <!-- Job Modal -->
+            <Modal
+                v-if="isModalOpen"
+                :title="selectedJob?.position"
+                :description="selectedJob?.description"
+                @close="closeModal"
+            />
         </div>
     </section>
 </template>
 
 <script>
+import { initFlowbite } from 'flowbite'
+import Modal from '@/components/JobModal.vue';
+import jobData from '../data/jobData.json';
+import companyData from '../data/companyData.json';
+
+export default {
+  props: ['id'], // Receives `id` from the route
+  components: { Modal },
+  data() {
+    return {
+      company: null, // The current company data
+      jobs: jobData, // List of all jobs
+      isModalOpen: false, // Controls modal visibility
+      selectedJob: null, // Stores the job selected for the modal
+    };
+  },
+  computed: {
+    filteredJobs() {
+      if (!this.company) return [];
+      // Filter jobs by company name
+      return this.jobs.filter(job => job.name === this.company.name);
+    },
+  },
+  mounted() {
+    initFlowbite();
+    this.loadCompanyData();
+  },
+  methods: {
+    loadCompanyData() {
+      // Find the company matching the `id` from the route
+      this.company = companyData.find(company => company.sponsorID === Number(this.id));
+    },
+    openModal(job) {
+      this.selectedJob = job;
+      this.isModalOpen = true;
+    },
+    closeModal() {
+      this.isModalOpen = false;
+      this.selectedJob = null;
+    },
+    getCompanyLogo(jobCompanyName) {
+      const company = companyData.find(obj => obj.name === jobCompanyName);
+      return company ? company.logo : null;
+    },
+  },
+};
+</script>
+
+<!-- <script>
 import { initFlowbite } from 'flowbite'
 import companyData from '@/data/companyData.json';
 
@@ -126,4 +205,4 @@ export default {
     },
   },
 };
-</script>
+</script> -->
