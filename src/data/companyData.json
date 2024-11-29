@@ -99,7 +99,7 @@
         "website": "",
         "shortDescription": "Leading Electronic Test and Measurement Company",
         "description": "Keysight Technologies is a leading technology company that helps enterprises, service providers, and governments accelerate innovation to connect and secure the world. Keysight's solutions optimize networks and bring electronic products to market faster and at a lower cost.",
-        "logo": "/Jabil logo.png",
+        "logo": "/Keysight logo.png",
         "location": "Bayan Lepas, Penang",
         "sponsorID": 8
     },
@@ -125,7 +125,7 @@
         "website": "",
         "shortDescription": "Global Technology Solutions Provider",
         "description": "Dell Technologies Malaysia is a part of the global Dell Technologies family, providing a broad range of technology solutions including PCs, servers, data storage devices, network switches, software, and computer peripherals. The company has a significant presence in Malaysia with offices in Cyberjaya and Penang.",
-        "logo": "/Jabil logo.png",
+        "logo": "/Dell logo.png",
         "location": "Cyberjaya, Selangor",
         "sponsorID": 10
     },
@@ -138,7 +138,7 @@
         "website": "",
         "shortDescription": "Leading Semiconductor Company",
         "description": "AMD Malaysia, located in Penang, is a crucial part of AMD's global operations, focusing on semiconductor research, development, and testing. The facility plays a key role in AMD's worldwide supply chain and contributes to the development of next-generation computing and graphics technologies.",
-        "logo": "/Jabil logo.png",
+        "logo": "/AMD logo.png",
         "location": "Bayan Lepas, Penang",
         "sponsorID": 11
     }

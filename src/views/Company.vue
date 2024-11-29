@@ -8,7 +8,7 @@
         <!-- Text Section -->
         <div class="text-left max-w-md">
           <span class="block text-4xl font-semibold whitespace-nowrap text-white">{{ company.name }}</span>
-          <p class="text-xl text-gray-300">{{ company.shortDescription }}</p>
+          <p class="text-xl text-gray-300 mt-2">{{ company.shortDescription }}</p>
         </div>
       </div>
        <!-- Company Description -->
