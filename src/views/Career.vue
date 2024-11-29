@@ -1,9 +1,7 @@
 <template>
-  <section class="min-h-screen bg-fixed bg-center bg-no-repeat bg-cover py-12"
-    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/src/assets/neon-purple-modern-city-iegjsguqr41ak8ee.jpg')">
-    <h1 class="text-5xl font-bold text-center mt-12 mb-2 text-white drop-shadow-lg">Career Opportunities</h1>
-    <p class="text-lg text-center mb-10 text-orange-400 flex justify-center items-center gap-2 drop-shadow-md font-medium">
-      Click on the job for more details!
+  <section class="min-h-screen bg-center bg-cover bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply p-8">
+    <h1 class="text-5xl font-bold text-center mt-3 mb-4 text-white">Career Opportunities</h1>
+    <p class="text text-center mb-8 text-orange-500 flex justify-center items-center gap-2">      Click on the job for more details!
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 animate-pulse">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" />
       </svg>
@@ -77,7 +75,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
       <fwb-card v-for="job in filteredJobs"
         :key="job.id"
-        class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 max-w-sm"
+        class="bg-white backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 max-w-sm"
         @click="openModal(job)">
         <!-- Card content -->
         <div class="p-4 flex flex-col justify-between h-full">
