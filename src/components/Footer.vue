@@ -18,12 +18,6 @@
                             <li>
                                 <a href="/career" class="rounded px-2 py-0.5 hover:text-[#1E1B4B]">Career</a>
                             </li>
-                            <li>
-                                <a href="/career" class="rounded px-2 py-0.5 hover:text-[#1E1B4B]">Career</a>
-                            </li>
-                            <li>
-                                <a href="/career" class="rounded px-2 py-0.5 hover:text-[#1E1B4B]">Career</a>
-                            </li>
                         </ul>
                     </div>
                     <div class="mx-8">
