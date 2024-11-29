@@ -1,5 +1,5 @@
 <template>
-    <section class="pt-12 bg-center bg-no-repeat bg-[url('/src/assets/neon-purple-modern-city-iegjsguqr41ak8ee.jpg')] bg-gray-500 bg-blend-multiply m-h-screen w-full flex flex-col items-center justify-center overflow-y-auto">
+    <section class="pt-12 bg-center bg-cover bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply m-h-screen w-full flex flex-col items-center justify-center overflow-y-auto">
       <div v-if="company" class="flex items-center space-x-10">
         <!-- Logo -->
         <a href="https://www.ni.com/en.html?srsltid=AfmBOop8ibaz67DwGZZCiBc5O5kIgxtTyLUzwztKtg38RYomfSEcFf_o" target="_blank" class="flex-shrink-0">

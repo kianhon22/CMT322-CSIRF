@@ -23,7 +23,7 @@
           />
         <!-- Scrollable Content -->
         <div class="popup-content max-h-80 overflow-y-auto pr-4">
-          <p class="text-gray-700 mb-6">{{ popupContent.content }}</p>
+            <p class="text-gray-700 mb-6" v-html= "popupContent.content"></p>
         </div>
           <!-- Register Button -->
           <button
@@ -38,10 +38,10 @@
       </div>
     </div>
   </template>
-  
+
   <script>
   import announcementData from "@/data/announcementData.json"; // Ensure this path is correct
-  
+
   export default {
     props: {
       isVisible: {
@@ -85,8 +85,7 @@
     },
   };
   </script>
-  
+
   <style scoped>
   /* Add necessary styling for the popup */
   </style>
-  
