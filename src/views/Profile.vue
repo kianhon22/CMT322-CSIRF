@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <section class="bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply min-h-screen p-8">
+  <section class="bg-gradient-to-br from-[#1E1B4B] to-[#312e81] min-h-screen p-8">
     <div class="max-w-3xl mx-auto">
       <!-- Profile Card -->
       <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 space-y-8">
@@ -12,7 +12,7 @@
           <button
             v-if="!isEditing"
             @click="startEditing"
-            class="flex items-center gap-2 px-4 py-2 text-sm text-white bg-[#1E1B4B] rounded-lg hover:bg-orange-500 transition-colors duration-200"
+            class="flex items-center gap-2 px-4 py-2 text-sm text-white bg-[#1E1B4B] rounded-lg hover:bg-[#312e81] transition-colors duration-200"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
