@@ -2,11 +2,15 @@
     "currentUser": {
         "id": 1,
         "role": "student",
-        "name": "Admin",
+        "name": "Admin1111",
         "email": "admin@csirf.com",
         "password": "csirfusm",
+        "phone": "0123456789",
+        "year": 3,
+        "resume": "testResume.pdf",
+        "registered": true,
         "applyWorkshop": false,
-        "applyJob": false
+        "applyJob": true
     },
     "admin": [
         {

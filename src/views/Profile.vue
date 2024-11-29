@@ -77,41 +77,40 @@
 
           <!-- Right Column -->
           <div class="space-y-6" v-if="currentUser.role === 'student'">
-            <!-- Student Information Section -->
             <div class="space-y-4">
-              <h2 class="text-xl font-semibold text-[#1E1B4B]">Student Details</h2>
-
-              <!-- Phone field -->
-              <div class="space-y-2">
-                <label class="text-sm font-medium text-gray-700">Phone Number</label>
-                <input v-if="isEditing"
-                       v-model="editedUser.phone"
-                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1E1B4B] focus:border-transparent text-gray-900 font-medium"
-                       placeholder="Enter your phone number"
-                />
-                <div v-else class="px-3 py-2 bg-gray-50 rounded-lg text-gray-900">
-                  {{ currentUser.phone }}
+              <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-2">
+                  <label class="text-sm font-medium text-gray-700">Phone</label>
+                  <input
+                    v-if="isEditing"
+                    v-model="phone"
+                    type="tel"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1E1B4B] focus:border-transparent text-gray-900 font-medium"
+                    placeholder="Enter your phone number"
+                  />
+                  <div v-else class="px-3 py-2 bg-gray-50 rounded-lg text-gray-900">
+                    {{ phone }}
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <label class="text-sm font-medium text-gray-700">Year</label>
+                  <input
+                    v-if="isEditing"
+                    v-model="year"
+                    type="number"
+                    min="1"
+                    max="4"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1E1B4B] focus:border-transparent text-gray-900 font-medium"
+                    placeholder="Enter your year"
+                  />
+                  <div v-else class="px-3 py-2 bg-gray-50 rounded-lg text-gray-900">
+                    {{ year }}
+                  </div>
                 </div>
               </div>
 
-              <!-- Year field -->
-              <div class="space-y-2">
-                <label class="text-sm font-medium text-gray-700">Study Year</label>
-                <select v-if="isEditing"
-                        v-model="editedUser.year"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1E1B4B] focus:border-transparent text-gray-900 font-medium bg-white">
-                  <option v-for="year in [1,2,3,4]" :key="year" :value="year">
-                    Year {{ year }}
-                  </option>
-                </select>
-                <div v-else class="px-3 py-2 bg-gray-50 rounded-lg text-gray-900">
-                  Year {{ currentUser.year }}
-                </div>
-              </div>
-
-              <!-- Resume field -->
-              <div class="space-y-2">
-                <label class="text-sm font-medium text-gray-700">Resume</label>
+              <h2 class="text-xl font-semibold text-[#1E1B4B]">Resume</h2>
+              <div class="flex justify-center items-center p-4 bg-gray-50 rounded-lg">
                 <div v-if="isEditing" class="space-y-2">
                   <input
                     type="file"
@@ -181,6 +180,8 @@ export default {
     return {
       isEditing: false,
       editedUser: {},
+      phone: this.currentUser.phone || '',
+      year: this.currentUser.year || '',
       newResumeFile: null,
       newLogoURL: null,
       logoError: ''
