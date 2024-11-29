@@ -1,5 +1,5 @@
 <template>
-    <section class="min-h-screen bg-center bg-no-repeat bg-[url('@/assets/neon-purple-modern-city-iegjsguqr41ak8ee.jpg')] bg-gray-500 bg-blend-multiply p-8">
+    <section class="min-h-screen bg-center bg-no-repeat bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply p-8">
       <h1 class="text-5xl font-bold text-center mt-3 mb-14 text-white">
         Exciting Things Are Happening!
       </h1>
