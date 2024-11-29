@@ -84,51 +84,15 @@
         "sponsorID": 7
     },
     {
-        "name": "Jabil",
+        "name": "Keysight",
         "category": "bronze",
         "email": "",
         "phone": "",
         "linkedin": "",
         "website": "",
-        "shortDescription": "American Multinational Manufacturing Company",
-        "description": "Jabil Inc. is an American multinational manufacturing company involved in the design, engineering, and manufacturing of electronic circuit board assemblies and systems, along with supply chain services, primarily serving original equipment manufacturers.",
-        "logo": "/Jabil logo.png",
-        "sponsorID": 7
-    },
-    {
-        "name": "Jabil",
-        "category": "bronze",
-        "email": "",
-        "phone": "",
-        "linkedin": "",
-        "website": "",
-        "shortDescription": "American Multinational Manufacturing Company",
-        "description": "Jabil Inc. is an American multinational manufacturing company involved in the design, engineering, and manufacturing of electronic circuit board assemblies and systems, along with supply chain services, primarily serving original equipment manufacturers.",
-        "logo": "/Jabil logo.png",
-        "sponsorID": 7
-    },
-    {
-        "name": "Jabil",
-        "category": "bronze",
-        "email": "",
-        "phone": "",
-        "linkedin": "",
-        "website": "",
-        "shortDescription": "American Multinational Manufacturing Company",
-        "description": "Jabil Inc. is an American multinational manufacturing company involved in the design, engineering, and manufacturing of electronic circuit board assemblies and systems, along with supply chain services, primarily serving original equipment manufacturers.",
-        "logo": "/Jabil logo.png",
-        "sponsorID": 7
-    },
-    {
-        "name": "Jabil",
-        "category": "bronze",
-        "email": "",
-        "phone": "",
-        "linkedin": "",
-        "website": "",
-        "shortDescription": "American Multinational Manufacturing Company",
-        "description": "Jabil Inc. is an American multinational manufacturing company involved in the design, engineering, and manufacturing of electronic circuit board assemblies and systems, along with supply chain services, primarily serving original equipment manufacturers.",
-        "logo": "/Jabil logo.png",
-        "sponsorID": 7
+        "shortDescription": "Electronics Test And Measurement Equipment Company",
+        "description": "Keysight provides electronic design and test solutions that are used in the simulation, design, validation, manufacture, installation, optimization and secure operation of electronics systems in the communications, networking and electronics industries.",
+        "logo": "/Keysight logo.png",
+        "sponsorID": 8
     }
 ]
