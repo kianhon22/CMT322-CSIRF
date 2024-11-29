@@ -9,6 +9,7 @@
         "shortDescription": "Automated Test and Measurement Systems",
         "description": "Fusionex is an established multi-award-winning data technology leader specializing in Analytics, Big Data Management, IR 4.0, Internet of Things, Machine Learning, and Artificial Intelligence.",
         "logo": "/Fusionex logo.png",
+        "location": "Kulai, Johor",
         "sponsorID": 1
     },
     {
@@ -21,6 +22,7 @@
         "shortDescription": "Automated Test and Measurement Systems",
         "description": "National Instruments Corp (NI) is a provider of software-defined platform, automated test equipment, and virtual instrumentation products for engineers and scientists.",
         "logo": "/NI logo.jpeg",
+        "location": "Batu Pahat, Johor",
         "sponsorID": 4
     },
     {
@@ -33,6 +35,7 @@
         "shortDescription": "Leading Machine Design And Manufacturing Corporation",
         "description": "Micro Modular System Sdn Bhd (MMS) is one of the fastest growing companies in design and manufacture of Industrial Automation Systems and Machinery focusing on LED and semiconductor industries.",
         "logo": "/MMS logo.png",
+        "location": "Bayan Lepas, Penang",
         "sponsorID": 2
     },
     {
@@ -45,6 +48,7 @@
         "shortDescription": "Leading American Brand And Manufacturer of Semiconductor Computer Circuit",
         "description": "Intel Corporation is an American multinational corporation and technology company headquartered in Santa Clara, California, and incorporated in Delaware. Intel designs, manufactures, and sells computer components and related products for business and consumer markets.",
         "logo": "/Intel logo.png",
+        "location": "Bayan Lepas, Penang",
         "sponsorID": 5
     },
     {
@@ -57,6 +61,7 @@
         "shortDescription": "Malaysian Technology Company",
         "description": "ViTrox Corporation Berhad (ViTrox Corp) is a technology company that designs and manufactures automated vision inspection equipment and system-on-chip embedded electronic devices. ",
         "logo": "/Vitrox logo.png",
+        "location": "Bukit Mertajam, Penang",
         "sponsorID": 3
     },
     {
@@ -69,6 +74,7 @@
         "shortDescription": "Leading Malaysia IT Solution Company",
         "description": "VeecoTech | Custom Software & App Development Agency. business forward A proud Malaysian agency. We're a software development and marketing agency that will guide you to online success. A proud Malaysian agency.",
         "logo": "/Veecotech logo.png",
+        "location": "Kuala Lumpur",
         "sponsorID": 6
     },
     {
@@ -81,18 +87,59 @@
         "shortDescription": "American Multinational Manufacturing Company",
         "description": "Jabil Inc. is an American multinational manufacturing company involved in the design, engineering, and manufacturing of electronic circuit board assemblies and systems, along with supply chain services, primarily serving original equipment manufacturers.",
         "logo": "/Jabil logo.png",
+        "location": "Singapore",
         "sponsorID": 7
     },
     {
-        "name": "Keysight",
+        "name": "Keysight Technologies",
         "category": "bronze",
         "email": "",
         "phone": "",
         "linkedin": "",
         "website": "",
-        "shortDescription": "Electronics Test And Measurement Equipment Company",
-        "description": "Keysight provides electronic design and test solutions that are used in the simulation, design, validation, manufacture, installation, optimization and secure operation of electronics systems in the communications, networking and electronics industries.",
-        "logo": "/Keysight logo.png",
+        "shortDescription": "Leading Electronic Test and Measurement Company",
+        "description": "Keysight Technologies is a leading technology company that helps enterprises, service providers, and governments accelerate innovation to connect and secure the world. Keysight's solutions optimize networks and bring electronic products to market faster and at a lower cost.",
+        "logo": "/Jabil logo.png",
+        "location": "Bayan Lepas, Penang",
         "sponsorID": 8
+    },
+    {
+        "name": "Motorola Solutions",
+        "category": "bronze",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "website": "",
+        "shortDescription": "Global Leader in Mission-Critical Communications",
+        "description": "Motorola Solutions is a global leader in mission-critical communications and analytics. Our technology platforms in mission-critical communications, command center software and video security & analytics make cities safer and help communities and businesses thrive.",
+        "logo": "/Jabil logo.png",
+        "location": "Bayan Lepas, Penang",
+        "sponsorID": 9
+    },
+    {
+        "name": "Dell Technologies",
+        "category": "bronze",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "website": "",
+        "shortDescription": "Global Technology Solutions Provider",
+        "description": "Dell Technologies Malaysia is a part of the global Dell Technologies family, providing a broad range of technology solutions including PCs, servers, data storage devices, network switches, software, and computer peripherals. The company has a significant presence in Malaysia with offices in Cyberjaya and Penang.",
+        "logo": "/Jabil logo.png",
+        "location": "Cyberjaya, Selangor",
+        "sponsorID": 10
+    },
+    {
+        "name": "AMD Malaysia",
+        "category": "bronze",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "website": "",
+        "shortDescription": "Leading Semiconductor Company",
+        "description": "AMD Malaysia, located in Penang, is a crucial part of AMD's global operations, focusing on semiconductor research, development, and testing. The facility plays a key role in AMD's worldwide supply chain and contributes to the development of next-generation computing and graphics technologies.",
+        "logo": "/Jabil logo.png",
+        "location": "Bayan Lepas, Penang",
+        "sponsorID": 11
     }
 ]

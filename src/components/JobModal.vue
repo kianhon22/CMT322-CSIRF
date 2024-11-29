@@ -2,57 +2,49 @@
 <template>
     <Transition name="modal-fade">
         <div v-if="isOpen" class="fixed inset-0 z-50 overflow-y-auto">
-            <!-- Background Overlay -->
-            <div
-                class="fixed inset-0 bg-black bg-opacity-50"
-                @click.self="close"
-            ></div>
+            <div class="flex min-h-screen items-center justify-center p-4">
+                <div class="fixed inset-0 bg-black opacity-30"></div>
+                <div class="relative w-full max-w-2xl rounded-lg bg-white p-6 shadow-xl">
+                    <!-- Header with close button -->
+                    <div class="mb-6 flex items-start justify-between">
+                        <h3 class="text-2xl font-semibold text-gray-900">
+                            {{ title }}
+                        </h3>
+                        <button @click="close" class="text-gray-400 hover:text-gray-500">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
 
-            <!-- Modal Content -->
-            <div class="flex min-h-full items-center justify-center p-4">
-                <div
-                    class="relative rounded-lg bg-white text-left shadow-xl sm:my-8 sm:w-full sm:max-w-lg"
-                >
-                    <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                        <!-- Close Button -->
-                        <div class="absolute right-4 top-4">
-                            <button
-                                @click="close"
-                                class="rounded-full bg-gray-100 p-2 hover:bg-gray-200 transition-colors duration-200"
-                            >
-                                <svg
-                                    class="h-6 w-6 text-gray-600"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-
-                        <!-- Content -->
-                        <div class="mt-3 text-center sm:mt-0 sm:text-left">
-                            <h3
-                                class="text-2xl font-semibold leading-6 text-gray-900 mb-4 pr-8"
-                            >
-                                {{ title }}
-                            </h3>
-                            <div class="mt-4">
-                                <p class="text-gray-700 whitespace-pre-line">
-                                    {{ description }}
-                                </p>
-                                <!-- Job Description -->
-                                <p class="mt-2 text-gray-600">
-                                    {{ jobDescription }}
-                                </p>
+                    <!-- Content -->
+                    <div class="mt-4">
+                        <div class="text-gray-600 whitespace-pre-line">
+                            <div v-for="(section, index) in formattedDescription" :key="index">
+                                <p class="font-bold text-gray-800 mb-2">{{ section.title }}</p>
+                                <ul class="list-disc pl-6 mb-4">
+                                    <li v-for="(item, idx) in section.items" :key="idx" class="mb-1">
+                                        {{ item }}
+                                    </li>
+                                </ul>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- New Footer with centered buttons -->
+                    <div class="mt-8 flex justify-center space-x-4">
+                        <button
+                            @click="viewCompany"
+                            class="px-6 py-2.5 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 transition-colors duration-300"
+                        >
+                            Company Details
+                        </button>
+                        <button
+                            @click="applyJob"
+                            class="px-6 py-2.5 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 transition-colors duration-300"
+                        >
+                            Apply
+                        </button>
                     </div>
                 </div>
             </div>
@@ -67,12 +59,38 @@ export default {
         title: String,
         description: String,
         jobDescription: String,
+        companyId: Number
     },
     methods: {
         close() {
             this.$emit("close");
         },
+        viewCompany() {
+            if (this.companyId) {
+                this.$router.push({ name: 'Company', params: { id: this.companyId } });
+                this.close();
+            }
+        },
+        applyJob() {
+            // Handle job application
+            // You can emit an event or handle the application logic here
+            this.$emit("apply");
+        }
     },
+    computed: {
+        formattedDescription() {
+            if (!this.jobDescription) return [];
+
+            const sections = this.jobDescription.split('\n\n');
+            return sections.map(section => {
+                const [title, ...items] = section.split('\n');
+                return {
+                    title: title,
+                    items: items.map(item => item.replace('• ', ''))
+                };
+            });
+        }
+    }
 };
 </script>
 
