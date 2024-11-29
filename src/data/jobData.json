@@ -3,7 +3,7 @@
         "id": 1,
         "name": "Fusionex",
         "position": "Frontend Developer Intern",
-        "description": "Responsible for developing and maintaining the frontend of our web applications.",
+        "description": "A. Job Responsibilities:\n• Develop and maintain responsive web applications using React/Vue.js\n• Collaborate with UI/UX designers to implement user-friendly interfaces\n• Write clean, maintainable, and efficient code\n• Participate in code reviews and implement feedback\n• Debug and fix frontend issues\n\nB. Job Requirements / Skills:\n• Currently pursuing Bachelor's degree in Computer Science or related field\n• Knowledge of HTML, CSS, JavaScript, and modern frontend frameworks\n• Basic understanding of version control (Git)\n• Good problem-solving skills\n• Strong attention to detail\n• Ability to work in a team environment\n\nC. Benefits:\n• Monthly allowance\n• Flexible working hours\n• Professional mentorship\n• Networking opportunities\n• Potential for full-time conversion\n• Modern office environment",
         "type": "Internship",
         "mode": "On-Site"
     },
@@ -11,7 +11,7 @@
         "id": 2,
         "name": "National Instruments",
         "position": "Machine Learning Engineer Intern",
-        "description": "Design and implement machine learning models to improve our data processing capabilities.",
+        "description": "A. Job Responsibilities:\n• Develop and implement machine learning models for data analysis\n• Collect and preprocess large datasets\n• Optimize existing ML models for better performance\n• Create documentation for ML systems\n• Collaborate with cross-functional teams\n\nB. Job Requirements / Skills:\n• Pursuing degree in Computer Science, AI, or related field\n• Strong programming skills in Python\n• Knowledge of ML frameworks (TensorFlow, PyTorch)\n• Understanding of statistical analysis\n• Experience with data visualization\n• Good analytical and problem-solving skills\n\nC. Benefits:\n• Competitive stipend\n• Learning and development opportunities\n• Access to cutting-edge technology\n• Team building activities\n• Health and wellness programs\n• Transportation allowance",
         "type": "Internship",
         "mode": "On-Site"
     },
@@ -19,7 +19,7 @@
         "id": 3,
         "name": "Micro Modular System",
         "position": "Automation Engineer Intern",
-        "description": "Design and implement automation solutions for LED and semiconductor manufacturing processes.",
+        "description": "A. Job Responsibilities:\n• Design and implement automation solutions for manufacturing processes\n• Program and configure industrial automation equipment\n• Conduct testing and troubleshooting of automated systems\n• Create technical documentation and user manuals\n• Support maintenance and optimization of existing systems\n\nB. Job Requirements / Skills:\n• Pursuing degree in Mechatronics, Electrical Engineering, or related field\n• Knowledge of PLC programming and industrial automation\n• Familiarity with automation software and tools\n• Basic understanding of electrical systems\n• Strong analytical and problem-solving abilities\n• Good communication skills\n\nC. Benefits:\n• Monthly allowance\n• Hands-on industry experience\n• Technical training programs\n• Safety certification opportunities\n• Exposure to cutting-edge automation technology\n• Transportation allowance",
         "type": "Internship",
         "mode": "On-Site"
     },
@@ -27,7 +27,7 @@
         "id": 4,
         "name": "Intel",
         "position": "Hardware Engineer",
-        "description": "Work on designing and testing computer components and semiconductor products.",
+        "description": "A. Job Responsibilities:\n• Design and develop computer hardware components\n• Conduct performance testing and validation\n• Create technical specifications and documentation\n• Collaborate with cross-functional teams on product development\n• Troubleshoot complex hardware issues\n• Lead technical reviews and design meetings\n\nB. Job Requirements / Skills:\n• Bachelor's degree in Computer Engineering or related field\n• 3+ years experience in hardware design\n• Proficiency in circuit design and PCB layout\n• Knowledge of computer architecture\n• Experience with hardware debugging tools\n• Strong project management skills\n\nC. Benefits:\n• Competitive salary package\n• Performance bonuses\n• Comprehensive medical coverage\n• Stock purchase plan\n• Professional development opportunities\n• Work-life balance programs",
         "type": "Full-Time",
         "mode": "Hybrid"
     },
@@ -35,7 +35,7 @@
         "id": 5,
         "name": "Vitrox",
         "position": "Vision System Engineer",
-        "description": "Develop and maintain automated vision inspection systems for quality control.",
+        "description": "A. Job Responsibilities:\n• Develop and maintain machine vision systems\n• Design image processing algorithms\n• Implement quality control solutions\n• Calibrate and optimize vision systems\n• Provide technical support to production teams\n• Document system specifications and procedures\n\nB. Job Requirements / Skills:\n• Bachelor's degree in Computer Science or Engineering\n• Experience with image processing and computer vision\n• Programming skills in C++ and Python\n• Knowledge of OpenCV or similar frameworks\n• Understanding of lighting and optics\n• Problem-solving and analytical skills\n\nC. Benefits:\n• Competitive salary\n• Performance incentives\n• Health insurance\n• Annual leave\n• Professional certification support\n• Gym membership",
         "type": "Full-Time",
         "mode": "On-Site"
     },
@@ -43,7 +43,7 @@
         "id": 6,
         "name": "Veecotech",
         "position": "Software Developer Intern",
-        "description": "Develop custom software solutions for clients using modern technologies.",
+        "description": "A. Job Responsibilities:\n• Develop and maintain web applications\n• Write clean, efficient, and maintainable code\n• Participate in software design discussions\n• Debug and fix software issues\n• Assist in testing and deployment processes\n• Collaborate with senior developers\n\nB. Job Requirements / Skills:\n• Currently pursuing Computer Science degree\n• Knowledge of programming languages (Java, Python, etc.)\n• Understanding of web technologies\n• Basic database knowledge\n• Eager to learn and grow\n• Good communication skills\n\nC. Benefits:\n• Monthly allowance\n• Flexible working arrangements\n• Mentorship program\n• Training opportunities\n• Team building activities\n• Remote work tools provided",
         "type": "Internship",
         "mode": "Remote"
     },
@@ -51,7 +51,7 @@
         "id": 7,
         "name": "Jabil",
         "position": "Manufacturing Engineer",
-        "description": "Support the design and optimization of manufacturing processes for electronic components.",
+        "description": "A. Job Responsibilities:\n• Optimize manufacturing processes\n• Implement lean manufacturing principles\n• Analyze production metrics and KPIs\n• Develop process improvement initiatives\n• Coordinate with production teams\n• Ensure quality standards compliance\n\nB. Job Requirements / Skills:\n• Bachelor's degree in Manufacturing Engineering\n• 3+ years manufacturing experience\n• Knowledge of lean manufacturing\n• Six Sigma certification preferred\n• Strong analytical skills\n• Leadership abilities\n\nC. Benefits:\n• Competitive salary package\n• Performance bonuses\n• Medical and dental coverage\n• Retirement benefits\n• Professional development\n• Overtime compensation",
         "type": "Full-Time",
         "mode": "On-Site"
     },
@@ -59,7 +59,7 @@
         "id": 8,
         "name": "Keysight Technologies",
         "position": "Test Engineer Intern",
-        "description": "Develop and implement test solutions for electronic measurement equipment.",
+        "description": "A. Job Responsibilities:\n• Develop and execute test plans\n• Create automated test scripts\n• Analyze and document test results\n• Identify and report software defects\n• Participate in quality assurance meetings\n• Support product validation processes\n\nB. Job Requirements / Skills:\n• Pursuing degree in Electronics/Computer Engineering\n• Knowledge of testing methodologies\n• Basic programming skills\n• Attention to detail\n• Analytical mindset\n• Good documentation skills\n\nC. Benefits:\n• Monthly stipend\n• Structured internship program\n• Technical training\n• Networking opportunities\n• Project presentation experience\n• Modern test equipment exposure",
         "type": "Internship",
         "mode": "Hybrid"
     },
@@ -67,7 +67,7 @@
         "id": 9,
         "name": "Motorola Solutions",
         "position": "Communications Engineer",
-        "description": "Work on mission-critical communication systems and solutions.",
+        "description": "A. Job Responsibilities:\n• Design communication systems and solutions\n• Implement network infrastructure\n• Conduct system testing and validation\n• Troubleshoot complex network issues\n• Develop technical documentation\n• Coordinate with global teams\n\nB. Job Requirements / Skills:\n• Bachelor's degree in Communications Engineering\n• Experience with wireless technologies\n• Knowledge of networking protocols\n• Cisco certification preferred\n• Project management skills\n• Strong problem-solving abilities\n\nC. Benefits:\n• Competitive salary\n• Annual bonuses\n• Comprehensive benefits package\n• Career advancement opportunities\n• International exposure\n• Training and certification support",
         "type": "Full-Time",
         "mode": "On-Site"
     },
@@ -75,7 +75,7 @@
         "id": 10,
         "name": "Dell Technologies",
         "position": "Systems Engineer",
-        "description": "Design and implement enterprise-level technology solutions for clients.",
+        "description": "A. Job Responsibilities:\n• Design and implement enterprise solutions\n• Configure and optimize system infrastructure\n• Provide technical consultation to clients\n• Manage system upgrades and migrations\n• Develop system documentation\n• Lead technical presentations\n\nB. Job Requirements / Skills:\n• Bachelor's degree in Computer Science/Engineering\n• 5+ years systems engineering experience\n• Knowledge of Dell technologies and solutions\n• Cloud computing expertise\n• Strong client management skills\n• Team leadership abilities\n\nC. Benefits:\n• High competitive salary\n• Performance-based bonuses\n• Comprehensive healthcare\n• Stock options\n• Global career opportunities\n• Flexible work arrangements",
         "type": "Full-Time",
         "mode": "Hybrid"
     },
@@ -83,7 +83,7 @@
         "id": 11,
         "name": "AMD Malaysia",
         "position": "Semiconductor Engineer Intern",
-        "description": "Work on research and development of next-generation computing technologies.",
+        "description": "A. Job Responsibilities:\n• Assist in semiconductor device development\n• Participate in testing and characterization\n• Analyze performance data\n• Support research and development projects\n• Document experimental results\n• Collaborate with engineering teams\n\nB. Job Requirements / Skills:\n• Pursuing degree in Electrical/Electronic Engineering\n• Knowledge of semiconductor physics\n• Basic understanding of circuit design\n• Proficiency in data analysis\n• Laboratory experience preferred\n• Strong analytical skills\n\nC. Benefits:\n• Competitive internship allowance\n• Hands-on industry experience\n• Technical workshops\n• Networking events\n• Project exposure\n• Transportation allowance",
         "type": "Internship",
         "mode": "On-Site"
     }

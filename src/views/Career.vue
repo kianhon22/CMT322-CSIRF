@@ -9,20 +9,67 @@
       </svg>
     </p>
 
-    <!-- Search Bar -->
-    <div class="max-w-2xl mx-auto mb-8">
-      <div class="relative">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-          </svg>
-        </div>
+    <!-- Search and Filters -->
+    <div class="max-w-4xl mx-auto px-4 mb-8">
+      <!-- Search Bar -->
+      <div class="mb-4 max-w-xl mx-auto">
         <input
           type="text"
           v-model="searchQuery"
-          class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white/90 backdrop-blur-sm focus:ring-blue-500 focus:border-blue-500"
-          placeholder="Search for positions, companies..."
+          placeholder="Search for jobs..."
+          class="w-full p-2.5 rounded-lg border border-gray-300 bg-white/95 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500"
+        />
+      </div>
+
+      <!-- Filters -->
+      <div class="flex justify-center gap-4">
+        <!-- Job Type Filter -->
+        <select
+          v-model="selectedType"
+          class="px-3 py-1.5 rounded-lg border border-gray-300 bg-white/95 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-medium cursor-pointer"
         >
+          <option value="">Type: All</option>
+          <option value="Internship">Internship</option>
+          <option value="Full-Time">Full-Time</option>
+        </select>
+
+        <!-- Job Mode Filter -->
+        <select
+          v-model="selectedMode"
+          class="px-3 py-1.5 rounded-lg border border-gray-300 bg-white/95 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-medium cursor-pointer"
+        >
+          <option value="">Mode: All</option>
+          <option value="On-Site">On-Site</option>
+          <option value="Remote">Remote</option>
+          <option value="Hybrid">Hybrid</option>
+        </select>
+
+        <!-- Location Filter -->
+        <select
+          v-model="selectedLocation"
+          class="px-3 py-1.5 rounded-lg border border-gray-300 bg-white/95 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-medium cursor-pointer"
+        >
+          <option value="">Location: All</option>
+          <optgroup label="Malaysia">
+            <option value="Johor">Johor</option>
+            <option value="Kedah">Kedah</option>
+            <option value="Kelantan">Kelantan</option>
+            <option value="Kuala Lumpur">Kuala Lumpur</option>
+            <option value="Melaka">Melaka</option>
+            <option value="Negeri Sembilan">Negeri Sembilan</option>
+            <option value="Pahang">Pahang</option>
+            <option value="Penang">Penang</option>
+            <option value="Perak">Perak</option>
+            <option value="Perlis">Perlis</option>
+            <option value="Sabah">Sabah</option>
+            <option value="Sarawak">Sarawak</option>
+            <option value="Selangor">Selangor</option>
+            <option value="Terengganu">Terengganu</option>
+          </optgroup>
+          <optgroup label="Singapore">
+            <option value="Singapore">Singapore</option>
+          </optgroup>
+        </select>
       </div>
     </div>
 
@@ -33,44 +80,56 @@
         class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 max-w-sm"
         @click="openModal(job)">
         <!-- Card content -->
-        <div class="p-4">
-          <div class="flex items-center gap-3 mb-3">
-            <img
-              v-if="getCompanyLogo(job.name)"
-              :src="getCompanyLogo(job.name)"
-              :alt="job.name"
-              class="w-14 h-14 object-contain rounded-lg"
-            />
-            <div>
-              <h5 class="text-xl font-bold tracking-tight text-gray-900">
-                {{ job.position }}
-              </h5>
-              <p class="font-normal text-gray-700">
-                {{ job.name }}
-              </p>
-              <p class="text-sm text-gray-600 flex items-center gap-1 mt-1">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                </svg>
-                {{ getCompanyLocation(job.name) }}
-              </p>
+        <div class="p-4 flex flex-col justify-between h-full">
+          <div>
+            <!-- Top section with logo and position -->
+            <div class="relative">
+              <!-- Logo positioned absolutely -->
+              <div class="absolute top-0 left-0">
+                <img
+                  v-if="getCompanyLogo(job.name)"
+                  :src="getCompanyLogo(job.name)"
+                  :alt="job.name"
+                  class="w-14 h-14 object-contain rounded-lg"
+                />
+              </div>
+
+              <!-- Position, company name, and location with consistent left padding -->
+              <div class="pl-[68px]">
+                <h5 class="text-xl font-bold tracking-tight text-gray-900 line-clamp-2 mb-1">
+                  {{ job.position }}
+                </h5>
+                <p class="font-normal text-gray-700">
+                  {{ job.name }}
+                </p>
+                <p class="text-sm text-gray-600 flex items-center gap-1 mt-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                  </svg>
+                  {{ getCompanyLocation(job.name) }}
+                </p>
+              </div>
             </div>
           </div>
-          <div class="flex justify-start gap-2 mb-3">
-            <span class="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-100 rounded-full">
-              {{ job.type }}
-            </span>
-            <span class="px-2 py-1 text-xs font-semibold text-green-800 bg-green-100 rounded-full">
-              {{ job.mode }}
-            </span>
+
+          <!-- Bottom section with tags and button -->
+          <div class="mt-4">
+            <div class="flex justify-start gap-2 mb-3">
+              <span class="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-100 rounded-full">
+                {{ job.type }}
+              </span>
+              <span class="px-2 py-1 text-xs font-semibold text-green-800 bg-green-100 rounded-full">
+                {{ job.mode }}
+              </span>
+            </div>
+            <button class="w-full inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors duration-300">
+              Apply Now
+              <svg class="w-4 h-4 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+              </svg>
+            </button>
           </div>
-          <button class="w-full inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors duration-300">
-            Apply Now
-            <svg class="w-4 h-4 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg>
-          </button>
         </div>
       </fwb-card>
     </div>
@@ -99,6 +158,9 @@ export default {
   data() {
     return {
       searchQuery: '',
+      selectedType: '',
+      selectedMode: '',
+      selectedLocation: '',
       jobs: jobData,
       isModalOpen: false,
       selectedJob: null
@@ -106,13 +168,19 @@ export default {
   },
   computed: {
     filteredJobs() {
-      const query = this.searchQuery.toLowerCase().trim();
-      if (!query) return this.jobs;
-
       return this.jobs.filter(job => {
-        return job.position.toLowerCase().includes(query) ||
-               job.name.toLowerCase().includes(query) ||
-               job.description.toLowerCase().includes(query);
+        const matchesSearch = job.position.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                            job.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+
+        const matchesType = !this.selectedType || job.type === this.selectedType;
+
+        const matchesMode = !this.selectedMode || job.mode === this.selectedMode;
+
+        const companyLocation = this.getCompanyLocation(job.name);
+        const matchesLocation = !this.selectedLocation ||
+                              (companyLocation && companyLocation.includes(this.selectedLocation));
+
+        return matchesSearch && matchesType && matchesMode && matchesLocation;
       });
     }
   },
@@ -132,6 +200,10 @@ export default {
     getCompanyLocation(jobCompanyName) {
       const company = companyData.find(company => company.name === jobCompanyName);
       return company ? company.location : null;
+    },
+    getCompanyId(jobCompanyName) {
+      const company = companyData.find(company => company.name === jobCompanyName);
+      return company ? company.sponsorID : null;
     }
   }
 }
