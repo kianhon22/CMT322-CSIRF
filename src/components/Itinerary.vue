@@ -82,7 +82,7 @@
                   <time class="mb-1 text-sm font-normal leading-none text-white">11.30 AM - 12.30 PM</time>
                   <h3 class="text-lg font-semibold text-orange-500">Platinum Career Talk - Fusionex</h3>
                   <p class="mb-2 text-base font-thin text-white">Represented by Lim Yi Yang, General Manager</p>
-                  <button @click="openModal" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-transparent rounded-lg hover:bg-transparent hover:border-white hover:text-white">
+                  <button @click.prevent="openModal" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-transparent rounded-lg hover:bg-transparent hover:border-white hover:text-white">
                     Register Here
                     <svg class="w-3 h-3 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -139,7 +139,6 @@
           </div>
         </div>
 
-          <!-- @click="$router.push('/event')" -->
         <!-- Dynamic Modal -->
         <Modal
           v-model:show="isModalVisible"
@@ -149,16 +148,16 @@
         >
           <template #actions>
             <button
-              @click="isModalVisible = false"
-              class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+              @click.prevent="isModalVisible = false"
+              class="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-600"
             >
               Cancel
             </button>
             <button
-              @click="triggerParentFunction"
+              @click.prevent="currentUser.workshop1==false ? registerEvent : $router.push('/login')"
               class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
             >
-              Confirm
+              {{currentUser.workshop1 == false ? 'Confirm' : 'Login Now'}}
             </button>
           </template>
         </Modal>
@@ -166,9 +165,14 @@
 </template>
 
 <script>
+import { inject } from 'vue';
 import Modal from "@/components/Modal.vue";
 
 export default {
+  setup() {
+    const currentUser = inject('currentUser')
+    return { currentUser }
+  },
   components: {
     Modal,
   },
@@ -198,7 +202,7 @@ export default {
       // Replace with actual logic to check if the user is logged in
       return false;
     },
-    triggerParentFunction() {
+    registerEvent() {
       console.log("Parent function triggered!");
       this.isModalVisible = false; // Optionally close modal
     },

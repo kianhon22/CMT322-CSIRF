@@ -1,10 +1,12 @@
 {
     "currentUser": {
         "id": 1,
-        "role": "sponsor",
+        "role": "admin",
         "name": "Admin",
         "email": "admin@csirf.com",
-        "password": "csirfusm"
+        "password": "csirfusm",
+        "applyWorkshop": false,
+        "applyJob": false
     },
     "admin": [
         {
@@ -45,7 +47,9 @@
             "phone": "0123456789",
             "year": 3,
             "resume": "testResume.pdf",
-            "registered": true
+            "registered": true,
+            "applyWorkshop": false,
+            "applyJob": true
         },
         {
             "id": 2,
@@ -56,7 +60,9 @@
             "phone": "0123456789",
             "year": 2,
             "resume": null,
-            "registered": true
+            "registered": true,
+            "applyWorkshop": false,
+            "applyJob": true
         },
         {
             "id": 3,
@@ -67,7 +73,9 @@
             "phone": "0123456789",
             "year": 3,
             "resume": null,
-            "registered": true
+            "registered": true,
+            "applyWorkshop": false,
+            "applyJob": false
         },
         {
             "id": 4,
@@ -78,7 +86,22 @@
             "phone": "0123456789",
             "year": 2,
             "resume": null,
-            "registered": true
+            "registered": true,
+            "applyWorkshop": false,
+            "applyJob": false
+        },
+        {
+            "id": 5,
+            "role": "student",
+            "name": "Student 5",
+            "email": "student5@student.usm.my",
+            "password": "csirfusm",
+            "phone": "0123456789",
+            "year": 4,
+            "resume": null,
+            "registered": true,
+            "applyWorkshop": false,
+            "applyJob": false
         },
         {
             "id": 6,
@@ -87,9 +110,76 @@
             "email": "student6@student.usm.my",
             "password": "csirfusm",
             "phone": "0123456789",
+            "year": 3,
+            "resume": null,
+            "registered": true,
+            "applyWorkshop": false,
+            "applyJob": false
+        },
+        {
+            "id": 7,
+            "role": "student",
+            "name": "Student 7",
+            "email": "student7@student.usm.my",
+            "password": "csirfusm",
+            "phone": "0123456789",
+            "year": 3,
+            "resume": null,
+            "registered": true,
+            "applyWorkshop": false,
+            "applyJob": false
+        },
+        {
+            "id": 8,
+            "role": "student",
+            "name": "Student 8",
+            "email": "student8@student.usm.my",
+            "password": "csirfusm",
+            "phone": "0123456789",
+            "year": 1,
+            "resume": null,
+            "registered": true,
+            "applyWorkshop": false,
+            "applyJob": false
+        },
+        {
+            "id": 9,
+            "role": "student",
+            "name": "Student 9",
+            "email": "student9@student.usm.my",
+            "password": "csirfusm",
+            "phone": "0123456789",
             "year": 4,
             "resume": null,
-            "registered": true
+            "registered": true,
+            "applyWorkshop": false,
+            "applyJob": false
+        },
+        {
+            "id": 10,
+            "role": "student",
+            "name": "Student 10",
+            "email": "student10@student.usm.my",
+            "password": "csirfusm",
+            "phone": "0123456789",
+            "year": 3,
+            "resume": null,
+            "registered": true,
+            "applyWorkshop": false,
+            "applyJob": false
+        },
+        {
+            "id": 11,
+            "role": "student",
+            "name": "Student 11",
+            "email": "student11@student.usm.my",
+            "password": "csirfusm",
+            "phone": "0123456789",
+            "year": 3,
+            "resume": null,
+            "registered": true,
+            "applyWorkshop": false,
+            "applyJob": false
         }
     ]
 }

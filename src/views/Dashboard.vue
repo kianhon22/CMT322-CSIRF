@@ -1,5 +1,6 @@
 <template>
     <div class="p-6 bg-[#1E1B4B] min-h-screen">
+        <h1 class="text-4xl font-bold text-center mb-4 text-white">Dashboard</h1>
         <div class="container mx-auto bg-white rounded-lg shadow">
             <!-- Tabs -->
             <div class="border-b">
@@ -79,7 +80,7 @@
                     <thead class="text-white">
                         <tr class="bg-[#1E1B4B]">
                             <th class="p-2 border border-white">No.</th>
-                            <th class="p-2 border border-white">
+                            <th v-if="currentUser.role === 'admin'" class="p-2 border border-white">
                                 Company
                                 <button @click.prevent="sort('name')" class="ml-2">
                                     <span :class="getSortIcon('name')">▲</span>
@@ -103,7 +104,7 @@
                             @click.prevent="openEditModal(job)"
                         >
                             <td class="p-2 border border-[#1E1B4B]">{{ index + 1 }}</td>
-                            <td class="p-2 border border-[#1E1B4B]">{{ job.name }}</td>
+                            <td v-if="currentUser.role === 'admin'" class="p-2 border border-[#1E1B4B]">{{ job.name }}</td>
                             <td class="p-2 border border-[#1E1B4B]">{{ job.position }}</td>
                             <td class="p-2 border border-[#1E1B4B]">{{ job.type }}</td>
                             <td class="p-2 border border-[#1E1B4B]">{{ job.mode }}</td>
@@ -255,6 +256,12 @@ export default {
         filteredStudents() {
             return this.students
                 .filter((student) => {
+                    if (this.currentUser.role == "sponsor") {
+                        return student.applyJob == true;
+                    }
+                    return true;    // Skip the filter for other roles
+                })                
+                .filter((student) => {
                     return (
                         student.name.toLowerCase().includes(this.studentSearch.toLowerCase().trim()) ||
                         student.email.toLowerCase().includes(this.studentSearch.toLowerCase().trim()) ||
@@ -306,9 +313,6 @@ export default {
         getSortIcon(key) {
             if (this.sortKey !== key) return '';
             return this.sortOrder === 1 ? '▲' : '▼'; // Unicode arrows for ascending/descending
-        },
-        sortStudents(key) {
-            this.students.sort((a, b) => (a[key] > b[key] ? 1 : -1));
         },
         changeJobPage(page) {
             this.jobPage = page;

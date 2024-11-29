@@ -93,7 +93,6 @@ export default {
     const currentUser = inject('currentUser')
     return { currentUser }
   },
-
   methods: {
     logout() {
       currentUser = null

@@ -46,5 +46,45 @@
         "description": "Ensure the security of our systems and protect against cyber threats.",
         "type": "Full-Time",
         "mode": "Hybrid"
+    },
+    {
+        "id": 7,
+        "name": "CyberGuard Security",
+        "position": "Security Engineer",
+        "description": "Ensure the security of our systems and protect against cyber threats.",
+        "type": "Full-Time",
+        "mode": "Hybrid"
+    },
+    {
+        "id": 8,
+        "name": "CyberGuard Security",
+        "position": "Security Engineer",
+        "description": "Ensure the security of our systems and protect against cyber threats.",
+        "type": "Full-Time",
+        "mode": "Hybrid"
+    },
+    {
+        "id": 9,
+        "name": "CyberGuard Security",
+        "position": "Security Engineer",
+        "description": "Ensure the security of our systems and protect against cyber threats.",
+        "type": "Full-Time",
+        "mode": "Hybrid"
+    },
+    {
+        "id": 10,
+        "name": "CyberGuard Security",
+        "position": "Security Engineer",
+        "description": "Ensure the security of our systems and protect against cyber threats.",
+        "type": "Full-Time",
+        "mode": "Hybrid"
+    },
+    {
+        "id": 11,
+        "name": "CyberGuard Security",
+        "position": "Security Engineer",
+        "description": "Ensure the security of our systems and protect against cyber threats.",
+        "type": "Full-Time",
+        "mode": "Hybrid"
     }
 ]

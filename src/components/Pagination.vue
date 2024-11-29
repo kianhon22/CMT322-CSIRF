@@ -21,7 +21,7 @@
               @click="$emit('change', page)"
               :class="[
                   'px-3 py-1 border',
-                  page === currentPage ? 'bg-[#1E1B4B] text-white' : ' text-white hover:bg-gray-300',
+                  page === currentPage ? 'bg-[#1E1B4B] text-white' : ' text-black hover:bg-gray-300',
               ]"
           >
               {{ page }}
