@@ -8,8 +8,9 @@
         <div
           v-for="(item, index) in announcement"
           :key="index"
-          class="flex bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 "
           style="min-height:200px;"
+          @click="openPopup(index + 1)"
           >
           <!-- Image Section -->
           <div class="w-1/3">
@@ -33,7 +34,7 @@
                     {{ item.badgeText }}
                 </span>
               <button
-                class="mt-auto px-4 py-2 text-orange-500 rounded-lg font-normal text-sm flex items-center"
+                class="mt-auto px-4 py-2 text-orange-500 rounded-lg font-normal text-sm flex items-center hover:bg-orange-200"
                 @click="openPopup(index + 1)"
               >
                 Read More
