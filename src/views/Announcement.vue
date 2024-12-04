@@ -9,7 +9,8 @@
           v-for="(item, index) in announcement"
           :key="index"
           class="flex bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-        >
+          style="min-height:200px;"
+          >
           <!-- Image Section -->
           <div class="w-1/3">
             <img
