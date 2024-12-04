@@ -86,7 +86,3 @@
     },
   };
   </script>
-
-  <style scoped>
-  /* Add necessary styling for the popup */
-  </style>
