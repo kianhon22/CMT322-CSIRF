@@ -27,6 +27,7 @@
         </div>
           <!-- Register Button -->
           <button
+            v-if="popupContent.badgeText === 'Event'"
             class="mt-4 px-6 py-2 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600"
           >
             Register Now
