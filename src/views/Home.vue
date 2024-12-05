@@ -39,7 +39,7 @@
       <CountdownClock/>
     </section>
     <section class="bg-center bg-[#1E1B4B] py-2 w-full">
-        <h1 class="text-4xl font-bold text-center text-white">About Us</h1> 
+        <h1 class="text-4xl mb-6 font-bold text-center text-white">About Us</h1> 
         <p class="text-white max-w-2xl mx-auto mb-20 font-light text-justify md:text-lg lg:text-xl">
           The <span class="text-orange-500"> Computer Science Internship & Recruitment Fair (CSIRF) </span>
           is a two-day flagship event organised by the Computer Science Society (USM CS Society).
