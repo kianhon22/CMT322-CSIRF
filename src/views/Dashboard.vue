@@ -35,13 +35,14 @@
                     />
                     <select v-model="jobTypeFilter" v-if="tab === 'jobs'" class="border rounded px-4 py-2 text-black ml-2">
                         <option value="">Type</option>
-                        <option class="hover:bg-[#1E1B4B] hover:text-white" value="Full-time">Full-time</option>
+                        <option class="hover:bg-[#1E1B4B] hover:text-white" value="Full-Time">Full-Time</option>
                         <option class="hover:bg-[#1E1B4B] hover:text-white" value="Internship">Internship</option>
                     </select>
                     <select v-model="jobModeFilter" v-if="tab === 'jobs'" class="border rounded px-4 py-2 text-black ml-2">
                         <option value="">Mode</option>
-                        <option value="On-site">On-site</option>
+                        <option value="On-Site">On-Site</option>
                         <option value="Hybrid">Hybrid</option>
+                        <option value="Remote">Remote</option>
                     </select>
                     <select v-model="studentYearFilter" v-if="tab === 'students'" class="border rounded px-4 py-2 text-black ml-2">
                         <option value="">Year</option>
@@ -72,8 +73,8 @@
                         Export CSV
                     </button>
                 </div>
-            </div> 
-    
+            </div>
+
             <!-- Jobs Table -->
             <div v-if="tab === 'jobs'">
                 <table class="w-full table-auto border-collapse border">
@@ -119,7 +120,7 @@
                     @change="changeJobPage"
                 />
             </div>
-    
+
             <!-- Applicants Table -->
             <div v-if="tab === 'students'">
                 <table class="w-full table-auto border-collapse border">
@@ -183,10 +184,10 @@
             v-if="isModalOpen"
             @close="closeEditModal"
             @update="updateItem"
-        />    
+        />
     </div>
 </template>
-  
+
 <script>
 import EditModal from '@/components/EditModal.vue';
 import Pagination from '@/components/Pagination.vue';
@@ -224,7 +225,7 @@ export default {
 
             // Others
             sortKey: '',
-            sortOrder: 1, 
+            sortOrder: 1,
             isModalOpen: false,
             selectedItem: null,
         };
@@ -260,7 +261,7 @@ export default {
                         return student.applyJob == true;
                     }
                     return true;    // Skip the filter for other roles
-                })                
+                })
                 .filter((student) => {
                     return (
                         student.name.toLowerCase().includes(this.studentSearch.toLowerCase().trim()) ||
@@ -326,7 +327,7 @@ export default {
                 if (index !== -1) {
                     this.jobs.splice(index, 1, updatedItem);
                 }
-            } 
+            }
             else if (this.tab === 'students') {
                 const index = this.students.findIndex((student) => student.id === updatedItem.id);
                 if (index !== -1) {
@@ -388,4 +389,3 @@ export default {
 <style>
 /* Add custom styles if needed */
 </style>
-  
