@@ -33,6 +33,14 @@
                         >
                             Cancel
                         </button>
+                        <button
+                            v-if="editableItem.id"
+                            type="button"
+                            @click="deleteItem"
+                            class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded"
+                        >
+                            Delete
+                        </button>
                         <button type="submit" class="px-4 py-2 bg-[#1E1B4B] hover:bg-[#4e4eaa] text-white rounded">
                             Save
                         </button>
@@ -79,6 +87,10 @@ export default {
     methods: {
         saveChanges() {
             this.$emit('update', this.editableItem);
+            this.$emit('close');
+        },
+        deleteItem() {
+            this.$emit('update', { ...this.editableItem, _delete: true });
             this.$emit('close');
         },
     },

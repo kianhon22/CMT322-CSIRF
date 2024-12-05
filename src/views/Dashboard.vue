@@ -321,8 +321,15 @@ export default {
         changeStudentPage(page) {
             this.studentPage = page;
         },
+        addJob() {
+            this.selectedItem = { position: '', description: '', type: '', mode: '' };
+            this.isModalOpen = true;
+        },
         updateItem(updatedItem) {
-            if (this.tab === 'jobs') {
+            if (updatedItem._delete) {
+                this.jobs = this.jobs.filter(job => job.id !== updatedItem.id);
+            }
+            else if (this.tab === 'jobs') {
                 const index = this.jobs.findIndex((job) => job.id === updatedItem.id);
                 if (index !== -1) {
                     this.jobs.splice(index, 1, updatedItem);
@@ -351,17 +358,17 @@ export default {
             const rows = this.tab === 'jobs' ? this.filteredJobs : this.filteredStudents;
 
             if (!rows.length) {
-                alert('No data to export.');
+                alert('No data to export');
                 return;
             }
 
             const headers = this.tab === 'jobs'
-                ? ['Company', 'Position', 'Type', 'Mode']
+                ? ['Position', 'Type', 'Mode']
                 : ['Name', 'Year', 'Email', 'Phone', 'Resume'];
 
             const data = rows.map((row) => {
                 if (this.tab === 'jobs') {
-                    return [row.name, row.position, row.type, row.mode];
+                    return [row.position, row.type, row.mode];
                 } else {
                     return [row.name, row.year, row.email, row.phone, row.resume || '-'];
                 }
@@ -379,7 +386,7 @@ export default {
             link.href = url;
             link.setAttribute('download', `${this.tab}_data.csv`);
             document.body.appendChild(link);
-            link.click.prevent();
+            link.click();
             document.body.removeChild(link);
         },
     },
