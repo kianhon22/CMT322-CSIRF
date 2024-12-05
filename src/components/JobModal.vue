@@ -34,6 +34,7 @@
                     <!-- New Footer with centered buttons -->
                     <div class="mt-8 flex justify-center space-x-4">
                         <button
+                            v-if="showCompanyDetails"
                             @click="viewCompany"
                             class="px-6 py-2.5 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 transition-colors duration-300"
                         >
@@ -55,11 +56,15 @@
 <script>
 export default {
     props: {
-        isOpen: Boolean,
-        title: String,
-        description: String,
-        jobDescription: String,
-        companyId: Number
+    isOpen: Boolean,
+    title: String,
+    description: String,
+    jobDescription: String,
+    companyId: Number,
+    showCompanyDetails: { // New prop to control visibility of the button
+        type: Boolean,
+        default: false,
+    }
     },
     methods: {
         close() {
@@ -73,7 +78,6 @@ export default {
         },
         applyJob() {
             // Handle job application
-            // You can emit an event or handle the application logic here
             this.$emit("apply");
         }
     },

@@ -134,11 +134,13 @@
 
     <!-- Modal Component -->
     <Modal
-      :isOpen="isModalOpen"
-      :title="selectedJob?.name"
-      :description="selectedJob?.position"
-      :jobDescription="selectedJob?.description"
-      @close="closeModal"
+    :isOpen="isModalOpen"
+    :title="selectedJob?.name"
+    :description="selectedJob?.position"
+    :jobDescription="selectedJob?.description"
+    :companyId="getCompanyId(selectedJob?.name)"
+    :showCompanyDetails="true"
+    @close="closeModal"
     />
   </section>
 </template>

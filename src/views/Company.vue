@@ -143,6 +143,7 @@
             :title="selectedJob?.name"
             :description="selectedJob?.position"
             :jobDescription="selectedJob?.description"
+            :showCompanyDetails="false"
             @close="closeModal"
             />
         </div>
