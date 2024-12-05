@@ -42,6 +42,7 @@
                         </button>
                         <button
                             @click="applyJob"
+                            @click.prevent="openModal"
                             class="px-6 py-2.5 text-sm font-medium text-white bg-orange-500 rounded-lg hover:bg-white hover:text-orange-500 border hover:border-orange-500"
                         >
                             Apply
@@ -51,10 +52,42 @@
             </div>
         </div>
     </Transition>
+        <!-- Dynamic Modal -->
+        <Modal
+          v-model:show="isModalVisible"
+          :title="modalTitle"
+          :text="modalText"
+          :color="modalColor"
+        >
+          <template #actions>
+            <button
+              @click.prevent="isModalVisible = false"
+              class="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-600"
+            >
+              Cancel
+            </button>
+            <button
+              @click.prevent="currentUser != null ? registerEvent() : $router.push('/login')"
+              class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
+            >
+              {{currentUser != null ? 'Confirm' : 'Log In'}}
+            </button>
+          </template>
+        </Modal>
 </template>
 
 <script>
+import { inject } from 'vue';
+import Modal from "@/components/Modal.vue";
+
 export default {
+    setup() {
+    const currentUser = inject('currentUser')
+    return { currentUser }
+    },
+    components: {
+    Modal,
+    },
     props: {
     isOpen: Boolean,
     title: String,
@@ -65,6 +98,14 @@ export default {
         type: Boolean,
         default: false,
     }
+    },
+    data() {
+    return {
+      isModalVisible: false,
+      modalTitle: "",
+      modalText: "",
+      modalColor: "white",
+    };
     },
     methods: {
         close() {
@@ -79,7 +120,32 @@ export default {
         applyJob() {
             // Handle job application
             this.$emit("apply");
-        }
+        },
+
+        openModal() {
+      if (this.isUserLoggedIn()) {
+        this.modalTitle = "Apply Now";
+        this.modalText = "Confirm to apply this job?";
+        this.modalColor = "black";
+        this.isModalVisible = true;
+      } 
+      else {
+        this.modalTitle = "Login Required";
+        this.modalText = "Please log in to apply for the job";
+        this.modalColor = "black";
+        this.isModalVisible = true;
+      }
+    },
+    isUserLoggedIn() {
+      if (this.currentUser != null)
+        return true;
+      else
+        return false;
+    },
+    registerEvent() {
+      toastr.success('Applied Successfully!', 'Success');
+      this.isModalVisible = false;
+    },
     },
     computed: {
         formattedDescription() {

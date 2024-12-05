@@ -95,7 +95,7 @@
     <!-- Career Available -->
     <section>
         <div class="mx-auto px-4 py-8 bg-[#1E1B4B]">
-            <h2 class="text-4xl font-semibold text-white mb-6 text-center">Career Available</h2>
+            <h2 class="text-4xl font-semibold text-white mb-6 text-center">Careers Available</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                 <fwb-card
                     v-for="job in filteredJobs"
@@ -127,7 +127,7 @@
                                 {{ job.mode }}
                             </span>
                         </div>
-                        <button @click="openModal(job)" class="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors duration-300">
+                        <button @click="openModal(job)" class="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-center text-white bg-[#1E1B4B] rounded-lg hover:bg-orange-500 focus:ring-4 focus:ring-blue-300 transition-colors duration-300">
                             Apply Now
                             <svg class="w-4 h-4 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
