@@ -1,6 +1,15 @@
 <template>
     <div class="fixed inset-0 flex items-center justify-center bg-gray-800 text-black bg-opacity-50 z-50">
-        <div class="bg-white rounded-lg shadow-lg w-1/2">
+        <div class="bg-white rounded-lg shadow-lg w-1/2 relative">
+            <button
+                type="button"
+                @click="$emit('close')"
+                class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
             <div class="p-4 border-b">
                 <h2 class="text-lg font-bold">Edit {{ isJob ? 'Job' : 'Applicant' }}</h2>
             </div>
@@ -25,18 +34,10 @@
                             </option>
                         </select>
                     </div>
-                    <div class="flex justify-end space-x-2">
+                    <div class="flex justify-between items-center">
                         <button
                             type="button"
-                            @click="$emit('close')"
-                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            v-if="editableItem.id"
-                            type="button"
-                            @click="deleteItem"
+                            @click="$emit('delete')"
                             class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded"
                         >
                             Delete
