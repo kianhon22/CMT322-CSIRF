@@ -67,7 +67,7 @@
               {{ item.badgeText }}
             </span>
             <button
-              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-colors duration-300"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-orange-500 rounded-lg hover:bg-orange-200 focus:ring-4 focus:ring-orange-300 transition-colors duration-300"
             >
               Read More
               <svg class="w-4 h-4 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
