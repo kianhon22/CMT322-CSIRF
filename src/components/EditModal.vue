@@ -42,10 +42,7 @@
                         >
                             Delete
                         </button>
-                        <button
-                            type="submit"
-                            class="px-4 py-2 bg-[#1E1B4B] hover:bg-[#4e4eaa] text-white rounded"
-                        >
+                        <button type="submit" class="px-4 py-2 bg-[#1E1B4B] hover:bg-[#4e4eaa] text-white rounded">
                             Save
                         </button>
                     </div>
@@ -91,6 +88,10 @@ export default {
     methods: {
         saveChanges() {
             this.$emit('update', this.editableItem);
+            this.$emit('close');
+        },
+        deleteItem() {
+            this.$emit('update', { ...this.editableItem, _delete: true });
             this.$emit('close');
         },
     },

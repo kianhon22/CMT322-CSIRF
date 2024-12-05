@@ -178,10 +178,10 @@ export default {
   },
   data() {
     return {
-      isModalVisible: false, // Modal visibility
+      isModalVisible: false,
       modalTitle: "",
       modalText: "",
-      modalColor: "white", // Color of the modal
+      modalColor: "white",
     };
   },
   methods: {
