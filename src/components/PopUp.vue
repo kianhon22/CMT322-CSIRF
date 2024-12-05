@@ -144,6 +144,7 @@
     registerEvent() {
       toastr.success('You have registered the event!', 'Success');
       this.isModalVisible = false;
+      this.$emit("close");
     },
     },
   };

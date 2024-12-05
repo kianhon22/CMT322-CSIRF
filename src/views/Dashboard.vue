@@ -8,12 +8,19 @@
                     <button
                         :class="tab === 'jobs' ? activeTabClass : inactiveTabClass"
                         @click.prevent="tab = 'jobs'"
-                    >Company Jobs
+                    >Jobs
                     </button>
                     <button
+                        v-if="currentUser.role == 'sponsor'"
                         :class="tab === 'students' ? activeTabClass : inactiveTabClass"
                         @click.prevent="tab = 'students'"
                     >Applicants
+                    </button>
+                    <button
+                        v-if="currentUser.role == 'admin'"
+                        :class="tab === 'students' ? activeTabClass : inactiveTabClass"
+                        @click.prevent="tab = 'students'"
+                    >Students
                     </button>
                 </nav>
             </div>
@@ -30,7 +37,7 @@
                     <input v-else
                         v-model="studentSearch"
                         type="text"
-                        placeholder="Search Applicants..."
+                        :placeholder="currentUser.role == 'sponsor' ? 'Search Applicants...' : 'Search Students...'"
                         class="border rounded px-4 py-2 text-black"
                     />
                     <select v-model="jobTypeFilter" v-if="tab === 'jobs'" class="border rounded px-4 py-2 text-black ml-2">
@@ -148,7 +155,9 @@
                             </th>
                             <th class="p-2 border border-white">Email</th>
                             <th class="p-2 border border-white">Phone</th>
-                            <th class="border border-white">Resume Link</th>
+                            <th v-if="currentUser.role === 'sponsor'" class="border border-white">Resume Link</th>
+                            <th v-if="currentUser.role === 'sponsor'" class="border border-white">Job Applied</th>
+                            <th v-if="currentUser.role === 'admin'" class="border border-white">Event Applied</th>
                         </tr>
                     </thead>
                     <tbody class="text-black">
@@ -162,7 +171,7 @@
                             <td class="p-2 border border-[#1E1B4B]">{{ student.year }}</td>
                             <td class="p-2 border border-[#1E1B4B]">{{ student.email }}</td>
                             <td class="p-2 border border-[#1E1B4B]">{{ student.phone }}</td>
-                            <td class="p-2 border border-[#1E1B4B]">
+                            <td v-if="currentUser.role === 'sponsor'" class="p-2 border border-[#1E1B4B]">
                                 <a
                                     v-if="student.resume"
                                     :href="`/resume/${student.resume}`"
@@ -173,6 +182,8 @@
                                 </a>
                                 <span v-else>-</span>
                             </td>
+                            <td v-if="currentUser.role === 'sponsor'" class="p-2 border border-[#1E1B4B]">{{ student.jobApplied }}</td>
+                            <td v-if="currentUser.role === 'admin'" class="p-2 border border-[#1E1B4B]">{{ student.eventApplied }}</td>
                         </tr>
                     </tbody>
                 </table>
