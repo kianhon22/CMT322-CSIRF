@@ -1,7 +1,7 @@
 {
     "currentUser": {
         "id": 1,
-        "role": "sponsor",
+        "role": "student",
         "name": "Admin1111",
         "email": "admin@csirf.com",
         "password": "csirfusm",
