@@ -11,7 +11,7 @@
                 </svg>
             </button>
             <div class="p-4 border-b">
-                <h2 class="text-lg font-bold">{{ isJob ? 'Add Job' : 'Edit Applicant' }}</h2>
+                <h2 class="text-lg font-bold">{{ editableItem.id ? 'Edit' : 'Add' }} {{ isJob ? 'Job' : 'Applicant' }}</h2>
             </div>
             <div class="p-4">
                 <form @submit.prevent="saveChanges">
