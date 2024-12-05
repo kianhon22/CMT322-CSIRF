@@ -299,10 +299,10 @@ export default {
         },
         sort(key) {
             if (this.sortKey === key) {
-                this.sortOrder *= -1; // Toggle sorting order
+                this.sortOrder *= -1;
             } else {
                 this.sortKey = key;
-                this.sortOrder = 1; // Default to ascending
+                this.sortOrder = 1;
             }
 
             (this.tab == 'jobs' ? this.jobs : this.students).sort((a, b) => {
@@ -313,7 +313,7 @@ export default {
         },
         getSortIcon(key) {
             if (this.sortKey !== key) return '';
-            return this.sortOrder === 1 ? '▲' : '▼'; // Unicode arrows for ascending/descending
+            return this.sortOrder === 1 ? '▲' : '▼';
         },
         changeJobPage(page) {
             this.jobPage = page;

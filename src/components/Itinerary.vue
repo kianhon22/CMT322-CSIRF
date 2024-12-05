@@ -154,10 +154,10 @@
               Cancel
             </button>
             <button
-              @click.prevent="currentUser.workshop1==false ? registerEvent : $router.push('/login')"
+              @click.prevent="currentUser != null ? registerEvent() : $router.push('/login')"
               class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
             >
-              {{currentUser.workshop1 == false ? 'Confirm' : 'Login Now'}}
+              {{currentUser != null ? 'Confirm' : 'Log In'}}
             </button>
           </template>
         </Modal>
@@ -187,11 +187,12 @@ export default {
   methods: {
     openModal() {
       if (this.isUserLoggedIn()) {
-        this.modalTitle = "Registration";
+        this.modalTitle = "RSVP Now";
         this.modalText = "Are you confirm to join the talk?";
         this.modalColor = "black";
         this.isModalVisible = true;
-      } else {
+      } 
+      else {
         this.modalTitle = "Login Required";
         this.modalText = "Please log in to register for the event";
         this.modalColor = "black";
@@ -199,12 +200,14 @@ export default {
       }
     },
     isUserLoggedIn() {
-      // Replace with actual logic to check if the user is logged in
-      return false;
+      if (this.currentUser != null)
+        return true;
+      else
+        return false;
     },
     registerEvent() {
-      console.log("Parent function triggered!");
-      this.isModalVisible = false; // Optionally close modal
+      toastr.success('You have registered the event!', 'Success');
+      this.isModalVisible = false;
     },
   },
 };
