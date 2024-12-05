@@ -20,6 +20,8 @@
       <h2 class="text-2xl font-semibold text-white mb-4">Company Description</h2>
       <p class="text-lg text-gray-300 leading-relaxed">{{ company.description }}</p>
     </div>
+
+    <!-- Carousel -->
     <div id="default-carousel" class="relative w-2/5" data-carousel="slide">
         <!-- Carousel wrapper -->
         <div class="relative h-56 overflow-hidden rounded-lg md:h-96">

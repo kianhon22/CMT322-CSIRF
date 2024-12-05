@@ -10,7 +10,12 @@
         "description": "Fusionex is an established multi-award-winning data technology leader specializing in Analytics, Big Data Management, IR 4.0, Internet of Things, Machine Learning, and Artificial Intelligence.",
         "logo": "/Fusionex logo.png",
         "location": "Kulai, Johor",
-        "sponsorID": 1
+        "sponsorID": 1,
+        "photos": [
+            "/office.jpg",
+            "/room.png",
+            "/canteen.jpg"
+          ]
     },
     {
         "name": "National Instruments",
@@ -23,7 +28,12 @@
         "description": "National Instruments Corp (NI) is a provider of software-defined platform, automated test equipment, and virtual instrumentation products for engineers and scientists.",
         "logo": "/NI logo.jpeg",
         "location": "Batu Pahat, Johor",
-        "sponsorID": 4
+        "sponsorID": 4,
+        "photos": [
+            "/office.jpg",
+            "/room.png",
+            "/canteen.jpg"
+          ]
     },
     {
         "name": "Micro Modular System",
@@ -36,7 +46,12 @@
         "description": "Micro Modular System Sdn Bhd (MMS) is one of the fastest growing companies in design and manufacture of Industrial Automation Systems and Machinery focusing on LED and semiconductor industries.",
         "logo": "/MMS logo.png",
         "location": "Bayan Lepas, Penang",
-        "sponsorID": 2
+        "sponsorID": 2,
+        "photos": [
+            "/office.jpg",
+            "/room.png",
+            "/canteen.jpg"
+          ]
     },
     {
         "name": "Intel",
@@ -49,7 +64,12 @@
         "description": "Intel Corporation is an American multinational corporation and technology company headquartered in Santa Clara, California, and incorporated in Delaware. Intel designs, manufactures, and sells computer components and related products for business and consumer markets.",
         "logo": "/Intel logo.png",
         "location": "Bayan Lepas, Penang",
-        "sponsorID": 5
+        "sponsorID": 5,
+        "photos": [
+            "/office.jpg",
+            "/room.png",
+            "/canteen.jpg"
+          ]
     },
     {
         "name": "Vitrox",
@@ -62,7 +82,12 @@
         "description": "ViTrox Corporation Berhad (ViTrox Corp) is a technology company that designs and manufactures automated vision inspection equipment and system-on-chip embedded electronic devices. ",
         "logo": "/Vitrox logo.png",
         "location": "Bukit Mertajam, Penang",
-        "sponsorID": 3
+        "sponsorID": 3,
+        "photos": [
+            "/office.jpg",
+            "/room.png",
+            "/canteen.jpg"
+          ]
     },
     {
         "name": "Veecotech",
@@ -75,7 +100,12 @@
         "description": "VeecoTech | Custom Software & App Development Agency. business forward A proud Malaysian agency. We're a software development and marketing agency that will guide you to online success. A proud Malaysian agency.",
         "logo": "/Veecotech logo.png",
         "location": "Kuala Lumpur",
-        "sponsorID": 6
+        "sponsorID": 6,
+        "photos": [
+            "/office.jpg",
+            "/room.png",
+            "/canteen.jpg"
+          ]
     },
     {
         "name": "Jabil",
@@ -88,7 +118,12 @@
         "description": "Jabil Inc. is an American multinational manufacturing company involved in the design, engineering, and manufacturing of electronic circuit board assemblies and systems, along with supply chain services, primarily serving original equipment manufacturers.",
         "logo": "/Jabil logo.png",
         "location": "Singapore",
-        "sponsorID": 7
+        "sponsorID": 7,
+        "photos": [
+            "/office.jpg",
+            "/room.png",
+            "/canteen.jpg"
+          ]
     },
     {
         "name": "Keysight Technologies",
@@ -101,7 +136,12 @@
         "description": "Keysight Technologies is a leading technology company that helps enterprises, service providers, and governments accelerate innovation to connect and secure the world. Keysight's solutions optimize networks and bring electronic products to market faster and at a lower cost.",
         "logo": "/Keysight logo.png",
         "location": "Bayan Lepas, Penang",
-        "sponsorID": 8
+        "sponsorID": 8,
+        "photos": [
+            "/office.jpg",
+            "/room.png",
+            "/canteen.jpg"
+          ]
     },
     {
         "name": "Motorola Solutions",
@@ -114,7 +154,12 @@
         "description": "Motorola Solutions is a global leader in mission-critical communications and analytics. Our technology platforms in mission-critical communications, command center software and video security & analytics make cities safer and help communities and businesses thrive.",
         "logo": "/Motorola logo.png",
         "location": "Bayan Lepas, Penang",
-        "sponsorID": 9
+        "sponsorID": 9,
+        "photos": [
+            "/office.jpg",
+            "/room.png",
+            "/canteen.jpg"
+          ]
     },
     {
         "name": "Dell Technologies",
@@ -127,7 +172,12 @@
         "description": "Dell Technologies Malaysia is a part of the global Dell Technologies family, providing a broad range of technology solutions including PCs, servers, data storage devices, network switches, software, and computer peripherals. The company has a significant presence in Malaysia with offices in Cyberjaya and Penang.",
         "logo": "/Dell logo.png",
         "location": "Cyberjaya, Selangor",
-        "sponsorID": 10
+        "sponsorID": 10,
+        "photos": [
+            "/office.jpg",
+            "/room.png",
+            "/canteen.jpg"
+          ]
     },
     {
         "name": "AMD Malaysia",
@@ -140,6 +190,11 @@
         "description": "AMD Malaysia, located in Penang, is a crucial part of AMD's global operations, focusing on semiconductor research, development, and testing. The facility plays a key role in AMD's worldwide supply chain and contributes to the development of next-generation computing and graphics technologies.",
         "logo": "/AMD logo.jpg",
         "location": "Bayan Lepas, Penang",
-        "sponsorID": 11
+        "sponsorID": 11,
+        "photos": [
+            "/office.jpg",
+            "/room.png",
+            "/canteen.jpg"
+          ]
     }
 ]
