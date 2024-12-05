@@ -9,31 +9,32 @@
           <div>
             <h1 class="text-3xl font-bold text-[#1E1B4B]">My Profile</h1>
           </div>
-          <button
-            v-if="!isEditing"
-            @click="startEditing"
-            class="flex items-center gap-2 px-4 py-2 text-sm text-white bg-[#1E1B4B] rounded-lg hover:bg-[#312e81] transition-colors duration-200"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-            </svg>
-            Edit Profile
-          </button>
-          <div v-else class="space-x-3">
+          <div class="flex gap-4">
             <button
-              @click="saveChanges"
-              class="px-4 py-2 text-sm text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors duration-200 flex items-center gap-2"
+              @click="logout"
+              class="flex items-center gap-2 px-4 py-2 text-sm text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors duration-200"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
               </svg>
-              Save
+              Logout
             </button>
             <button
-              @click="cancelEditing"
-              class="px-4 py-2 text-sm text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200"
+              v-if="!isEditing"
+              @click="startEditing"
+              class="flex items-center gap-2 px-4 py-2 text-sm text-white bg-[#1E1B4B] rounded-lg hover:bg-[#312e81] transition-colors duration-200"
             >
-              Cancel
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+              Edit Profile
+            </button>
+            <button
+              v-else
+              @click="saveChanges"
+              class="flex items-center gap-2 px-4 py-2 text-sm text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors duration-200"
+            >
+              Save Changes
             </button>
           </div>
         </div>
@@ -168,12 +169,14 @@
 
 <script>
 import { inject } from 'vue';
+import { useRouter } from 'vue-router';
 import userData from '../data/userData.json';
 
 export default {
   setup() {
-    const currentUser = inject('currentUser')
-    return { currentUser }
+    const currentUser = inject('currentUser');
+    const router = useRouter();
+    return { currentUser, router };
   },
 
   data() {
@@ -262,6 +265,11 @@ export default {
         console.error('Error updating profile:', error);
         alert('Failed to update profile. Please try again.');
       }
+    },
+
+    logout() {
+      this.currentUser.value = null;
+      this.router.push('/login');
     }
   }
 }
