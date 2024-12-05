@@ -1,22 +1,24 @@
 <template>
     <section class="pt-12 bg-center bg-cover bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply m-h-screen w-full flex flex-col items-center justify-center overflow-y-auto">
-      <div v-if="company" class="flex items-center space-x-10">
-        <!-- Logo -->
-        <a href="https://www.ni.com/en.html?srsltid=AfmBOop8ibaz67DwGZZCiBc5O5kIgxtTyLUzwztKtg38RYomfSEcFf_o" target="_blank" class="flex-shrink-0">
-          <img :src="company.logo" class="h-25" :alt="company.name" />
-        </a>
-        <!-- Text Section -->
-        <div class="text-left max-w-md">
-          <span class="block text-4xl font-semibold whitespace-nowrap text-white">{{ company.name }}</span>
-          <p class="text-xl text-gray-300 mt-2">{{ company.shortDescription }}</p>
-        </div>
+       <!-- Company Header -->
+    <div v-if="company" class="flex items-center space-x-10">
+      <!-- Company Logo -->
+      <a :href="company.website || '#'" target="_blank" class="flex-shrink-0">
+        <img :src="company.logo" class="h-25" :alt="company.name" />
+      </a>
+      <!-- Company Info -->
+      <div class="text-left max-w-md">
+        <span class="block text-4xl font-semibold whitespace-nowrap text-white">
+          {{ company.name }}
+        </span>
+        <p class="text-xl text-gray-300 mt-2">{{ company.shortDescription }}</p>
       </div>
-       <!-- Company Description -->
+    </div>
+
+    <!-- Company Description -->
     <div v-if="company" class="mt-10 max-w-3xl">
-    <h2 class="text-2xl font-semibold text-white mb-4">Company Description</h2>
-    <p class="text-lg text-gray-300 leading-relaxed">
-        {{ company.description }}
-    </p>
+      <h2 class="text-2xl font-semibold text-white mb-4">Company Description</h2>
+      <p class="text-lg text-gray-300 leading-relaxed">{{ company.description }}</p>
     </div>
     <div id="default-carousel" class="relative w-2/5" data-carousel="slide">
         <!-- Carousel wrapper -->
