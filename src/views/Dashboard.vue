@@ -57,6 +57,12 @@
                             Year {{ year }}
                         </option>
                     </select>
+                    <select v-if="tab === 'students' && currentUser.role == 'admin'" class="border rounded px-4 py-2 text-black ml-2">
+                        <option value="">Event</option>
+                        <option value="Talk 1">Talk 1</option>
+                        <option value="Webinar 2">Webinar 2</option>
+                        <option value="Workshop X">Workshop X</option>
+                    </select>
                     <select
                         v-model="itemsPerPage"
                         class="border rounded px-4 py-2 text-black ml-2"
@@ -394,12 +400,12 @@ export default {
             }
 
             const headers = this.tab === 'jobs'
-                ? ['Position', 'Type', 'Mode']
+                ? (this.currentUser.role == 'sponsor' ? ['Position', 'Type', 'Mode'] : ['Company', 'Position', 'Type', 'Mode'])
                 : ['Name', 'Year', 'Email', 'Phone', 'Resume'];
 
             const data = rows.map((row) => {
                 if (this.tab === 'jobs') {
-                    return [row.position, row.type, row.mode];
+                    return this.currentUser.role == 'sponsor' ? [row.position, row.type, row.mode] : [row.name, row.position, row.type, row.mode];
                 } else {
                     return [row.name, row.year, row.email, row.phone, row.resume || '-'];
                 }

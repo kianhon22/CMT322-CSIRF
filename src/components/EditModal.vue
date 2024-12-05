@@ -60,7 +60,13 @@
 </template>
 
 <script>
+import { inject } from 'vue';
+
 export default {
+    setup() {
+        const currentUser = inject('currentUser')
+        return { currentUser }
+    },
     props: {
         item: {
             type: Object,
@@ -70,12 +76,7 @@ export default {
     data() {
         return {
             editableItem: { ...this.item },
-            jobFields: [
-                { key: 'position', label: 'Position', type: 'input' },
-                { key: 'description', label: 'Description', type: 'input' },
-                { key: 'type', label: 'Type', type: 'select', options: ['Full-Time', 'Part-Time', 'Internship'] },
-                { key: 'mode', label: 'Mode', type: 'select', options: ['On-Site', 'Hybrid', 'WFH'] },
-            ],
+            jobFields: [],
             studentFields: [
                 { key: 'name', label: 'Name', type: 'input' },
                 { key: 'email', label: 'Email', type: 'input' },
@@ -90,6 +91,23 @@ export default {
         },
         editableFields() {
             return this.isJob ? this.jobFields : this.studentFields;
+        },
+    },
+    watch: {
+        currentUser: {
+            immediate: true,
+            handler() {
+                // Dynamically populate jobFields based on currentUser.role
+                this.jobFields = [
+                    ...(this.currentUser.role == 'admin'
+                        ? [{ key: 'name', label: 'Company', type: 'input' }]
+                        : []),
+                    { key: 'position', label: 'Position', type: 'input' },
+                    { key: 'description', label: 'Description', type: 'input' },
+                    { key: 'type', label: 'Type', type: 'select', options: ['Full-Time', 'Part-Time', 'Internship'] },
+                    { key: 'mode', label: 'Mode', type: 'select', options: ['On-Site', 'Hybrid', 'WFH'] },
+                ];
+            },
         },
     },
     methods: {
