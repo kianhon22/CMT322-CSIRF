@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-screen bg-center bg-cover bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply p-8">
+  <section class="min-h-screen bg-center bg-cover bg-no-repeat bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply p-8">
     <h1 class="text-5xl font-bold text-center mt-3 mb-4 text-white">Career Opportunities</h1>
     <p class="text text-center mb-8 text-orange-500 flex justify-center items-center gap-2">      Click on the job for more details!
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 animate-pulse">

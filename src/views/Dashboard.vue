@@ -1,5 +1,5 @@
 <template>
-    <div class="p-6 bg-[#1E1B4B] min-h-screen">
+    <div class="min-h-screen bg-center bg-cover bg-no-repeat bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply p-6">
         <h1 class="text-4xl font-bold text-center mb-4 text-white">Dashboard</h1>
         <div class="container mx-auto bg-white rounded-lg shadow">
             <!-- Tabs -->
@@ -101,7 +101,7 @@
                         <tr
                             v-for="(job, index) in paginatedJobs"
                             :key="job.id"
-                            class="text-center hover:bg-[#1E1B4B] hover:text-white cursor-pointer"
+                            class="text-center hover:bg-[#4e4eaa] hover:text-white cursor-pointer"
                             @click.prevent="openEditModal(job)"
                         >
                             <td class="p-2 border border-[#1E1B4B]">{{ index + 1 }}</td>
