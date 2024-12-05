@@ -1,6 +1,24 @@
 <template>
     <section class="pt-12 bg-center bg-cover bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply m-h-screen w-full flex flex-col items-center justify-center overflow-y-auto">
-       <!-- Company Header -->
+    <!-- Back Button -->
+    <div class="absolute top-20 left-5">
+        <button
+        @click="navigateBack"
+        class="flex items-center px-3 py-2 text-gray-900 bg-white border border-transparent rounded-lg hover:bg-transparent hover:border-white hover:text-white">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 25 25"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-5 h-5 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+        </svg>
+        Back
+        </button>
+    </div>
+
+        <!-- Company Header -->
     <div v-if="company" class="flex items-center space-x-10">
       <!-- Company Logo -->
       <a :href="company.website || '#'" target="_blank" class="flex-shrink-0">
@@ -22,28 +40,28 @@
     </div>
 
     <!-- Carousel -->
-    <div id="default-carousel" class="relative w-2/5" data-carousel="slide">
+    <div id="default-carousel" class="relative w-2/5 mb-7 mt-5" data-carousel="slide">
         <!-- Carousel wrapper -->
         <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
             <!-- Item 1 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="../assets/office.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
+                <img src="../assets/company.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
             </div>
             <!-- Item 2 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="../assets/office.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
+                <img src="../assets/office1.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
             </div>
             <!-- Item 3 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="../assets/office.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
+                <img src="../assets/canteen.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
             </div>
             <!-- Item 4 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="../assets/office.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
+                <img src="../assets/meetingroom.jpeg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
             </div>
             <!-- Item 5 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="../assets/office.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
+                <img src="../assets/gymroom.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
             </div>
         </div>
         <!-- Slider indicators -->
@@ -76,8 +94,8 @@
 
     <!-- Career Available -->
     <section>
-        <div class="container mx-auto px-4 py-9 bg-[#1E1B4B]">
-            <h2 class="text-4xl font-semibold text-white mb-4 text-center">Career Available</h2>
+        <div class="mx-auto px-4 py-8 bg-[#1E1B4B]">
+            <h2 class="text-4xl font-semibold text-white mb-6 text-center">Career Available</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                 <fwb-card
                     v-for="job in filteredJobs"
@@ -162,6 +180,9 @@ export default {
     loadCompanyData() {
       // Find the company matching the `id` from the route
       this.company = companyData.find(company => company.sponsorID === Number(this.id));
+    },
+    navigateBack() {
+        this.$router.push('/'); // Adjust the path to match your Home route
     },
     openModal(job) {
       this.selectedJob = job;

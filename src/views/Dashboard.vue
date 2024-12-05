@@ -58,13 +58,20 @@
                             {{ number }} Entries
                         </option>
                     </select>
+                    <button
+                        @click.prevent="refresh"
+                        class="ml-2 px-4 py-2 bg-[#1E1B4B] text-white hover:bg-[#4e4eaa] rounded"
+                    >
+                        Refresh
+                    </button>
                 </div>
                 <div class="flex items-center">
                     <button
-                        @click.prevent="refresh"
+                        v-if="tab === 'jobs'"
+                        @click.prevent="addJob"
                         class="mr-2 px-4 py-2 bg-[#1E1B4B] text-white hover:bg-[#4e4eaa] rounded"
                     >
-                        Refresh
+                        Add Job
                     </button>
                     <button
                         @click.prevent="exportToCSV"
@@ -322,20 +329,33 @@ export default {
             this.studentPage = page;
         },
         addJob() {
-            this.selectedItem = { position: '', description: '', type: '', mode: '' };
+            this.selectedItem = { name:'', position: '', description: '', type: '', mode: '' };
             this.isModalOpen = true;
         },
         updateItem(updatedItem) {
             if (updatedItem._delete) {
                 this.jobs = this.jobs.filter(job => job.id !== updatedItem.id);
+                this.closeEditModal();
+                return;
             }
-            else if (this.tab === 'jobs') {
-                const index = this.jobs.findIndex((job) => job.id === updatedItem.id);
+
+            if (this.tab === 'jobs') {
+                if (!updatedItem.position || !updatedItem.type || !updatedItem.mode) {
+                    alert('Please fill in all required fields (Position, Type, Mode)');
+                    return;
+                }
+
+                // Update an existing job if `id` exists
+                const index = this.jobs.findIndex(job => job.id === updatedItem.id);
                 if (index !== -1) {
-                    this.jobs.splice(index, 1, updatedItem);
+                    this.jobs.splice(index, 1, updatedItem); // Update the job
+                } else {
+                    // Add new job if `id` does not exist
+                    const newJob = { ...updatedItem, id: Date.now() };
+                    this.jobs.push(newJob); // Add to the jobs array
                 }
             }
-            else if (this.tab === 'students') {
+            else if(this.tab === 'students') {
                 const index = this.students.findIndex((student) => student.id === updatedItem.id);
                 if (index !== -1) {
                     this.students.splice(index, 1, updatedItem);

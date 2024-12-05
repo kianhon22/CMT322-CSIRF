@@ -36,8 +36,9 @@
                     </div>
                     <div class="flex justify-between items-center">
                         <button
+                            v-if="editableItem.id"
                             type="button"
-                            @click="$emit('delete')"
+                            @click="deleteItem"
                             class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded"
                         >
                             Delete
