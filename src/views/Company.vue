@@ -100,7 +100,7 @@
                 <fwb-card
                     v-for="job in filteredJobs"
                     :key="job.id"
-                    class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                    class="bg-white backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
                     @click="openModal(job)">
                     <div class="p-6">
                         <div class="flex items-center gap-4 mb-4">

@@ -35,13 +35,13 @@
                     <div class="mt-8 flex justify-center space-x-4">
                         <button
                             @click="viewCompany"
-                            class="px-6 py-2.5 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 transition-colors duration-300"
+                            class="px-6 py-2.5 text-sm font-medium text-white bg-[#1E1B4B] rounded-lg hover:bg-white hover:text-[#1E1B4B] border border-[#1E1B4B]"
                         >
                             Company Details
                         </button>
                         <button
                             @click="applyJob"
-                            class="px-6 py-2.5 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 transition-colors duration-300"
+                            class="px-6 py-2.5 text-sm font-medium text-white bg-orange-500 rounded-lg hover:bg-white hover:text-orange-500 border hover:border-orange-500"
                         >
                             Apply
                         </button>
