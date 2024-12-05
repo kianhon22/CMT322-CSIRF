@@ -28,6 +28,7 @@
           <!-- Register Button -->
           <button
             v-if="popupContent.badgeText === 'Event'"
+            @click.prevent="openModal"
             class="mt-4 px-6 py-2 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600"
           >
             Register Here
@@ -38,12 +39,43 @@
         </div>
       </div>
     </div>
+                  <!-- Dynamic Modal -->
+                  <Modal
+          v-model:show="isModalVisible"
+          :title="modalTitle"
+          :text="modalText"
+          :color="modalColor"
+        >
+          <template #actions>
+            <button
+              @click.prevent="isModalVisible = false"
+              class="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-600"
+            >
+              Cancel
+            </button>
+            <button
+              @click.prevent="currentUser != null ? registerEvent() : $router.push('/login')"
+              class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
+            >
+              {{currentUser != null ? 'Confirm' : 'Log In'}}
+            </button>
+          </template>
+        </Modal>
   </template>
 
   <script>
   import announcementData from "@/data/announcementData.json"; // Ensure this path is correct
+  import Modal from "@/components/Modal.vue";
+  import { inject } from 'vue';
 
   export default {
+    setup() {
+    const currentUser = inject('currentUser')
+    return { currentUser }
+  },
+    components: {
+      Modal,
+    },
     props: {
       isVisible: {
         type: Boolean,
@@ -57,6 +89,11 @@
     data() {
       return {
         popupContent: null,
+
+        isModalVisible: false, // Modal visibility
+        modalTitle: "",
+        modalText: "",
+        modalColor: "white", // Color of the modal
       };
     },
     watch: {
@@ -83,6 +120,31 @@
       closePopup() {
         this.$emit("close");
       },
+
+      openModal() {
+      if (this.isUserLoggedIn()) {
+        this.modalTitle = "RSVP Now";
+        this.modalText = "Confirm to join the event?";
+        this.modalColor = "black";
+        this.isModalVisible = true;
+      } 
+      else {
+        this.modalTitle = "Login Required";
+        this.modalText = "Please log in to register for the event";
+        this.modalColor = "black";
+        this.isModalVisible = true;
+      }
+    },
+    isUserLoggedIn() {
+      if (this.currentUser != null)
+        return true;
+      else
+        return false;
+    },
+    registerEvent() {
+      toastr.success('You have registered the event!', 'Success');
+      this.isModalVisible = false;
+    },
     },
   };
   </script>
