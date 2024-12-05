@@ -3,18 +3,18 @@
     <!-- Back Button -->
     <div class="absolute top-20 left-5">
         <button
-        @click="navigateBack"
-        class="flex items-center px-3 py-2 text-gray-900 bg-white border border-transparent rounded-lg hover:bg-transparent hover:border-white hover:text-white">
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 25 25"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5 mr-2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
-        </svg>
-        Back
+            @click="navigateBack"
+            class="flex items-center text-white text-xl font-medium hover:underline">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 25 25"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+            Back
         </button>
     </div>
 
@@ -184,8 +184,15 @@ export default {
       this.company = companyData.find(company => company.sponsorID === Number(this.id));
     },
     navigateBack() {
-        this.$router.push('/'); // Adjust the path to match your Home route
+    this.$router.push('/').then(() => {
+        // Wait for the navigation to complete before scrolling
+        const companySection = document.getElementById('company');
+        if (companySection) {
+        companySection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
     },
+
     openModal(job) {
       this.selectedJob = job;
       this.isModalOpen = true;

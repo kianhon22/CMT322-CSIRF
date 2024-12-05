@@ -3,7 +3,7 @@
       <div class="flex flex-col items-center text-center px-8 py-8">
             <div class="lg:col-span-7 text-center lg:text-center">
                 <h1 class="text-white fade-in w-full mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-7xl">
-                  COMPUTER SCIENCE INTERNSHIP <br> & RECRUITMENT FAIR 
+                  COMPUTER SCIENCE INTERNSHIP <br> & RECRUITMENT FAIR
                   <span class="font-extrabold text-orange-500 blink">2025</span>
                 </h1>
                 <p class="text-white fade-in w-full mb-6 font-light md:text-lg lg:text-2xl">
@@ -39,22 +39,22 @@
       <CountdownClock/>
     </section>
     <section class="bg-center bg-[#1E1B4B] py-8 w-full">
-        <h1 class="text-4xl font-bold text-center mt-6 mb-8 text-white">About Us</h1> 
+        <h1 class="text-4xl font-bold text-center mt-6 mb-8 text-white">About Us</h1>
         <p class="text-white max-w-2xl mx-auto mb-20 font-light text-justify md:text-lg lg:text-xl">
           The <span class="text-orange-500"> Computer Science Internship & Recruitment Fair (CSIRF) </span>
-          is a two-day flagship event organised by the Computer Science Society (USM CS Society). 
-          It consists of a series of career talks and booth exhibitions tailored for third and 
+          is a two-day flagship event organised by the Computer Science Society (USM CS Society).
+          It consists of a series of career talks and booth exhibitions tailored for third and
           final-year undergraduates from the School of Computer Sciences, Universiti Sains Malaysia.
         </p>
     </section>
-    <section class="bg-center bg-orange-500 py-8 w-full">
+    <section id="company" class="bg-center bg-orange-500 py-8 w-full">
     <h1 class="text-4xl font-bold text-center mt-2 mb-12 text-white">Company</h1>
     <div class="mb-6 grid grid-cols-4 gap-6 pl-20 pr-20">
       <router-link
         v-for="(company, index) in companies"
         :key="index"
         :to="{ name: 'Company', params: { id: company.sponsorID }}"
-        class="bg-white rounded-lg shadow-lg flex flex-col items-center p-4 hover:shadow-xl transition-shadow">
+        class="bg-white rounded-lg shadow-lg flex flex-col items-center p-4 hover:shadow-xl transition-shadow hover:bg-gray-100">
         <img :src="company.logo" :alt="company.name" class="h-24 w-24 object-contain rounded-full mb-4"/>
         <h3 class="text-lg font-semibold text-gray-800">{{ company.name }}</h3>
         <span :class="categoryClass(company.category)" class="px-3 py-1 mt-2 rounded-full text-sm font-medium">
@@ -78,7 +78,7 @@ export default {
     };
   },
   components: {
-       Itinerary, 
+       Itinerary,
        CountdownClock,
     },
   methods: {
