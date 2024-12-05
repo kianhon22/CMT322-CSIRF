@@ -9,8 +9,10 @@
         "year": 3,
         "resume": "testResume.pdf",
         "registered": true,
-        "applyWorkshop": false,
-        "applyJob": true
+        "applyWorkshop": true,
+        "eventApplied": "Talk 1",
+        "applyJob": true,
+        "jobApplied": "Software Engineer"
     },
     "admin": [
         {
@@ -52,8 +54,10 @@
             "year": 3,
             "resume": "testResume.pdf",
             "registered": true,
-            "applyWorkshop": false,
-            "applyJob": true
+            "applyWorkshop": true,
+            "eventApplied": "Talk 1",
+            "applyJob": true,
+            "jobApplied": "Software Engineer"
         },
         {
             "id": 2,
@@ -63,10 +67,12 @@
             "password": "csirfusm",
             "phone": "0123456789",
             "year": 2,
-            "resume": null,
+            "resume": "testResume.pdf",
             "registered": true,
-            "applyWorkshop": false,
-            "applyJob": true
+            "applyWorkshop": true,
+            "eventApplied": "Talk 2",
+            "applyJob": true,
+            "jobApplied": "Software Engineer"
         },
         {
             "id": 3,
@@ -76,10 +82,12 @@
             "password": "csirfusm",
             "phone": "0123456789",
             "year": 3,
-            "resume": null,
+            "resume": "testResume.pdf",
             "registered": true,
-            "applyWorkshop": false,
-            "applyJob": false
+            "applyWorkshop": true,
+            "eventApplied": "Webinar 1",
+            "applyJob": true,
+            "jobApplied": "Web Developer"
         },
         {
             "id": 4,
@@ -89,10 +97,12 @@
             "password": "csirfusm",
             "phone": "0123456789",
             "year": 2,
-            "resume": null,
+            "resume": "testResume.pdf",
             "registered": true,
-            "applyWorkshop": false,
-            "applyJob": false
+            "applyWorkshop": true,
+            "eventApplied": "Webinar 1",
+            "applyJob": true,
+            "jobApplied": "Web Developer"
         },
         {
             "id": 5,
@@ -102,10 +112,12 @@
             "password": "csirfusm",
             "phone": "0123456789",
             "year": 4,
-            "resume": null,
+            "resume": "testResume.pdf",
             "registered": true,
-            "applyWorkshop": false,
-            "applyJob": false
+            "applyWorkshop": true,
+            "eventApplied": "Webinar 1",
+            "applyJob": true,
+            "jobApplied": "Web Engineer"
         },
         {
             "id": 6,
@@ -115,10 +127,12 @@
             "password": "csirfusm",
             "phone": "0123456789",
             "year": 3,
-            "resume": null,
+            "resume": "testResume.pdf",
             "registered": true,
-            "applyWorkshop": false,
-            "applyJob": false
+            "applyWorkshop": true,
+            "eventApplied": "Webinar 1",
+            "applyJob": true,
+            "jobApplied": "Web Developer"
         },
         {
             "id": 7,
@@ -130,8 +144,10 @@
             "year": 3,
             "resume": null,
             "registered": true,
-            "applyWorkshop": false,
-            "applyJob": false
+            "applyWorkshop": true,
+            "eventApplied": "Webinar 5",
+            "applyJob": true,
+            "jobApplied": "Network Engineer"
         },
         {
             "id": 8,
@@ -141,10 +157,12 @@
             "password": "csirfusm",
             "phone": "0123456789",
             "year": 1,
-            "resume": null,
+            "resume": "testResume.pdf",
             "registered": true,
-            "applyWorkshop": false,
-            "applyJob": false
+            "applyWorkshop": true,
+            "eventApplied": "Webinar 1",
+            "applyJob": false,
+            "jobApplied": "Data Analyst"
         },
         {
             "id": 9,
@@ -157,7 +175,9 @@
             "resume": null,
             "registered": true,
             "applyWorkshop": false,
-            "applyJob": false
+            "eventApplied": "Webinar 2",
+            "applyJob": false,
+            "jobApplied": "Web Developer"
         },
         {
             "id": 10,
@@ -167,10 +187,12 @@
             "password": "csirfusm",
             "phone": "0123456789",
             "year": 3,
-            "resume": null,
+            "resume": "testResume.pdf",
             "registered": true,
             "applyWorkshop": false,
-            "applyJob": false
+            "eventApplied": "Webinar 2",
+            "applyJob": false,
+            "jobApplied": "Project Manager"
         },
         {
             "id": 11,
@@ -180,10 +202,12 @@
             "password": "csirfusm",
             "phone": "0123456789",
             "year": 3,
-            "resume": null,
+            "resume": "testResume.pdf",
             "registered": true,
             "applyWorkshop": false,
-            "applyJob": false
+            "eventApplied": "Webinar 1",
+            "applyJob": false,
+            "jobApplied": "Web Developer"
         }
     ]
 }

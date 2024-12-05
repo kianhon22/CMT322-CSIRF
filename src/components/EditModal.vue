@@ -11,7 +11,7 @@
                 </svg>
             </button>
             <div class="p-4 border-b">
-                <h2 class="text-lg font-bold">Edit {{ isJob ? 'Job' : 'Applicant' }}</h2>
+                <h2 class="text-lg font-bold">{{ editableItem.id ? 'Edit' : 'Add' }} {{ isJob ? 'Job' : 'Applicant' }}</h2>
             </div>
             <div class="p-4">
                 <form @submit.prevent="saveChanges">
@@ -43,7 +43,13 @@
                         >
                             Delete
                         </button>
-                        <button type="submit" class="px-4 py-2 bg-[#1E1B4B] hover:bg-[#4e4eaa] text-white rounded">
+                        <button
+                            type="submit"
+                            :class="[
+                                'px-4 py-2 bg-[#1E1B4B] hover:bg-[#4e4eaa] text-white rounded',
+                                { 'ml-auto': !editableItem.id }
+                            ]"
+                        >
                             Save
                         </button>
                     </div>
