@@ -17,7 +17,7 @@
             <ul class="flex flex-col mt-4 text-lg lg:flex-row lg:space-x-8 lg:mt-0 ml-60">
                 <li>
                   <router-link to="/"
-                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
+                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-300 hover:text-[#1E1B4B]"
                     active-class="!bg-orange-500 !text-[#1E1B4B]"
                   > Home
                   </router-link>
@@ -25,7 +25,7 @@
                 <div v-if="currentUser && (currentUser.role=='admin' || currentUser.role=='sponsor')">
                   <li>
                     <router-link to="/dashboard"
-                      class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
+                      class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-300 hover:text-[#1E1B4B]"
                       active-class="!bg-orange-500 !text-[#1E1B4B]"
                     > Dashboard
                     </router-link>
@@ -33,21 +33,21 @@
                 </div>
                 <li>
                   <router-link to="/announcement"
-                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
+                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-300 hover:text-[#1E1B4B]"
                     active-class="!bg-orange-500 !text-[#1E1B4B]"
                   > Announcement
                   </router-link>
                 </li>
                 <li>
                   <router-link to="/career"
-                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
+                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-300 hover:text-[#1E1B4B]"
                     active-class="!bg-orange-500 !text-[#1E1B4B]"
                   > Career
                   </router-link>
                 </li>
                 <li>
                   <router-link to="/profile"
-                      class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
+                      class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-300 hover:text-[#1E1B4B]"
                       active-class="!bg-orange-500 !text-[#1E1B4B]"
                     > Profile
                     </router-link>
@@ -55,7 +55,7 @@
                 <div v-if="currentUser">
                   <li>
                     <router-link to="/login"
-                      class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-500 hover:text-[#1E1B4B]"
+                      class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-300 hover:text-[#1E1B4B]"
                       active-class="!bg-orange-500 !text-[#1E1B4B]"
                     > Get Started
                     </router-link>
