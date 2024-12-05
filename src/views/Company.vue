@@ -184,15 +184,8 @@ export default {
       this.company = companyData.find(company => company.sponsorID === Number(this.id));
     },
     navigateBack() {
-    this.$router.push('/').then(() => {
-        // Wait for the navigation to complete before scrolling
-        const companySection = document.getElementById('company');
-        if (companySection) {
-        companySection.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
+    this.$router.push({ path: '/', hash: '#company' });
     },
-
     openModal(job) {
       this.selectedJob = job;
       this.isModalOpen = true;

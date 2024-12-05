@@ -19,8 +19,19 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
-});
+    history: createWebHistory(),
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+      if (to.hash) {
+        // Scroll to the element with the matching hash
+        return {
+          el: to.hash, // Scroll to the element with the ID matching the hash
+          behavior: 'smooth', // Optional: Adds smooth scrolling
+        };
+      }
+      return { top: 0 }; // Default: Scroll to top for other cases
+    },
+  });
+
 
 export default router;
