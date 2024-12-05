@@ -15,6 +15,9 @@
                             <li class="mb-4">
                                 <a href="/" class="rounded px-2 py-0.5 hover:text-[#1E1B4B]">Home</a>
                             </li>
+                            <li class="mb-4">
+                                <a href="/announcement" class="rounded px-2 py-0.5 hover:text-[#1E1B4B]">Announcement</a>
+                            </li>
                             <li>
                                 <a href="/career" class="rounded px-2 py-0.5 hover:text-[#1E1B4B]">Career</a>
                             </li>
