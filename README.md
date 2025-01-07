@@ -16,8 +16,8 @@ Computer Science Internship & Recruitment Fair is an annual event exhibiting a s
    npm install
    ```
 
-3. Create .env file (Get the credentials from owner)
-   Create a new .env file, copy everything from .env.example
+3. Create .env file (Get the credentials from owner) <br>
+   Create a new <code>.env</code> file, copy everything from <code>.env.example</code> <br>
    or simply run this command:
    
    ```bash
