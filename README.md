@@ -17,8 +17,9 @@ Computer Science Internship & Recruitment Fair is an annual event exhibiting a s
    ```
 
 3. Create .env file (Get the credentials from owner)
-Create a new .env file, copy everything from .env.example
-or simply run this command:
+   Create a new .env file, copy everything from .env.example
+   or simply run this command:
+   
    ```bash
    cp .env.example .env
    ```
