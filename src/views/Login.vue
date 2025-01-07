@@ -14,7 +14,7 @@
             />
             CSIRF
           </a>
-          <form class="space-y-4 md:space-y-6" @submit.prevent="login()">
+          <form class="space-y-4 md:space-y-6" @submit.prevent="authenticate">
             <div>
               <label
                 for="email"
@@ -73,13 +73,13 @@
             </div>
             <button
               type="submit"
-              class="w-full text-white bg-[#2f2975] hover:bg-[#1E1B4B] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-              >Start Exploring
+              class="w-full text-white bg-[#2f2975] hover:bg-[#1E1B4B] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              {{ isLogin ? 'Start Exploring' : 'Register Now' }}
             </button>
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-              Haven't registered?
-              <a href="#" class="font-medium text-[#1E1B4B] hover:underline"
-                >Get Started
+              {{ isLogin ? "Haven't registered? " : 'Already have an account? ' }}
+              <a href="#" class="font-medium text-[#1E1B4B] hover:underline" @click="toggleAuth">
+                {{ isLogin ? 'Get Started' : 'Login here' }}
               </a>
             </p>
           </form>
@@ -90,58 +90,39 @@
 </template>
 
 <script>
-import userData from '../data/userData.json';
-import { inject } from 'vue';
+import { auth } from '@/firebase.js';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 
 export default {
-  setup() {
-    const currentUser = inject('currentUser')
-    return { currentUser }
-  },
-
   data() {
     return {
       email: '',
       password: '',
       errorMessage: '',
+      isLogin: true,    // Toggle between Login and Register
     }
   },
 
   methods: {
-    login() {
-      this.errorMessage = '';   // Reset the error message
+    async authenticate() {
+      this.errorMessage = '';
 
-      const roles = ['admin', 'sponsor', 'student'];
-      for (let role of roles) {
-        // Find a user that matches the email and password
-        const user = userData[role].find(
-          (user) => user.email == this.email && user.password == this.password
-        );
-
-        if (user) {
-          // If a match is found, assign the user to currentUser and exit the loop
-          this.currentUser = user;  // Update the currentUser in userData
-          this.$router.push('/');
-          return;
+      try {
+        if (this.isLogin) {
+          await signInWithEmailAndPassword(auth, this.email, this.password);
+        } 
+        else {
+          await createUserWithEmailAndPassword(auth, this.email, this.password);
         }
+        this.$router.push('/');
+      } catch (error) {
+        this.errorMessage = 'Invalid email or password. Please try again.';
       }
-
-      // If no match was found, set the error message
-      this.errorMessage = 'Invalid email or password. Please try again.';
+    },
+    // Toggle between Login and Register
+    toggleAuth() {
+      this.isLogin = !this.isLogin;
     },
   },
-
-  // computed: {
-  //   currentUser() {
-  //     return this.mockData.currentUser || {
-  //       name: "Guest",
-  //       role: "guest",
-  //     };
-  //   },
-  // },
 }
 </script>
-
-<style>
-/* Optional custom styles */
-</style>
