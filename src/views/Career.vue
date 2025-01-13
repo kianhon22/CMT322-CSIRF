@@ -10,13 +10,17 @@
     <!-- Search and Filters -->
     <div class="max-w-4xl mx-auto px-4 mb-8">
       <!-- Search Bar -->
-      <div class="mb-4 max-w-xl mx-auto">
+      <div class="mb-4 max-w-xl mx-auto flex items-center gap-2">
         <input
           type="text"
           v-model="searchQuery"
           placeholder="Search for jobs..."
           class="w-full p-2.5 rounded-lg border border-gray-300 bg-white/95 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-500"
         />
+
+        <button class="px-3 py-[11px] rounded-lg backdrop-blur-sm bg-white hover:bg-orange-500 text-gray-900 font-medium cursor-pointer"
+          @click="refresh">Refresh
+        </button>
       </div>
 
       <!-- Filters -->
@@ -26,7 +30,7 @@
           v-model="selectedType"
           class="px-3 py-1.5 rounded-lg border border-gray-300 bg-white/95 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-medium cursor-pointer"
         >
-          <option value="">Type: All</option>
+          <option value="" disabled>Type</option>
           <option value="Internship">Internship</option>
           <option value="Full-Time">Full-Time</option>
         </select>
@@ -36,7 +40,7 @@
           v-model="selectedMode"
           class="px-3 py-1.5 rounded-lg border border-gray-300 bg-white/95 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-medium cursor-pointer"
         >
-          <option value="">Mode: All</option>
+          <option value="" disabled>Mode</option>
           <option value="On-Site">On-Site</option>
           <option value="Remote">Remote</option>
           <option value="Hybrid">Hybrid</option>
@@ -47,7 +51,7 @@
           v-model="selectedLocation"
           class="px-3 py-1.5 rounded-lg border border-gray-300 bg-white/95 backdrop-blur-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-medium cursor-pointer"
         >
-          <option value="">Location: All</option>
+          <option value="" disabled>Location</option>
           <optgroup label="Malaysia">
             <option value="Johor">Johor</option>
             <option value="Kedah">Kedah</option>
