@@ -20,8 +20,7 @@
                   > Home
                   </router-link>
                 </li>
-                <!-- <div v-if="currentUser && (currentUser.role=='admin' || currentUser.role=='sponsor')"> -->
-                <div>
+                <div v-if="user && (user.role =='admin' || user.role =='company')">
                   <li>
                     <router-link to="/dashboard"
                       class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-300 hover:text-[#1E1B4B]"
@@ -44,8 +43,14 @@
                   > Career
                   </router-link>
                 </li>                
-                <!-- <div v-if="currentUser != null"> -->
-                <div>
+                <li>
+                  <router-link to="/"
+                    class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-300 hover:text-[#1E1B4B]"
+                    @click="scrollToCompany"
+                  > Company
+                  </router-link>
+                </li>                
+                <div v-if="user">
                   <li>
                     <router-link to="/profile"
                         class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-300 hover:text-[#1E1B4B]"
@@ -54,8 +59,7 @@
                       </router-link>
                   </li>
                 </div>
-                <!-- <div v-if="currentUser == null"> -->
-                <div>
+                <div v-else>
                   <li>
                     <router-link to="/login"
                       class="block px-4 py-2 lg:px-2 lg:py-1 pr-4 pl-3 text-white border-b border-gray-100 rounded-lg lg:border-0 lg:hover:bg-orange-300 hover:text-[#1E1B4B]"
@@ -71,9 +75,37 @@
 </template>
 
 <script>
-import { inject } from 'vue';
+import { auth, db } from '@/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 
 export default {
-
+  data() {
+    return {
+      user: null,
+    }
+  },
+  methods: {
+    async fetchUser(uid) {
+      const userDoc = await getDoc(doc(db, 'users', uid));
+      if (userDoc.exists()) {
+        this.user = userDoc.data();
+      } else {
+        this.user = null;
+      }
+    },
+    scrollToCompany() {
+      this.$router.push({ path: '/', hash: '#company' });
+    },
+  },
+  mounted() {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        await this.fetchUser(user.uid);
+      } else {
+        this.user = null;
+      }
+    });
+  },
 }
 </script>

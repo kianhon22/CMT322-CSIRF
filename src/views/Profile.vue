@@ -47,7 +47,6 @@
             <div class="space-y-4">
               <h2 class="text-xl font-semibold text-[#1E1B4B]">Basic Information</h2>
 
-              <!-- Name field -->
               <div class="space-y-2">
                 <label class="text-sm font-medium text-gray-700">Full Name</label>
                 <input v-if="isEditing"
@@ -56,48 +55,47 @@
                        placeholder="Enter your full name"
                 />
                 <div v-else class="px-3 py-2 bg-gray-50 rounded-lg text-gray-900">
-                  {{ currentUser.name }}
+                  {{ user.name }}
                 </div>
               </div>
 
-              <!-- Email field -->
               <div class="space-y-2">
                 <label class="text-sm font-medium text-gray-700">Email Address</label>
-                <input v-if="isEditing"
+                <!-- <input v-if="isEditing"
                        v-model="editedUser.email"
                        type="email"
-                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1E1B4B] focus:border-transparent text-gray-900 font-medium"
+                       class="disabled w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1E1B4B] focus:border-transparent text-gray-900 font-medium"
                        placeholder="Enter your email"
-                />
-                <div v-else class="px-3 py-2 bg-gray-50 rounded-lg text-gray-900">
-                  {{ currentUser.email }}
+                /> -->
+                <div class="px-3 py-2 bg-gray-50 rounded-lg text-gray-900">
+                  {{ user.email }}
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Right Column -->
-          <div class="space-y-6" v-if="currentUser.role === 'student'">
+          <!-- For Student -->
+          <div class="space-y-6" v-if="user.role === 'student'">
             <div class="space-y-4">
               <div class="grid grid-cols-2 gap-4">
                 <div class="space-y-2">
                   <label class="text-sm font-medium text-gray-700">Phone</label>
                   <input
                     v-if="isEditing"
-                    v-model="phone"
+                    v-model="editedUser.phone"
                     type="tel"
                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1E1B4B] focus:border-transparent text-gray-900 font-medium"
                     placeholder="Enter your phone number"
                   />
                   <div v-else class="px-3 py-2 bg-gray-50 rounded-lg text-gray-900">
-                    {{ phone }}
+                    {{ user.phone }}
                   </div>
                 </div>
                 <div class="space-y-2">
                   <label class="text-sm font-medium text-gray-700">Year</label>
                   <input
                     v-if="isEditing"
-                    v-model="year"
+                    v-model="editedUser.year"
                     type="number"
                     min="1"
                     max="4"
@@ -105,7 +103,7 @@
                     placeholder="Enter your year"
                   />
                   <div v-else class="px-3 py-2 bg-gray-50 rounded-lg text-gray-900">
-                    {{ year }}
+                    {{ user.year }}
                   </div>
                 </div>
               </div>
@@ -115,17 +113,17 @@
                 <div v-if="isEditing" class="space-y-2">
                   <input
                     type="file"
-                    @change="handleFileUpload"
+                    @change="(e) => handleFileUpload(e, 'resume')"
                     accept=".pdf,.doc,.docx"
                     class="w-full text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#1E1B4B] file:text-white hover:file:bg-[#312e81]"
                   />
-                  <p v-if="currentUser.resume" class="text-sm text-gray-900 font-medium">
-                    Current file: {{ currentUser.resume }}
+                  <p v-if="editedUser.resume" class="text-sm text-gray-900 font-medium">
+                    Current file: {{ editedUser.resume }}
                   </p>
                 </div>
                 <div v-else class="px-3 py-2 bg-gray-50 rounded-lg">
-                  <a v-if="currentUser.resume"
-                     :href="`/resume/${currentUser.resume}`"
+                  <a v-if="user.resume"
+                     :href="`/uploads/resume/${user.resume}`"
                      class="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-2"
                      target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -139,22 +137,22 @@
             </div>
           </div>
 
-          <!--sponsor section -->
-          <div class="space-y-6" v-if="currentUser.role === 'sponsor'">
+          <!--For Company -->
+          <div v-if="user.role === 'company'" class="space-y-6">
             <div class="space-y-4">
               <h2 class="text-xl font-semibold text-[#1E1B4B]">Company Logo</h2>
               <div class="flex justify-center items-center p-4 bg-gray-50 rounded-lg">
                 <img
-                  :src="newLogoURL || currentUser.logo"
-                  :alt="currentUser.name"
+                  :src="`/uploads/companyLogo/${user.logo}`"
+                  alt="Company Logo"
                   class="max-w-[200px] max-h-[200px] object-contain"
                 />
               </div>
               <div v-if="isEditing" class="space-y-2">
                 <input
                   type="file"
-                  @change="handleLogoUpload"
-                  accept="image/png, image/jpeg, image/jpg, image/gif"
+                  @change="(e) => handleFileUpload(e, 'logo')"
+                  accept="image/*"
                   class="w-full text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#1E1B4B] file:text-white hover:file:bg-[#312e81]"
                 />
                 <p v-if="logoError" class="text-red-500 text-sm mt-1">{{ logoError }}</p>
@@ -168,115 +166,74 @@
 </template>
 
 <script>
-import { inject } from 'vue';
-import { useRouter } from 'vue-router';
-import userData from '../data/userData.json';
+import { signOut } from 'firebase/auth';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { auth, db } from '@/firebase';
 
 export default {
-  setup() {
-    const currentUser = inject('currentUser');
-    const router = useRouter();
-    return { currentUser, router };
-  },
-
   data() {
     return {
-      isEditing: false,
+      user: {},
       editedUser: {},
-      phone: this.currentUser.phone || '',
-      year: this.currentUser.year || '',
-      newResumeFile: null,
-      newLogoURL: null,
+      isEditing: false,
       logoError: ''
+    }
+  },
+
+  async created() {
+    if (auth.currentUser) {
+      const userDoc = await getDoc(doc(db, 'users', auth.currentUser.uid));
+      if (userDoc.exists()) {
+        this.user = userDoc.data();
+        this.editedUser = { ...this.user };
+      }
+    } else {
+      this.$router.push('/login');
     }
   },
 
   methods: {
     startEditing() {
-      this.editedUser = { ...this.currentUser };
       this.isEditing = true;
     },
-
-    cancelEditing() {
-      this.isEditing = false;
-      this.editedUser = {};
-      this.newResumeFile = null;
-    },
-
-    handleFileUpload(event) {
+    async handleFileUpload(event, type) {
       const file = event.target.files[0];
-      if (file) {
-        const allowedTypes = ['.pdf', '.doc', '.docx'];
-        const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+      if (!file) return;
 
-        if (!allowedTypes.includes(fileExtension)) {
-          alert('Please upload a PDF or Word document');
-          return;
-        }
+      const fileName = file.name;
 
-        this.newResumeFile = file;
-        this.editedUser.resume = `student${this.currentUser.id}_resume${fileExtension}`;
-      }
-    },
-
-    handleLogoUpload(event) {
-      const file = event.target.files[0];
-      this.logoError = '';
-
-      if (file) {
-        const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
+      if (type == 'resume') {
+        this.editedUser.resume = fileName;
+      } else if (type == 'logo') {
+        const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
         if (!allowedTypes.includes(file.type)) {
-          this.logoError = 'Please upload a valid image file (PNG, JPEG, JPG, or GIF)';
-          event.target.value = '';
+          this.logoError = 'Please upload a valid image file (PNG, JPEG, JPG)';
           return;
         }
-
-        const maxSize = 5 * 1024 * 1024;
-        if (file.size > maxSize) {
-          this.logoError = 'File size should not exceed 5MB';
-          event.target.value = '';
-          return;
-        }
-
-        const fileURL = URL.createObjectURL(file);
-        this.newLogoURL = fileURL;
-        this.editedUser.logo = fileURL;
+        this.editedUser.logo = fileName;
       }
     },
-
-    saveChanges() {
+    async saveChanges() {
       try {
-        if (this.newResumeFile) {
-          const fileURL = URL.createObjectURL(this.newResumeFile);
-          localStorage.setItem(`resume_${this.editedUser.resume}`, fileURL);
-        }
-
-        Object.assign(this.currentUser, this.editedUser);
-
-        const studentIndex = userData.student.findIndex(s => s.id === this.currentUser.id);
-        if (studentIndex !== -1) {
-          userData.student[studentIndex] = { ...this.currentUser };
-        }
-
+        const userRef = doc(db, 'users', auth.currentUser.uid);
+        await updateDoc(userRef, this.editedUser);
+        this.user = { ...this.editedUser };
         this.isEditing = false;
-        this.newResumeFile = null;
         alert('Profile updated successfully!');
-      } catch (error) {
-        console.error('Error updating profile:', error);
+      } 
+      catch (error) {
         alert('Failed to update profile. Please try again.');
       }
     },
-
-    logout() {
-      this.currentUser.value = null;
-      this.router.push('/login');
-    }
+    async logout() {
+      await signOut(auth);
+      this.$router.push('/login');
+    },
   }
 }
 </script>
 
 <style scoped>
-/* Optional: Add smooth transitions */
 .transition-colors {
   transition-property: background-color, border-color, color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

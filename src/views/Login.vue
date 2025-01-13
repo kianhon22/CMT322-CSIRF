@@ -15,6 +15,56 @@
             CSIRF
           </a>
           <form class="space-y-4 md:space-y-6" @submit.prevent="authenticate">
+            <div v-if="!isLogin">
+              <label
+                for="name"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Name <span class="text-red-700">*</span>
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                v-model="name"
+                placeholder="Your full name"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              />
+            </div>
+            <div v-if="!isLogin">
+              <label
+                for="phone"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Phone <span class="text-red-700">*</span>
+              </label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                v-model="phone"
+                placeholder="0123456789"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              />
+            </div>
+            <div v-if="!isLogin">
+              <label
+                for="year"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Year <span class="text-red-700">*</span>
+              </label>
+              <input
+                id="year"
+                name="year"
+                type="number"
+                min="1"
+                max="4"
+                v-model="year"
+                placeholder="Enter your year"
+                required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              />
+            </div>
             <div>
               <label
                 for="email"
@@ -90,14 +140,18 @@
 </template>
 
 <script>
-import { auth } from '@/firebase.js';
+import { auth, db } from '@/firebase';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
 export default {
   data() {
     return {
       email: '',
       password: '',
+      name: '',
+      phone: '',
+      year: '',
       errorMessage: '',
       isLogin: true,    // Toggle between Login and Register
     }
@@ -112,7 +166,17 @@ export default {
           await signInWithEmailAndPassword(auth, this.email, this.password);
         } 
         else {
-          await createUserWithEmailAndPassword(auth, this.email, this.password);
+          const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password);
+          const user = userCredential.user;
+
+          // Add additional user info to Firestore
+          await setDoc(doc(db, 'users', user.uid), {
+            name: this.name,
+            email: this.email,
+            phone: this.phone,
+            year: this.year,
+            role: 'student'
+          });
         }
         this.$router.push('/');
       } catch (error) {
