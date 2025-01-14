@@ -29,7 +29,7 @@
         <span class="block text-4xl font-semibold whitespace-nowrap text-white">
           {{ company.name }}
         </span>
-        <p class="text-xl text-gray-300 mt-2">{{ company.shortDescription }}</p>
+        <p class="text-xl text-gray-300 mt-2">{{ company.title }}</p>
       </div>
     </div>
 
@@ -184,7 +184,7 @@ export default {
       this.company = companyData.find(company => company.sponsorID === Number(this.id));
     },
     navigateBack() {
-    this.$router.push({ path: '/', hash: '#company' });
+      this.$router.push({ path: '/', hash: '#company' });
     },
     openModal(job) {
       this.selectedJob = job;
@@ -201,35 +201,3 @@ export default {
   },
 };
 </script>
-
-<!-- <script>
-import { initFlowbite } from 'flowbite'
-import companyData from '@/data/companyData.json';
-
-export default {
-  props: ['id'], // Receive `id` from the route
-  data() {
-    return {
-      company: null, // Store the specific company data
-    };
-  },
-  mounted() {
-    initFlowbite();
-    this.loadCompanyData();
-  },
-  watch: {
-    id() {
-      // Reload data when the route parameter changes
-      this.loadCompanyData();
-    },
-  },
-  methods: {
-    loadCompanyData() {
-      // Find the company matching the `id` from the route
-      this.company = companyData.find(
-        (company) => company.sponsorID === Number(this.id)
-      );
-    },
-  },
-};
-</script> -->

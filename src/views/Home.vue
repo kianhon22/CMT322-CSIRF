@@ -39,32 +39,33 @@
       <CountdownClock/>
     </section>
     <section class="bg-center bg-[#1E1B4B] py-2 w-full">
-        <h1 class="text-4xl mb-6 font-bold text-center text-white">About Us</h1> 
-        <p class="text-white max-w-2xl mx-auto mb-20 font-light text-justify md:text-lg lg:text-xl">
-          The <span class="text-orange-500"> Computer Science Internship & Recruitment Fair (CSIRF) </span>
-          is a two-day flagship event organised by the Computer Science Society (USM CS Society).
-          It consists of a series of career talks and booth exhibitions tailored for third and
-          final-year undergraduates from the School of Computer Sciences, Universiti Sains Malaysia.
-        </p>
+      <h1 class="text-4xl mb-6 font-bold text-center text-white">About Us</h1> 
+      <p class="text-white max-w-2xl mx-auto mb-20 font-light text-justify md:text-lg lg:text-xl">
+        The <span class="text-orange-500"> Computer Science Internship & Recruitment Fair (CSIRF) </span>
+        is a two-day flagship event organised by the Computer Science Society (USM CS Society).
+        It consists of a series of career talks and booth exhibitions tailored for third and
+        final-year undergraduates from the School of Computer Sciences, Universiti Sains Malaysia.
+      </p>
     </section>
     <section id="company" class="bg-center bg-orange-500 py-8 w-full">
-    <h1 class="text-4xl font-bold text-center mt-2 mb-12 text-white">Company</h1>
-    <div class="mb-6 grid grid-cols-4 gap-6 pl-20 pr-20">
-      <router-link
-        v-for="(company, index) in companies"
-        :key="index"
-        :to="{ name: 'Company', params: { id: company.sponsorID }}"
-        class="bg-white rounded-lg shadow-lg flex flex-col items-center p-4 hover:shadow-xl transition-shadow hover:bg-gray-100">
-        <img :src="company.logo" :alt="company.name" class="h-24 w-24 object-contain rounded-full mb-4"/>
-        <h3 class="text-lg font-semibold text-gray-800">{{ company.name }}</h3>
-        <span :class="categoryClass(company.category)" class="px-3 py-1 mt-2 rounded-full text-sm font-medium">
-          {{ capitalize(company.category) }}
-        </span>
-      </router-link>
-    </div>
-  </section>
-  <Itinerary/>
-  </template>
+      <h1 class="text-4xl font-bold text-center mt-2 mb-12 text-white">Company</h1>
+      <div class="mb-6 grid grid-cols-4 gap-6 pl-20 pr-20">
+        <router-link
+          v-for="(company, index) in companies"
+          :key="index"
+          :to="{ name: 'Company', params: { id: company.sponsorID }}"
+          class="bg-white rounded-lg shadow-lg flex flex-col items-center p-4 hover:shadow-xl transition-shadow hover:bg-gray-100">
+          <img :src="company.logo" :alt="company.name" class="h-24 w-24 object-contain rounded-full mb-4"/>
+          <h3 class="text-lg font-semibold text-gray-800">{{ company.name }}</h3>
+          <span :class="categoryClass(company.category)" class="px-3 py-1 mt-2 rounded-full text-sm font-medium">
+            {{ capitalize(company.category) }}
+          </span>
+        </router-link>
+      </div>
+    </section>
+    <!-- Itinerary Component -->
+    <Itinerary/>
+</template>
 
 <script>
 import companyData from "@/data/companyData.json";
@@ -121,73 +122,73 @@ export default {
 </script>
 
 <style scoped>
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .fade-in {
+    animation: fadeIn 2s ease-in-out forwards;
   }
-}
 
-.fade-in {
-  animation: fadeIn 2s ease-in-out forwards;
-}
-
-@keyframes fadeInThinAir {
-  from {
-    opacity: 0;
+  @keyframes fadeInThinAir {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
-  to {
-    opacity: 1;
+
+  .fade-in-thin-air {
+    opacity: 0; /* Ensure the element starts invisible */
+    animation: fadeInThinAir 2s ease-in-out forwards; /* Add animation */
   }
-}
 
-.fade-in-thin-air {
-  opacity: 0; /* Ensure the element starts invisible */
-  animation: fadeInThinAir 2s ease-in-out forwards; /* Add animation */
-}
-
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
+  @keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
   }
-  50% {
-    opacity: 0;
+
+  .blink {
+    animation: blink 1s 1;
+    animation-delay: 1.5s;
   }
-}
 
-.blink {
-  animation: blink 1s 1;
-  animation-delay: 1.5s;
-}
-
-.happening-banner {
-  border: 2px solid transparent;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.052) 50%, rgba(255, 153, 0, 0.229) 100%);
-  border-radius: 16px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-@keyframes typewriter {
-  from {
-    width: 0;
+  .happening-banner {
+    border: 2px solid transparent;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.052) 50%, rgba(255, 153, 0, 0.229) 100%);
+    border-radius: 16px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
   }
-  to {
-    width: 100%;
-  }
-}
 
-.typewriter {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  animation: none;
-  width: 100%; /* Initial width */
-}
-.typewriter-active {
-  animation: typewriter 3s steps(31, end) forwards;
-}
+  @keyframes typewriter {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  .typewriter {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: none;
+    width: 100%; /* Initial width */
+  }
+  .typewriter-active {
+    animation: typewriter 3s steps(31, end) forwards;
+  }
 </style>
