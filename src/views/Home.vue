@@ -39,7 +39,7 @@
       <CountdownClock/>
     </section>
     <section class="bg-center bg-[#1E1B4B] py-2 w-full">
-      <h1 class="text-4xl mb-6 font-bold text-center text-white">About Us</h1> 
+      <h1 class="text-4xl mb-6 font-bold text-center text-white">About Us</h1>
       <p class="text-white max-w-2xl mx-auto mb-20 font-light text-justify md:text-lg lg:text-xl">
         The <span class="text-orange-500"> Computer Science Internship & Recruitment Fair (CSIRF) </span>
         is a two-day flagship event organised by the Computer Science Society (USM CS Society).
@@ -50,17 +50,25 @@
     <section id="company" class="bg-center bg-orange-500 py-8 w-full">
       <h1 class="text-4xl font-bold text-center mt-2 mb-12 text-white">Company</h1>
       <div class="mb-6 grid grid-cols-4 gap-6 pl-20 pr-20">
-        <router-link
-          v-for="(company, index) in companies"
-          :key="index"
-          :to="{ name: 'Company', params: { id: company.sponsorID }}"
-          class="bg-white rounded-lg shadow-lg flex flex-col items-center p-4 hover:shadow-xl transition-shadow hover:bg-gray-100">
-          <img :src="company.logo" :alt="company.name" class="h-24 w-24 object-contain rounded-full mb-4"/>
-          <h3 class="text-lg font-semibold text-gray-800">{{ company.name }}</h3>
-          <span :class="categoryClass(company.category)" class="px-3 py-1 mt-2 rounded-full text-sm font-medium">
-            {{ capitalize(company.category) }}
-          </span>
-        </router-link>
+        <div v-if="isLoading" class="col-span-4 text-center py-8">
+          <span class="text-gray-600">Loading companies...</span>
+        </div>
+        <template v-else>
+          <router-link
+            v-for="(company, index) in companies"
+            :key="index"
+            :to="{ name: 'Company', params: { id: company.sponsorID }}"
+            class="bg-white rounded-lg shadow-lg flex flex-col items-center p-4 hover:shadow-xl transition-shadow hover:bg-gray-100">
+            <div v-if="!company.logo" class="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center mb-4">
+              <span class="text-3xl font-bold text-gray-600">{{ company.name.charAt(0) }}</span>
+            </div>
+            <img v-else :src="company.logo" :alt="company.name" class="h-24 w-24 object-contain rounded-full mb-4"/>
+            <h3 class="text-lg font-semibold text-gray-800">{{ company.name }}</h3>
+            <span :class="categoryClass(company.category)" class="px-3 py-1 mt-2 rounded-full text-sm font-medium">
+              {{ capitalize(company.category) }}
+            </span>
+          </router-link>
+        </template>
       </div>
     </section>
     <!-- Itinerary Component -->
@@ -68,21 +76,40 @@
 </template>
 
 <script>
-import companyData from "@/data/companyData.json";
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '@/firebase';
 import Itinerary from "@/components/Itinerary.vue";
 import CountdownClock from "@/components/CountdownClock.vue";
 
 export default {
   data() {
     return {
-      companies: companyData,
+      companies: [],
+      isLoading: false,
     };
+  },
+  async created() {
+    await this.fetchCompanies();
   },
   components: {
        Itinerary,
        CountdownClock,
     },
   methods: {
+    async fetchCompanies() {
+      this.isLoading = true;
+      try {
+        const companiesRef = collection(db, 'companies');
+        const snapshot = await getDocs(companiesRef);
+        this.companies = snapshot.docs.map(doc => ({
+          ...doc.data(),
+        }));
+      } catch (error) {
+        console.error("Error fetching companies:", error);
+      } finally {
+        this.isLoading = false;
+      }
+    },
     categoryClass(category) {
       switch (category) {
         case "platinum":
