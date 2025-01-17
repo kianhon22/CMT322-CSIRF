@@ -11,7 +11,7 @@ import { signOut } from 'firebase/auth';
 
 window.toastr = toastr;
 
-const SESSION_TIMEOUT = 1 * 60 * 1000; // 1 minute
+const SESSION_TIMEOUT = 0.5 * 60 * 1000; //  30 sec inactive period
 let lastActivityTime = Date.now(); // Store the last active timestamp
 
 // Function to update the last activity timestamp
@@ -41,7 +41,7 @@ window.addEventListener('mousemove', updateLastActivity);
 window.addEventListener('keypress', updateLastActivity);
 
 // Periodically check for session timeout
-setInterval(checkSessionTimeout, 60 * 1000); // Check every minute
+setInterval(checkSessionTimeout, 0.25 * 60 * 1000); // Check every 15 sec
 
 const app = createApp(App);
 app.use(router);
