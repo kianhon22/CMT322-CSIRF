@@ -41,7 +41,7 @@ window.addEventListener('mousemove', updateLastActivity);
 window.addEventListener('keypress', updateLastActivity);
 
 // Periodically check for session timeout
-setInterval(checkSessionTimeout, 0.25 * 60 * 1000); // Check every 15 sec
+setInterval(checkSessionTimeout, 0.2 * 60 * 1000); // Check every 15 sec
 
 const app = createApp(App);
 app.use(router);
