@@ -206,8 +206,6 @@ export default {
         if (userDoc.exists()) {
           this.user = userDoc.data();
         }
-      } else {
-        this.$router.push('/login');
       }
     });
   },
