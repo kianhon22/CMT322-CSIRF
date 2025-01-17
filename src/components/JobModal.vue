@@ -67,7 +67,7 @@
               Cancel
             </button>
             <button
-              @click.prevent="currentUser != null ? registerEvent() : $router.push('/login')"
+              @click.prevent="currentUser != null ? applyJobs() : $router.push('/login')"
               class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
             >
               {{currentUser != null ? 'Confirm' : 'Log In'}}
@@ -77,35 +77,46 @@
 </template>
 
 <script>
-import { inject } from 'vue';
 import Modal from "@/components/Modal.vue";
+import { doc, getDoc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { db, auth } from '@/firebase';
+import toastr from 'toastr';
 
 export default {
-    setup() {
-    const currentUser = inject('currentUser')
-    return { currentUser }
-    },
     components: {
-    Modal,
+        Modal,
     },
     props: {
-    isOpen: Boolean,
-    title: String,
-    description: String,
-    jobDescription: String,
-    companyId: Number,
-    showCompanyDetails: { // New prop to control visibility of the button
-        type: Boolean,
-        default: false,
-    }
+        isOpen: Boolean,
+        jobId: String,
+        title: String,
+        description: String,
+        jobDescription: String,
+        companyId: Number,
+        showCompanyDetails: {
+            type: Boolean,
+            default: false,
+        }
     },
     data() {
-    return {
-      isModalVisible: false,
-      modalTitle: "",
-      modalText: "",
-      modalColor: "white",
-    };
+        return {
+            isModalVisible: false,
+            modalTitle: "",
+            modalText: "",
+            modalColor: "white",
+            currentUser: null,
+        };
+    },
+    async mounted() {
+        if (auth.currentUser) {
+            const userDoc = await getDoc(doc(db, 'users', auth.currentUser.uid));
+            if (userDoc.exists()) {
+                this.currentUser = {
+                    id: userDoc.id,
+                    ...userDoc.data(),
+                };
+            }
+        }
     },
     methods: {
         close() {
@@ -128,7 +139,7 @@ export default {
         this.modalText = "Confirm to apply this job?";
         this.modalColor = "black";
         this.isModalVisible = true;
-      } 
+      }
       else {
         this.modalTitle = "Login Required";
         this.modalText = "Please log in to apply for the job";
@@ -142,10 +153,54 @@ export default {
       else
         return false;
     },
-    registerEvent() {
-      toastr.success('Applied Successfully!', 'Success');
-      this.isModalVisible = false;
-    },
+
+async applyJobs() {
+  console.log("currentUser:", this.currentUser); // Logs the current user object
+  console.log("job:", this.jobId);
+  if (!this.currentUser || !this.title) {
+    return;
+  }
+
+  try {
+    const userRef = doc(db, "users", this.currentUser.id);
+    const jobRef = doc(db, "jobs", this.jobId.id);
+
+
+          await updateDoc(userRef, {
+            appliedJobs: arrayUnion(this.jobId.id),
+          });
+
+    // Ensure user's appliedJobs field is initialized as an array
+    // const userDoc = await getDoc(userRef);
+    // if (!userDoc.exists() || !Array.isArray(userDoc.data().appliedJobs)) {
+    //   await updateDoc(userRef, { appliedJobs: [] });
+    // }
+
+    // Ensure job's appliedStudents field is initialized as an array
+    const jobDoc = await getDoc(jobRef);
+    if (!jobDoc.exists() || !Array.isArray(jobDoc.data().appliedStudents)) {
+      await updateDoc(jobRef, { appliedStudents: [] });
+    }
+
+    // Now update the arrays with arrayUnion
+    // await updateDoc(userRef, {
+    //   appliedJobs: arrayUnion(this.jobId),
+    // });
+
+
+    await updateDoc(jobRef, {
+      appliedStudents: arrayUnion(this.currentUser.id),
+    });
+
+    toastr.success("You have successfully applied for the job!", "Success");
+  } catch (error) {
+    console.error("Error applying for the job:", error);
+    toastr.error("Failed to apply for the job. Please try again.", "Error");
+  } finally {
+    this.isModalVisible = false;
+    this.$emit("close");
+  }
+}
     },
     computed: {
         formattedDescription() {

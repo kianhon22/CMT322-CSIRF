@@ -112,7 +112,7 @@
               };
               // Check if the user has registered for this event
               this.checkRegisteredCourse();
-            } 
+            }
             else {
               this.event = null;
             }
@@ -141,6 +141,7 @@
       async registerEvent() {
         if (!this.user || !this.event)
           return;
+        console.log("currentUser:", this.user); // Logs the current user object
 
         try {
           // Update the user's registeredEvents array
@@ -148,6 +149,7 @@
           await updateDoc(userRef, {
             registeredEvents: arrayUnion(this.popupId),
           });
+          console.log("popupid:", this.popupId);
 
           // Update the event's registeredStudents array
           const eventRef = doc(db, "events", this.popupId);

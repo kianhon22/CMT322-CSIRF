@@ -155,6 +155,7 @@
     <!-- Modal Component -->
     <Modal
     :isOpen="isModalOpen"
+    :jobId="selectedJob|| ''"
     :title="selectedJob?.position"
     :description="selectedJob?.position"
     :jobDescription="selectedJob?.description"

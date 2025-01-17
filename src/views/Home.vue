@@ -112,7 +112,6 @@ export default {
             try {
               const logoRef = ref(storage, `companies logo${company.logo}`);
               const logoUrl = await getDownloadURL(logoRef);
-              console.log(`Successfully fetched logo URL for ${company.name}:`, logoUrl); // Console check
               return {
                 ...company,
                 logo: logoUrl

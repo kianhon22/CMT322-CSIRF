@@ -165,7 +165,7 @@
 import { initFlowbite } from 'flowbite'
 import Modal from '@/components/JobModal.vue';
 import jobData from '../data/jobData.json';
-import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { doc, getDoc, collection, query, where, getDocs, updateDoc, arrayUnion } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { db } from '@/firebase';
 
