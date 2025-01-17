@@ -197,51 +197,37 @@ export default {
     }
   },
 
-  async created() {
-    onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
-        if (userDoc.exists()) {
-          this.user = userDoc.data();
-          this.editedUser = { ...this.user };
-        }
-      } else {
-        this.$router.push('/login');
-      }
-    });
-  },
-
   methods: {
     startEditing() {
       this.isEditing = true;
     },
 
-// Sanitize all editable fields before saving
-sanitizeInputs() {
-  // Sanitize name
-  this.editedUser.name = DOMPurify.sanitize(this.editedUser.name || '');
-  if (!this.editedUser.name.trim()) {
-    this.editedUser.name = 'Unnamed User'; // Provide a default value if empty
-  }
+    // Sanitize all editable fields before saving
+    sanitizeInputs() {
+      // Sanitize name
+      this.editedUser.name = DOMPurify.sanitize(this.editedUser.name || '');
+      if (!this.editedUser.name.trim()) {
+        this.editedUser.name = 'Unnamed User'; // Provide a default value if empty
+      }
 
-  // Sanitize phone
-  this.editedUser.phone = DOMPurify.sanitize(this.editedUser.phone || '');
-  if (!/^\d+$/.test(this.editedUser.phone)) {
-    this.editedUser.phone = ''; // Reset if phone is not valid (only digits allowed)
-  }
+      // Sanitize phone
+      this.editedUser.phone = DOMPurify.sanitize(this.editedUser.phone || '');
+      if (!/^\d+$/.test(this.editedUser.phone)) {
+        this.editedUser.phone = ''; // Reset if phone is not valid (only digits allowed)
+      }
 
-  // Sanitize year
-  this.editedUser.year = DOMPurify.sanitize(this.editedUser.year || '');
-  const year = parseInt(this.editedUser.year, 10);
-  if (isNaN(year) || year < 1 || year > 4) {
-    this.editedUser.year = ''; // Reset if year is out of range
-  }
+      // Sanitize year
+      this.editedUser.year = DOMPurify.sanitize(this.editedUser.year || '');
+      const year = parseInt(this.editedUser.year, 10);
+      if (isNaN(year) || year < 1 || year > 4) {
+        this.editedUser.year = ''; // Reset if year is out of range
+      }
 
-  // Sanitize resume file name if present
-  if (this.editedUser.resume) {
-    this.editedUser.resume.fileName = DOMPurify.sanitize(this.editedUser.resume.fileName || '');
-  }
-},
+      // Sanitize resume file name if present
+      if (this.editedUser.resume) {
+        this.editedUser.resume.fileName = DOMPurify.sanitize(this.editedUser.resume.fileName || '');
+      }
+    },
     async handleFileUpload(event, type) {
       const file = event.target.files[0];
       if (!file) return;
@@ -339,6 +325,19 @@ sanitizeInputs() {
     isAuthenticated() {
       return this.user !== null;
     },
+  },
+  async created() {
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+        if (userDoc.exists()) {
+          this.user = userDoc.data();
+          this.editedUser = { ...this.user };
+        }
+      } else {
+        this.$router.push('/login');
+      }
+    });
   },
 }
 </script>

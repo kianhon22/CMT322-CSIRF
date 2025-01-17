@@ -524,6 +524,11 @@ export default {
                     const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
                     if (userDoc.exists()) {
                         this.user = userDoc.data();
+
+                        if (this.user.role == 'student') {
+                            this.$router.push('/profile');
+                        }
+                        
                         await this.fetchJobs();
                         await this.fetchStudents();
                         await this.fetchCompanies();

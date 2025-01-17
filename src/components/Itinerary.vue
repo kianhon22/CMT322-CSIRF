@@ -149,10 +149,10 @@
               Cancel
             </button>
             <button
-              @click.prevent="currentUser != null ? registerEvent() : $router.push('/login')"
+              @click.prevent="user != null ? registerEvent() : $router.push('/login')"
               class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
             >
-              {{currentUser != null ? 'Confirm' : 'Log In'}}
+              {{user != null ? 'Confirm' : 'Log In'}}
             </button>
           </template>
         </Modal>
@@ -160,19 +160,18 @@
 </template>
 
 <script>
-import { inject } from 'vue';
 import Modal from "@/components/Modal.vue";
+import { auth, db } from '@/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 
 export default {
-  setup() {
-    const currentUser = inject('currentUser')
-    return { currentUser }
-  },
   components: {
     Modal,
   },
   data() {
     return {
+      user: null,
       isModalVisible: false,
       modalTitle: "",
       modalText: "",
@@ -181,7 +180,7 @@ export default {
   },
   methods: {
     openModal() {
-      if (this.isUserLoggedIn()) {
+      if (this.user != null) {
         this.modalTitle = "RSVP Now";
         this.modalText = "Confirm to join the talk?";
         this.modalColor = "black";
@@ -194,16 +193,23 @@ export default {
         this.isModalVisible = true;
       }
     },
-    isUserLoggedIn() {
-      if (this.currentUser != null)
-        return true;
-      else
-        return false;
-    },
     registerEvent() {
       toastr.success('You have registered the event!', 'Success');
       this.isModalVisible = false;
     },
+  },
+
+  async created() {
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+        if (userDoc.exists()) {
+          this.user = userDoc.data();
+        }
+      } else {
+        this.$router.push('/login');
+      }
+    });
   },
 };
 </script>

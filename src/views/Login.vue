@@ -1,5 +1,5 @@
 <template>
-    <section class="bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply">
+    <section v-if="loading==false" class="bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -141,12 +141,13 @@
 
 <script>
 import { auth, db } from '@/firebase';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export default {
   data() {
     return {
+      loading: true,
       email: '',
       password: '',
       name: '',
@@ -188,6 +189,18 @@ export default {
     toggleAuth() {
       this.isLogin = !this.isLogin;
     },
+  },
+
+  async created() {
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+        if (userDoc.exists()) {
+          this.loading = false;
+          this.$router.push('/profile');
+        }
+      }
+    });
   },
 }
 </script>
