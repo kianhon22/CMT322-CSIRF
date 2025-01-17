@@ -116,8 +116,8 @@
                     <div class="p-6">
                         <div class="flex items-center gap-4 mb-4">
                             <img
-                                v-if="getCompanyLogo(job.name)"
-                                :src="getCompanyLogo(job.name)"
+                                v-if="company.logo"
+                                :src="company.logo"
                                 :alt="job.name"
                                 class="w-16 h-16 object-contain rounded-lg"
                             />
@@ -179,6 +179,7 @@ export default {
       isModalOpen: false,
       selectedJob: null,
       isLoading: false,
+      companyLogos: {},
     };
   },
   computed: {
@@ -186,6 +187,14 @@ export default {
       if (!this.company) return [];
       return this.jobs.filter(job => job.name === this.company.name);
     },
+  },
+  watch: {
+    filteredJobs: {
+      immediate: true,
+      handler() {
+        this.loadCompanyLogos();
+      }
+    }
   },
   mounted() {
     initFlowbite();
@@ -238,21 +247,22 @@ export default {
       this.isModalOpen = false;
       this.selectedJob = null;
     },
-    async getCompanyLogo(jobCompanyName) {
-      try {
-        // Query Firestore to find company by name
-        const companyDoc = doc(db, 'companies', jobCompanyName);
-        const docSnap = await getDoc(companyDoc);
 
-        if (docSnap.exists() && docSnap.data().logo) {
-          const storage = getStorage();
-          const logoRef = ref(storage, `companies logo${docSnap.data().logo}`);
-          return await getDownloadURL(logoRef);
+    async loadCompanyLogos() {
+      for (const job of this.filteredJobs) {
+        try {
+          const companyDoc = doc(db, 'companies', job.name);
+          const docSnap = await getDoc(companyDoc);
+
+          if (docSnap.exists() && docSnap.data().logo) {
+            const storage = getStorage();
+            const logoRef = ref(storage, `companies logo${docSnap.data().logo}`);
+            const logoUrl = await getDownloadURL(logoRef);
+            this.$set(this.companyLogos, job.name, logoUrl);
+          }
+        } catch (error) {
+          console.error('Error fetching company logo:', error);
         }
-        return null;
-      } catch (error) {
-        console.error('Error fetching company logo:', error);
-        return null;
       }
     },
   },
