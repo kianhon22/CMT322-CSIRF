@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import DOMPurify from 'dompurify';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/firebase';
 import { doc, getDoc } from 'firebase/firestore';
@@ -123,8 +124,30 @@ export default {
         },
     },
     methods: {
+        validateSanitization(input) {
+            // Test cases with potential XSS
+            const testCases = {
+                original: input,
+                sanitized: DOMPurify.sanitize(input)
+            };
+
+            console.log('Sanitization Test Results:');
+            console.log('Original:', testCases.original);
+            console.log('Sanitized:', testCases.sanitized);
+
+            return testCases.sanitized;
+        },
+
         saveChanges() {
-            this.$emit('update', this.editableItem);
+            // Test sanitization before saving
+            const sanitizedItem = {
+                ...this.editableItem,
+                position: this.validateSanitization(this.editableItem.position),
+                description: this.validateSanitization(this.editableItem.description)
+            };
+
+            console.log('Final sanitized item:', sanitizedItem);
+            this.$emit('update', sanitizedItem);
         },
         deleteItem() {
             this.$emit('update', { ...this.editableItem, delete: true });
