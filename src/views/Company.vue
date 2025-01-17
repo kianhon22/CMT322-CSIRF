@@ -100,6 +100,7 @@
             </span>
         </button>
     </div>
+
     </section>
 
     <!-- Career Available -->
@@ -196,27 +197,26 @@ export default {
       try {
         console.log("Fetching company with sponsorID:", this.id); // Debug the passed ID
         // Query Firestore to find the company by sponsorID
-        const companiesRef = collection(db, "companies");
-        const q = query(companiesRef, where("sponsorID", "==", Number(this.id))); // Use `where` to match sponsorID
-        const querySnapshot = await getDocs(q);
 
-        if (!querySnapshot.empty) {
-          const doc = querySnapshot.docs[0]; // Assuming sponsorID is unique
-          const companyData = doc.data();
+        if (this.id != null) {
+            const companyDoc = await getDoc(doc(db, 'companies', this.id));
+            if (companyDoc) {
+                this.company = companyDoc.data();
+            } else {
+                this.company = null;
+            }
 
           // Fetch the logo URL if available
-          if (companyData.logo) {
+          if (this.company.logo) {
             try {
               const storage = getStorage();
-              const logoRef = ref(storage, `companies logo${companyData.logo}`);
+              const logoRef = ref(storage, `companies logo${this.company.logo}`);
               const logoUrl = await getDownloadURL(logoRef);
-              companyData.logo = logoUrl;
+              this.company.logo = logoUrl;
             } catch (error) {
               console.error("Error fetching logo:", error);
             }
           }
-
-          this.company = companyData;
           console.log("Company data loaded successfully:", this.company);
         } else {
           console.log("No company found with sponsorID:", this.id);

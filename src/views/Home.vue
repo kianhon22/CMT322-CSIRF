@@ -57,7 +57,7 @@
           <router-link
             v-for="(company, index) in companies"
             :key="index"
-            :to="{ name: 'Company', params: { id: company.sponsorID }}"
+            :to="{ name: 'Company', params: { id: company.id }}"
             class="bg-white rounded-lg shadow-lg flex flex-col items-center p-4 hover:shadow-xl transition-shadow hover:bg-gray-100">
             <div v-if="!company.logo" class="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center mb-4">
               <span class="text-3xl font-bold text-gray-600">{{ company.name.charAt(0) }}</span>
@@ -107,6 +107,7 @@ export default {
         // Fetch companies and their logo URLs
         this.companies = await Promise.all(snapshot.docs.map(async (doc) => {
           const company = doc.data();
+          company.id = doc.id;
           if (company.logo) { // Using logo field from Firestore
             try {
               const logoRef = ref(storage, `companies logo${company.logo}`);
