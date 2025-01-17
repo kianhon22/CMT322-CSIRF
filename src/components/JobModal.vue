@@ -43,9 +43,15 @@
                         <button
                             @click="applyJob"
                             @click.prevent="openModal"
-                            class="px-6 py-2.5 text-sm font-medium text-white bg-orange-500 rounded-lg hover:bg-white hover:text-orange-500 border hover:border-orange-500"
+                            :disabled="isApplied"
+                            :class="[
+                                'px-6 py-2.5 text-sm font-medium rounded-lg border transition-colors duration-300',
+                                isApplied
+                                    ? 'bg-gray-400 text-white cursor-not-allowed'
+                                    : 'bg-orange-500 text-white hover:bg-white hover:text-orange-500 hover:border-orange-500'
+                            ]"
                         >
-                            Apply
+                            {{ isApplied ? 'Applied' : 'Apply' }}
                         </button>
                     </div>
                 </div>
@@ -96,6 +102,10 @@ export default {
         showCompanyDetails: {
             type: Boolean,
             default: false,
+        },
+        isApplied: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -134,19 +144,21 @@ export default {
         },
 
         openModal() {
-      if (this.isUserLoggedIn()) {
-        this.modalTitle = "Apply Now";
-        this.modalText = "Confirm to apply this job?";
-        this.modalColor = "black";
-        this.isModalVisible = true;
-      }
-      else {
-        this.modalTitle = "Login Required";
-        this.modalText = "Please log in to apply for the job";
-        this.modalColor = "black";
-        this.isModalVisible = true;
-      }
-    },
+            if (!this.isApplied) {
+                if (this.isUserLoggedIn()) {
+                    this.modalTitle = "Apply Now";
+                    this.modalText = "Confirm to apply this job?";
+                    this.modalColor = "black";
+                    this.isModalVisible = true;
+                }
+                else {
+                    this.modalTitle = "Login Required";
+                    this.modalText = "Please log in to apply for the job";
+                    this.modalColor = "black";
+                    this.isModalVisible = true;
+                }
+            }
+        },
     isUserLoggedIn() {
       if (this.currentUser != null)
         return true;
@@ -165,16 +177,9 @@ async applyJobs() {
     const userRef = doc(db, "users", this.currentUser.id);
     const jobRef = doc(db, "jobs", this.jobId.id);
 
-
-          await updateDoc(userRef, {
-            appliedJobs: arrayUnion(this.jobId.id),
-          });
-
-    // Ensure user's appliedJobs field is initialized as an array
-    // const userDoc = await getDoc(userRef);
-    // if (!userDoc.exists() || !Array.isArray(userDoc.data().appliedJobs)) {
-    //   await updateDoc(userRef, { appliedJobs: [] });
-    // }
+    await updateDoc(userRef, {
+      appliedJobs: arrayUnion(this.jobId.id),
+    });
 
     // Ensure job's appliedStudents field is initialized as an array
     const jobDoc = await getDoc(jobRef);
@@ -182,17 +187,12 @@ async applyJobs() {
       await updateDoc(jobRef, { appliedStudents: [] });
     }
 
-    // Now update the arrays with arrayUnion
-    // await updateDoc(userRef, {
-    //   appliedJobs: arrayUnion(this.jobId),
-    // });
-
-
     await updateDoc(jobRef, {
       appliedStudents: arrayUnion(this.currentUser.id),
     });
 
     toastr.success("You have successfully applied for the job!", "Success");
+    this.$emit('success'); // Emit success event after successful application
   } catch (error) {
     console.error("Error applying for the job:", error);
     toastr.error("Failed to apply for the job. Please try again.", "Error");
@@ -215,7 +215,8 @@ async applyJobs() {
                 };
             });
         }
-    }
+    },
+    emits: ['close', 'success'],
 };
 </script>
 

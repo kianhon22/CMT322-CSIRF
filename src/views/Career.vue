@@ -141,9 +141,25 @@
                 {{ job.mode }}
               </span>
             </div>
-            <button class="w-full inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-[#1E1B4B] rounded-lg hover:bg-orange-500 focus:ring-4 focus:ring-blue-300 transition-colors duration-300">
-              Apply Now
-              <svg class="w-4 h-4 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+            <button
+              :class="[
+                'w-full inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg transition-colors duration-300',
+                hasApplied(job)
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-[#1E1B4B] hover:bg-orange-500 focus:ring-4 focus:ring-blue-300'
+              ]"
+              :disabled="hasApplied(job)"
+              @click="openModal(job)"
+            >
+              {{ hasApplied(job) ? 'Applied' : 'Apply Now' }}
+              <svg
+                v-if="!hasApplied(job)"
+                class="w-4 h-4 ms-2"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 10"
+              >
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
               </svg>
             </button>
@@ -161,7 +177,9 @@
     :jobDescription="selectedJob?.description"
     :companyId="selectedJob?.companyID"
     :showCompanyDetails="true"
+    :isApplied="selectedJob ? hasApplied(selectedJob) : false"
     @close="closeModal"
+    @success="handleApplicationSuccess"
     />
   </section>
 </template>
@@ -170,12 +188,17 @@
 import Modal from '@/components/JobModal.vue';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-import { db } from '@/firebase';
+import { db, auth } from '@/firebase';
+import { inject } from 'vue';
 
 export default {
   name: 'CareerView',
   components: {
     Modal
+  },
+  setup() {
+    const currentUser = inject('currentUser');
+    return { currentUser }
   },
   data() {
     return {
@@ -205,6 +228,9 @@ export default {
 
         return matchesSearch && matchesType && matchesMode && matchesLocation;
       });
+    },
+    isAuthenticated() {
+      return auth.currentUser !== null;
     }
   },
   methods: {
@@ -274,6 +300,29 @@ export default {
       this.selectedMode = '';
       this.selectedLocation = '';
       this.fetchJobs();
+    },
+    hasApplied(job) {
+      if (!this.isAuthenticated || !job.appliedStudents) {
+        return false;
+      }
+      return job.appliedStudents.includes(auth.currentUser.uid);
+    },
+    handleApplicationSuccess() {
+      // Update the appliedStudents array of the selected job
+      if (this.selectedJob && this.isAuthenticated) {
+        const jobIndex = this.jobs.findIndex(job => job.id === this.selectedJob.id);
+        if (jobIndex !== -1) {
+          // Create a new array if it doesn't exist
+          if (!this.jobs[jobIndex].appliedStudents) {
+            this.jobs[jobIndex].appliedStudents = [];
+          }
+          // Add the current user's ID if not already present
+          if (!this.jobs[jobIndex].appliedStudents.includes(auth.currentUser.uid)) {
+            this.jobs[jobIndex].appliedStudents.push(auth.currentUser.uid);
+          }
+        }
+      }
+      this.closeModal();
     }
   },
   async mounted() {
