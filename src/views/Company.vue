@@ -18,78 +18,88 @@
         </button>
     </div>
 
+    <div v-if="isLoading" class="text-white text-xl">
+        Loading company details...
+    </div>
+
+    <div v-else-if="!company" class="text-white text-xl">
+        Company not found
+    </div>
+
+    <template v-else>
         <!-- Company Header -->
-    <div v-if="company" class="flex items-center space-x-10">
-      <!-- Company Logo -->
-      <a :href="company.website || '#'" target="_blank" class="flex-shrink-0">
-        <img :src="company.logo" class="h-25" :alt="company.name" />
-      </a>
-      <!-- Company Info -->
-      <div class="text-left max-w-md">
-        <span class="block text-4xl font-semibold whitespace-nowrap text-white">
-          {{ company.name }}
-        </span>
-        <p class="text-xl text-gray-300 mt-2">{{ company.title }}</p>
-      </div>
-    </div>
-
-    <!-- Company Description -->
-    <div v-if="company" class="mt-10 max-w-3xl">
-      <h2 class="text-2xl font-semibold text-white mb-4">Company Description</h2>
-      <p class="text-lg text-gray-300 leading-relaxed">{{ company.description }}</p>
-    </div>
-
-    <!-- Carousel -->
-    <div id="default-carousel" class="relative w-2/5 mb-7 mt-5" data-carousel="slide">
-        <!-- Carousel wrapper -->
-        <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-            <!-- Item 1 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="../assets/company.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
-            </div>
-            <!-- Item 2 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="../assets/office1.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
-            </div>
-            <!-- Item 3 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="../assets/canteen.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
-            </div>
-            <!-- Item 4 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="../assets/meetingroom.jpeg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
-            </div>
-            <!-- Item 5 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="../assets/gymroom.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
-            </div>
-        </div>
-        <!-- Slider indicators -->
-        <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-        </div>
-        <!-- Slider controls -->
-        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                </svg>
-                <span class="sr-only">Previous</span>
+        <div class="flex items-center space-x-10">
+          <!-- Company Logo -->
+          <a :href="company.website || '#'" target="_blank" class="flex-shrink-0">
+            <img :src="company.logo" class="h-25" :alt="company.name" />
+          </a>
+          <!-- Company Info -->
+          <div class="text-left max-w-md">
+            <span class="block text-4xl font-semibold whitespace-nowrap text-white">
+              {{ company.name }}
             </span>
-        </button>
-        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                </svg>
-                <span class="sr-only">Next</span>
-            </span>
-        </button>
-    </div>
+            <p class="text-xl text-gray-300 mt-2">{{ company.title }}</p>
+          </div>
+        </div>
+
+        <!-- Company Description -->
+        <div class="mt-10 max-w-3xl">
+          <h2 class="text-2xl font-semibold text-white mb-4">Company Description</h2>
+          <p class="text-lg text-gray-300 leading-relaxed">{{ company.description }}</p>
+        </div>
+
+        <!-- Carousel -->
+        <div id="default-carousel" class="relative w-2/5 mb-7 mt-5" data-carousel="slide">
+            <!-- Carousel wrapper -->
+            <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                <!-- Item 1 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+                    <img src="../assets/company.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
+                </div>
+                <!-- Item 2 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <img src="../assets/office1.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
+                </div>
+                <!-- Item 3 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <img src="../assets/canteen.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
+                </div>
+                <!-- Item 4 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <img src="../assets/meetingroom.jpeg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
+                </div>
+                <!-- Item 5 -->
+                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                    <img src="../assets/gymroom.jpg" loading="lazy" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Image">
+                </div>
+            </div>
+            <!-- Slider indicators -->
+            <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+            </div>
+            <!-- Slider controls -->
+            <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                    </svg>
+                    <span class="sr-only">Previous</span>
+                </span>
+            </button>
+            <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                    </svg>
+                    <span class="sr-only">Next</span>
+                </span>
+            </button>
+        </div>
+    </template>
     </section>
 
     <!-- Career Available -->
@@ -154,23 +164,25 @@
 import { initFlowbite } from 'flowbite'
 import Modal from '@/components/JobModal.vue';
 import jobData from '../data/jobData.json';
-import companyData from '../data/companyData.json';
+import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import { db } from '@/firebase';
 
 export default {
-  props: ['id'], // Receives `id` from the route
+  props: ['id'],
   components: { Modal },
   data() {
     return {
-      company: null, // The current company data
-      jobs: jobData, // List of all jobs
-      isModalOpen: false, // Controls modal visibility
-      selectedJob: null, // Stores the job selected for the modal
+      company: null,
+      jobs: jobData,
+      isModalOpen: false,
+      selectedJob: null,
+      isLoading: false,
     };
   },
   computed: {
     filteredJobs() {
       if (!this.company) return [];
-      // Filter jobs by company name
       return this.jobs.filter(job => job.name === this.company.name);
     },
   },
@@ -179,9 +191,41 @@ export default {
     this.loadCompanyData();
   },
   methods: {
-    loadCompanyData() {
-      // Find the company matching the `id` from the route
-      this.company = companyData.find(company => company.sponsorID === Number(this.id));
+    async loadCompanyData() {
+      this.isLoading = true;
+      try {
+        console.log("Fetching company with sponsorID:", this.id); // Debug the passed ID
+        // Query Firestore to find the company by sponsorID
+        const companiesRef = collection(db, "companies");
+        const q = query(companiesRef, where("sponsorID", "==", Number(this.id))); // Use `where` to match sponsorID
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          const doc = querySnapshot.docs[0]; // Assuming sponsorID is unique
+          const companyData = doc.data();
+
+          // Fetch the logo URL if available
+          if (companyData.logo) {
+            try {
+              const storage = getStorage();
+              const logoRef = ref(storage, `companies logo${companyData.logo}`);
+              const logoUrl = await getDownloadURL(logoRef);
+              companyData.logo = logoUrl;
+            } catch (error) {
+              console.error("Error fetching logo:", error);
+            }
+          }
+
+          this.company = companyData;
+          console.log("Company data loaded successfully:", this.company);
+        } else {
+          console.log("No company found with sponsorID:", this.id);
+        }
+      } catch (error) {
+        console.error("Error loading company data:", error);
+      } finally {
+        this.isLoading = false;
+      }
     },
     navigateBack() {
       this.$router.push({ path: '/', hash: '#company' });
@@ -194,9 +238,22 @@ export default {
       this.isModalOpen = false;
       this.selectedJob = null;
     },
-    getCompanyLogo(jobCompanyName) {
-      const company = companyData.find(obj => obj.name === jobCompanyName);
-      return company ? company.logo : null;
+    async getCompanyLogo(jobCompanyName) {
+      try {
+        // Query Firestore to find company by name
+        const companyDoc = doc(db, 'companies', jobCompanyName);
+        const docSnap = await getDoc(companyDoc);
+
+        if (docSnap.exists() && docSnap.data().logo) {
+          const storage = getStorage();
+          const logoRef = ref(storage, `companies logo${docSnap.data().logo}`);
+          return await getDownloadURL(logoRef);
+        }
+        return null;
+      } catch (error) {
+        console.error('Error fetching company logo:', error);
+        return null;
+      }
     },
   },
 };

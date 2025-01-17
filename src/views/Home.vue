@@ -77,6 +77,7 @@
 
 <script>
 import { collection, getDocs } from 'firebase/firestore';
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { db } from '@/firebase';
 import Itinerary from "@/components/Itinerary.vue";
 import CountdownClock from "@/components/CountdownClock.vue";
@@ -101,8 +102,26 @@ export default {
       try {
         const companiesRef = collection(db, 'companies');
         const snapshot = await getDocs(companiesRef);
-        this.companies = snapshot.docs.map(doc => ({
-          ...doc.data(),
+        const storage = getStorage();
+
+        // Fetch companies and their logo URLs
+        this.companies = await Promise.all(snapshot.docs.map(async (doc) => {
+          const company = doc.data();
+          if (company.logo) { // Using logo field from Firestore
+            try {
+              const logoRef = ref(storage, `companies logo${company.logo}`);
+              const logoUrl = await getDownloadURL(logoRef);
+              console.log(`Successfully fetched logo URL for ${company.name}:`, logoUrl); // Console check
+              return {
+                ...company,
+                logo: logoUrl
+              };
+            } catch (error) {
+              console.error(`Error fetching logo for ${company.name}:`, error);
+              return company;
+            }
+          }
+          return company;
         }));
       } catch (error) {
         console.error("Error fetching companies:", error);
