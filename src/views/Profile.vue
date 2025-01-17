@@ -110,26 +110,37 @@
 
               <h2 class="text-xl font-semibold text-[#1E1B4B]">Resume</h2>
               <div class="flex justify-center items-center p-4 bg-gray-50 rounded-lg">
-                <div v-if="isEditing" class="space-y-2">
+                <div v-if="isEditing" class="space-y-2 w-full">
                   <input
                     type="file"
                     @change="(e) => handleFileUpload(e, 'resume')"
                     accept=".pdf,.doc,.docx"
                     class="w-full text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#1E1B4B] file:text-white hover:file:bg-[#312e81]"
+                    :disabled="isUploading"
                   />
-                  <p v-if="editedUser.resume" class="text-sm text-gray-900 font-medium">
-                    Current file: {{ editedUser.resume }}
+                  <!-- Upload Progress -->
+                  <div v-if="isUploading" class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div class="bg-[#1E1B4B] h-2.5 rounded-full transition-all duration-300" :style="{ width: uploadProgress + '%' }"></div>
+                  </div>
+                  <!-- Error Message -->
+                  <p v-if="resumeError" class="text-sm text-red-500">{{ resumeError }}</p>
+                  <!-- Current File Info -->
+                  <p v-if="editedUser.resume" class="text-sm text-gray-900 font-medium flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Current file: {{ editedUser.resume.fileName }}
                   </p>
                 </div>
-                <div v-else class="px-3 py-2 bg-gray-50 rounded-lg">
+                <div v-else class="px-3 py-2 bg-gray-50 rounded-lg w-full">
                   <a v-if="user.resume"
-                     :href="`/uploads/resume/${user.resume}`"
+                     :href="user.resume.fileURL"
                      class="text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-2"
                      target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    View Resume
+                    View Resume ({{ user.resume.fileName }})
                   </a>
                   <span v-else class="text-gray-500">No resume uploaded</span>
                 </div>
@@ -169,6 +180,8 @@
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '@/firebase';
+import { getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import toastr from 'toastr';
 
 export default {
   data() {
@@ -177,6 +190,9 @@ export default {
       editedUser: {},
       isEditing: false,
       logoError: '',
+      uploadProgress: 0,
+      isUploading: false,
+      resumeError: '',
     }
   },
 
@@ -202,16 +218,70 @@ export default {
       const file = event.target.files[0];
       if (!file) return;
 
-      const fileName = file.name;
+      if (type === 'resume') {
+        // Validate file type
+        const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        if (!allowedTypes.includes(file.type)) {
+          this.resumeError = 'Please upload a valid document (PDF, DOC, or DOCX)';
+          return;
+        }
 
-      if (type == 'resume') {
-        this.editedUser.resume = fileName;
-      } else if (type == 'logo') {
+        // Validate file size (max 5MB)
+        const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+        if (file.size > maxSize) {
+          this.resumeError = 'File size should not exceed 5MB';
+          return;
+        }
+
+        this.isUploading = true;
+        this.uploadProgress = 0;
+        this.resumeError = '';
+
+        try {
+          const storage = getStorage();
+          const fileExtension = file.name.split('.').pop();
+          const fileName = `${auth.currentUser.uid}_${Date.now()}.${fileExtension}`;
+          const resumeRef = storageRef(storage, `resumes/${fileName}`);
+
+          // Upload file with progress tracking
+          const uploadTask = uploadBytesResumable(resumeRef, file);
+
+          uploadTask.on('state_changed',
+            (snapshot) => {
+              // Track upload progress
+              this.uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            },
+            (error) => {
+              // Handle upload error
+              console.error('Upload error:', error);
+              this.resumeError = 'Failed to upload resume. Please try again.';
+              this.isUploading = false;
+            },
+            async () => {
+              // Upload completed successfully
+              const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+              this.editedUser.resume = {
+                fileName: file.name,
+                fileURL: downloadURL,
+                uploadedAt: new Date().toISOString()
+              };
+              this.isUploading = false;
+              toastr.success('Resume uploaded successfully!');
+            }
+          );
+        } catch (error) {
+          console.error('Resume upload error:', error);
+          this.resumeError = 'Failed to upload resume. Please try again.';
+          this.isUploading = false;
+        }
+      } else if (type === 'logo') {
+        // Existing logo upload logic
         const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
         if (!allowedTypes.includes(file.type)) {
           this.logoError = 'Please upload a valid image file (PNG, JPEG, JPG)';
           return;
         }
+        const fileName = file.name;
         this.editedUser.logo = fileName;
       }
     },
@@ -221,10 +291,11 @@ export default {
         await updateDoc(userRef, this.editedUser);
         this.user = { ...this.editedUser };
         this.isEditing = false;
-        alert('Profile updated successfully!');
-      } 
+        toastr.success('Profile updated successfully!');
+      }
       catch (error) {
-        alert('Failed to update profile. Please try again.');
+        console.error('Profile update error:', error);
+        toastr.error('Failed to update profile. Please try again.');
       }
     },
     async logout() {
