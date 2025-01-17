@@ -77,7 +77,19 @@
 
     <!-- Container for cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
-      <fwb-card v-for="job in filteredJobs"
+      <!-- Loading state -->
+      <div v-if="isLoading" class="col-span-3 text-center py-8">
+        <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] text-white"></div>
+        <p class="mt-2 text-white">Loading jobs...</p>
+      </div>
+
+      <!-- No jobs found -->
+      <div v-else-if="filteredJobs.length === 0" class="col-span-3 text-center py-8">
+        <p class="text-white text-lg">No jobs found matching your criteria.</p>
+      </div>
+
+      <!-- Job cards -->
+      <fwb-card v-else v-for="job in filteredJobs"
         :key="job.id"
         class="bg-white backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 max-w-sm"
         @click="openModal(job)">
@@ -89,11 +101,15 @@
               <!-- Logo positioned absolutely -->
               <div class="absolute top-0 left-0">
                 <img
-                  v-if="getCompanyLogo(job.name)"
-                  :src="getCompanyLogo(job.name)"
-                  :alt="job.name"
+                  v-if="job.companyLogo"
+                  :src="job.companyLogo"
+                  :alt="job.companyName"
                   class="w-14 h-14 object-contain rounded-lg"
+                  @error="$event.target.style.display='none'"
                 />
+                <div v-else class="w-14 h-14 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <span class="text-xl font-bold text-gray-500">{{ job.companyName ? job.companyName.charAt(0) : '?' }}</span>
+                </div>
               </div>
 
               <!-- Position, company name, and location with consistent left padding -->
@@ -102,14 +118,14 @@
                   {{ job.position }}
                 </h5>
                 <p class="font-normal text-gray-700">
-                  {{ job.name }}
+                  {{ job.companyName }}
                 </p>
                 <p class="text-sm text-gray-600 flex items-center gap-1 mt-1">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                   </svg>
-                  {{ getCompanyLocation(job.name) }}
+                  {{ job.companyLocation }}
                 </p>
               </div>
             </div>
@@ -139,10 +155,10 @@
     <!-- Modal Component -->
     <Modal
     :isOpen="isModalOpen"
-    :title="selectedJob?.name"
+    :title="selectedJob?.position"
     :description="selectedJob?.position"
     :jobDescription="selectedJob?.description"
-    :companyId="getCompanyId(selectedJob?.name)"
+    :companyId="selectedJob?.companyID"
     :showCompanyDetails="true"
     @close="closeModal"
     />
@@ -151,8 +167,9 @@
 
 <script>
 import Modal from '@/components/JobModal.vue';
-import jobData from '../data/jobData.json';
-import companyData from '../data/companyData.json';
+import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import { db } from '@/firebase';
 
 export default {
   name: 'CareerView',
@@ -165,22 +182,23 @@ export default {
       selectedType: '',
       selectedMode: '',
       selectedLocation: '',
-      jobs: jobData,
+      jobs: [],
       isModalOpen: false,
-      selectedJob: null
+      selectedJob: null,
+      isLoading: true
     }
   },
   computed: {
     filteredJobs() {
       return this.jobs.filter(job => {
         const matchesSearch = job.position.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-                            job.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+                            job.companyName?.toLowerCase().includes(this.searchQuery.toLowerCase());
 
         const matchesType = !this.selectedType || job.type === this.selectedType;
 
         const matchesMode = !this.selectedMode || job.mode === this.selectedMode;
 
-        const companyLocation = this.getCompanyLocation(job.name);
+        const companyLocation = job.companyLocation;
         const matchesLocation = !this.selectedLocation ||
                               (companyLocation && companyLocation.includes(this.selectedLocation));
 
@@ -189,6 +207,57 @@ export default {
     }
   },
   methods: {
+    async fetchJobs() {
+      this.isLoading = true;
+      try {
+        const jobsRef = collection(db, 'jobs');
+        const snapshot = await getDocs(jobsRef);
+
+        // Fetch jobs and company details
+        const jobsPromises = snapshot.docs.map(async (jobDoc) => {
+          const jobData = jobDoc.data();
+
+          // Fetch company details
+          if (jobData.companyID) {
+            const companyRef = doc(db, 'companies', jobData.companyID);
+            const companyDoc = await getDoc(companyRef);
+            if (companyDoc.exists()) {
+              const companyData = companyDoc.data();
+
+              // Fetch the logo URL if available
+              let logoUrl = null;
+              if (companyData.logo) {
+                try {
+                  const storage = getStorage();
+                  const logoRef = ref(storage, `companies logo${companyData.logo}`);
+                  logoUrl = await getDownloadURL(logoRef);
+                } catch (error) {
+                  console.error("Error fetching logo:", error);
+                }
+              }
+
+              return {
+                id: jobDoc.id,
+                ...jobData,
+                companyName: companyData.name,
+                companyLocation: companyData.location,
+                companyLogo: logoUrl
+              };
+            }
+          }
+          return {
+            id: jobDoc.id,
+            ...jobData
+          };
+        });
+
+        this.jobs = await Promise.all(jobsPromises);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      } finally {
+        this.isLoading = false;
+      }
+    },
     openModal(job) {
       this.selectedJob = job;
       this.isModalOpen = true;
@@ -197,18 +266,16 @@ export default {
       this.isModalOpen = false;
       this.selectedJob = null;
     },
-    getCompanyLogo(jobCompanyName) {
-      const company = companyData.find(company => company.name === jobCompanyName);
-      return company ? company.logo : null;
-    },
-    getCompanyLocation(jobCompanyName) {
-      const company = companyData.find(company => company.name === jobCompanyName);
-      return company ? company.location : null;
-    },
-    getCompanyId(jobCompanyName) {
-      const company = companyData.find(company => company.name === jobCompanyName);
-      return company ? company.sponsorID : null;
+    refresh() {
+      this.searchQuery = '';
+      this.selectedType = '';
+      this.selectedMode = '';
+      this.selectedLocation = '';
+      this.fetchJobs();
     }
+  },
+  async mounted() {
+    await this.fetchJobs();
   }
 }
 </script>
