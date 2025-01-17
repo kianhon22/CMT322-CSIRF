@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-center bg-cover bg-no-repeat bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply p-6">
+    <div v-if='user' class="min-h-screen bg-center bg-cover bg-no-repeat bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply p-6">
         <h1 class="text-4xl font-bold text-center mb-4 text-white">Dashboard</h1>
         <div class="container mx-auto bg-white rounded-lg shadow">
             <!-- Tabs -->
@@ -11,16 +11,10 @@
                     >Jobs
                     </button>
                     <button
-                        v-if="currentUser.role == 'sponsor'"
+                        v-if="user.role == 'company' || user.role == 'admin'"
                         :class="tab === 'students' ? activeTabClass : inactiveTabClass"
                         @click.prevent="tab = 'students'"
-                    >Applicants
-                    </button>
-                    <button
-                        v-if="currentUser.role == 'admin'"
-                        :class="tab === 'students' ? activeTabClass : inactiveTabClass"
-                        @click.prevent="tab = 'students'"
-                    >Students
+                    >{{ user.role === 'company' ? 'Applicants' : 'Students' }}
                     </button>
                 </nav>
             </div>
@@ -37,31 +31,39 @@
                     <input v-else
                         v-model="studentSearch"
                         type="text"
-                        :placeholder="currentUser.role == 'sponsor' ? 'Search Applicants...' : 'Search Students...'"
+                        :placeholder="user.role == 'company' ? 'Search Applicants...' : 'Search Students...'"
                         class="border rounded px-4 py-2 text-black"
                     />
                     <select v-model="jobTypeFilter" v-if="tab === 'jobs'" class="border rounded px-4 py-2 text-black ml-2">
-                        <option value="">Type</option>
-                        <option class="hover:bg-[#1E1B4B] hover:text-white" value="Full-Time">Full-Time</option>
+                        <option value="" disabled>Type</option>
+                        <option class="hover:bg-[#acacad] hover:text-white" value="Full-Time">Full-Time</option>
+                        <option class="hover:bg-[#acacad] hover:text-white" value="Part-Time">Part-Time</option>
                         <option class="hover:bg-[#1E1B4B] hover:text-white" value="Internship">Internship</option>
                     </select>
                     <select v-model="jobModeFilter" v-if="tab === 'jobs'" class="border rounded px-4 py-2 text-black ml-2">
-                        <option value="">Mode</option>
+                        <option value="" disabled>Mode</option>
                         <option value="On-Site">On-Site</option>
                         <option value="Hybrid">Hybrid</option>
                         <option value="Remote">Remote</option>
                     </select>
                     <select v-model="studentYearFilter" v-if="tab === 'students'" class="border rounded px-4 py-2 text-black ml-2">
-                        <option value="">Year</option>
+                        <option value="" disabled>Year</option>
                         <option v-for="year in [1, 2, 3, 4]" :key="year" :value="year">
                             Year {{ year }}
                         </option>
                     </select>
-                    <select v-if="tab === 'students' && currentUser.role == 'admin'" class="border rounded px-4 py-2 text-black ml-2">
-                        <option value="">Event</option>
-                        <option value="Talk 1">Talk 1</option>
-                        <option value="Webinar 2">Webinar 2</option>
-                        <option value="Workshop X">Workshop X</option>
+                    <select
+                        v-if="tab === 'students' && user.role === 'admin'"
+                        v-model="eventFilter"
+                        class="border rounded px-4 py-2 text-black ml-2"
+                    >
+                        <option
+                            v-for="event in events"
+                            :key="event.id"
+                            :value="event.id"
+                        >
+                            {{ event.title }}
+                        </option>
                     </select>
                     <select
                         v-model="itemsPerPage"
@@ -101,10 +103,10 @@
                     <thead class="text-white">
                         <tr class="bg-[#1E1B4B]">
                             <th class="p-2 border border-white">No.</th>
-                            <th v-if="currentUser.role === 'admin'" class="p-2 border border-white">
+                            <th v-if="user.role === 'admin'" class="p-2 border border-white">
                                 Company
-                                <button @click.prevent="sort('name')" class="ml-2">
-                                    <span :class="getSortIcon('name')">▲</span>
+                                <button @click.prevent="sort('companyName')" class="ml-2">
+                                    <span :class="getSortIcon('companyName')">▲</span>
                                 </button>
                             </th>
                             <th class="p-2 border border-white">
@@ -125,7 +127,7 @@
                             @click.prevent="openEditModal(job)"
                         >
                             <td class="p-2 border border-[#1E1B4B]">{{ index + 1 }}</td>
-                            <td v-if="currentUser.role === 'admin'" class="p-2 border border-[#1E1B4B]">{{ job.name }}</td>
+                            <td v-if="user.role === 'admin'" class="p-2 border border-[#1E1B4B]">{{ job.companyName }}</td>
                             <td class="p-2 border border-[#1E1B4B]">{{ job.position }}</td>
                             <td class="p-2 border border-[#1E1B4B]">{{ job.type }}</td>
                             <td class="p-2 border border-[#1E1B4B]">{{ job.mode }}</td>
@@ -141,7 +143,7 @@
                 />
             </div>
 
-            <!-- Applicants Table -->
+            <!-- Students Table -->
             <div v-if="tab === 'students'">
                 <table class="w-full table-auto border-collapse border">
                     <thead class="text-white">
@@ -161,9 +163,8 @@
                             </th>
                             <th class="p-2 border border-white">Email</th>
                             <th class="p-2 border border-white">Phone</th>
-                            <th v-if="currentUser.role === 'sponsor'" class="border border-white">Resume Link</th>
-                            <th v-if="currentUser.role === 'sponsor'" class="border border-white">Job Applied</th>
-                            <th v-if="currentUser.role === 'admin'" class="border border-white">Event Applied</th>
+                            <th v-if="user.role === 'company'" class="border border-white">Resume Link</th>
+                            <th v-if="user.role === 'company'" class="border border-white">Job Applied</th>
                         </tr>
                     </thead>
                     <tbody class="text-black">
@@ -177,7 +178,7 @@
                             <td class="p-2 border border-[#1E1B4B]">{{ student.year }}</td>
                             <td class="p-2 border border-[#1E1B4B]">{{ student.email }}</td>
                             <td class="p-2 border border-[#1E1B4B]">{{ student.phone }}</td>
-                            <td v-if="currentUser.role === 'sponsor'" class="p-2 border border-[#1E1B4B]">
+                            <td v-if="user.role === 'company'" class="p-2 border border-[#1E1B4B]">
                                 <a
                                     v-if="student.resume"
                                     :href="`/resume/${student.resume}`"
@@ -188,8 +189,13 @@
                                 </a>
                                 <span v-else>-</span>
                             </td>
-                            <td v-if="currentUser.role === 'sponsor'" class="p-2 border border-[#1E1B4B]">{{ student.jobApplied }}</td>
-                            <td v-if="currentUser.role === 'admin'" class="p-2 border border-[#1E1B4B]">{{ student.eventApplied }}</td>
+                            <td v-if="user.role === 'company'" class="p-2 border border-[#1E1B4B]">
+                                <span v-if="student.appliedJobNames && student.appliedJobNames.length > 0">
+                                    {{ student.appliedJobNames.join('') }}
+                                    <!-- {{ student.appliedJobNames.join(student.appliedJobNames.length > 1 ? ', ' : '') }} -->
+                                </span>
+                                <span v-else>-</span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -204,8 +210,9 @@
         </div>
 
         <EditModal
+            v-if="isModalOpen && user"
             :item="selectedItem"
-            v-if="isModalOpen"
+            :companies="companies"
             @close="closeEditModal"
             @update="updateItem"
         />
@@ -215,33 +222,32 @@
 <script>
 import EditModal from '@/components/EditModal.vue';
 import Pagination from '@/components/Pagination.vue';
-import jobData from '../data/jobData.json';
-import userData from '../data/userData.json';
-
-import { inject } from 'vue';
+import { auth, db } from '@/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { collection, doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc, query, where, orderBy } from 'firebase/firestore';
+import { serverTimestamp } from "firebase/firestore";
 
 export default {
-    setup() {
-        const currentUser = inject('currentUser')
-        return { currentUser }
-    },
     components:{
         EditModal, Pagination
     },
     data() {
         return {
-            // Filters
+            user: null,
             jobSearch: '',
             studentSearch: '',
             jobTypeFilter: '',
             jobModeFilter: '',
             studentYearFilter: '',
+            eventFilter: '',
             itemsPerPage: 10,
 
             // Data
             tab: 'jobs',
-            jobs: jobData,
-            students: userData.student,
+            jobs: [],
+            students: [],
+            companies: [],
+            events: [],
 
             // Pagination
             jobPage: 1,
@@ -252,23 +258,19 @@ export default {
             sortOrder: 1,
             isModalOpen: false,
             selectedItem: null,
+            loading: true,
         };
     },
     computed: {
         filteredJobs() {
-            return this.jobs
-                .filter((job) => {
-                    return (
-                        job.name.toLowerCase().includes(this.jobSearch.toLowerCase().trim()) ||
-                        job.position.toLowerCase().includes(this.jobSearch.toLowerCase().trim())
-                    );
-                })
-                .filter((job) => {
-                    return (
-                        (this.jobTypeFilter ? job.type === this.jobTypeFilter : true) &&
-                        (this.jobModeFilter ? job.mode === this.jobModeFilter : true)
-                    );
-                });
+            return this.jobs.filter((job) => {
+                return (
+                    (job.companyName.toLowerCase().includes(this.jobSearch.toLowerCase().trim()) ||
+                    job.position.toLowerCase().includes(this.jobSearch.toLowerCase().trim())) &&
+                    (this.jobTypeFilter ? job.type === this.jobTypeFilter : true) &&
+                    (this.jobModeFilter ? job.mode === this.jobModeFilter : true)
+                );
+            });
         },
         paginatedJobs() {
             const start = (this.jobPage - 1) * this.itemsPerPage;
@@ -277,24 +279,30 @@ export default {
         jobTotalPages() {
             return Math.ceil(this.filteredJobs.length / this.itemsPerPage);
         },
-
         filteredStudents() {
             return this.students
                 .filter((student) => {
-                    if (this.currentUser.role == "sponsor") {
-                        return student.applyJob == true;
+                    if (this.user.role == "company") {
+                        return  student.appliedJobs !== undefined && student.appliedJobs !== null;
+                    }
+                    else if (this.user.role === 'admin') {
+                        return this.eventFilter
+                            ? student.eventID === this.eventFilter
+                            : true; // Filter by selected event
                     }
                     return true;    // Skip the filter for other roles
                 })
                 .filter((student) => {
                     return (
-                        student.name.toLowerCase().includes(this.studentSearch.toLowerCase().trim()) ||
-                        student.email.toLowerCase().includes(this.studentSearch.toLowerCase().trim()) ||
-                        student.phone.toLowerCase().includes(this.studentSearch.toLowerCase().trim())
-                    );
-                })
-                .filter((student) => {
-                    return (
+                        (
+                            (this.user.role === 'company' && student.appliedJobNames &&
+                                student.appliedJobNames.some((jobName) =>
+                                    jobName.toLowerCase().includes(this.studentSearch.toLowerCase().trim())
+                                )) ||
+                            student.name.toLowerCase().includes(this.studentSearch.toLowerCase().trim()) ||
+                            student.email.toLowerCase().includes(this.studentSearch.toLowerCase().trim()) ||
+                            student.phone.toLowerCase().includes(this.studentSearch.toLowerCase().trim())
+                        ) &&
                         (this.studentYearFilter ? student.year === this.studentYearFilter : true)
                     );
                 });
@@ -314,7 +322,107 @@ export default {
         },
     },
     methods: {
+        async fetchJobs() {
+            const companySnapshot = await getDocs(collection(db, 'companies'));
+            const companyMap = companySnapshot.docs.reduce((map, doc) => {
+                map[doc.id] = doc.data().name; // Map companyID to companyName
+                return map;
+            }, {});
+
+            let jobQuery = '';
+            if (this.user.role == 'company') {
+                jobQuery = query(collection(db, 'jobs'), where('companyID', '==', this.user.companyID), orderBy('createdAt', 'desc'));
+            }
+            else {
+                jobQuery = query(collection(db, 'jobs'), orderBy('createdAt', 'desc'));
+            }
+
+            const jobSnapshot = await getDocs(jobQuery);
+            this.jobs = jobSnapshot.docs
+                .map((doc) => {
+                    const jobData = doc.data();
+                    return {
+                        id: doc.id,
+                        ...jobData,
+                        companyName: companyMap[jobData.companyID] || '', // Map companyID to name
+                    };
+                })
+        },
+        async fetchStudents() {
+            if (this.user.role == 'company') {
+                // Fetch all jobs and create a map of job IDs to job names
+                const jobQuery = query(
+                    collection(db, 'jobs'),
+                    where('companyID', '==', this.user.companyID)
+                );
+                const jobSnapshot = await getDocs(jobQuery);
+                const jobMap = jobSnapshot.docs.reduce((map, doc) => {
+                    map[doc.id] = doc.data().position; // Map job ID to job position name
+                    return map;
+                }, {});
+
+                // Fetch all students
+                const querySnapshot = await getDocs(collection(db, 'users'));
+                this.students = querySnapshot.docs
+                    .map((doc) => {
+                        const studentData = doc.data();
+
+                        // Map appliedJobs field to job names
+                        const appliedJobNames = studentData.appliedJobs
+                            ? studentData.appliedJobs.map((jobId) => jobMap[jobId] || '')
+                            : [];
+
+                        return {
+                            id: doc.id,
+                            ...studentData,
+                            appliedJobNames, // Add the resolved job names to the student object
+                        };
+                    })
+                    .filter((student) => student.appliedJobs && student.appliedJobs.length > 0);    // Filter students who have appliedJobs
+            }
+            else if (this.user.role == 'admin') {
+                // Fetch all events
+                const eventSnapshot = await getDocs(collection(db, 'events'));
+                this.events = eventSnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    title: doc.data().title,
+                }));
+
+                // Automatically set the first event as the default filter if available
+                if (this.events.length > 0) {
+                    this.eventFilter = this.events[0].id;
+                }
+
+                // Fetch all users who registered for events
+                const querySnapshot = await getDocs(collection(db, 'users'));
+                this.students = querySnapshot.docs.flatMap((doc) => {
+                    const studentData = doc.data();
+
+                    if (studentData.role != 'student' || !studentData.registeredEvents || !Array.isArray(studentData.registeredEvents)) {
+                        return []; // Skip users without registeredEvents
+                    }
+
+                    // Create a row for each event the student is registered for
+                    return studentData.registeredEvents.map((eventID) => ({
+                        id: doc.id,
+                        ...studentData,
+                        eventID,
+                    }));
+                });
+            }
+        },
+        async fetchCompanies() {
+            const querySnapshot = await getDocs(collection(db, 'companies'));
+            this.companies = querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                name: doc.data().name,
+            }));
+        },
         openEditModal(item) {
+            if (!item) {
+                console.error('Error Occurred');
+                return;
+            }
             this.selectedItem = { ...item };
             this.isModalOpen = true;
         },
@@ -346,38 +454,40 @@ export default {
             this.studentPage = page;
         },
         addJob() {
-            this.selectedItem = { name:'', position: '', description: '', type: '', mode: '' };
+            this.selectedItem = this.user.role == 'admin' ? {companyID:'', position: '', description: '', type: '', mode: '', createdAt: serverTimestamp()} : {companyID: this.user.companyID, position: '', description: '', type: '', mode: '', createdAt: serverTimestamp()};
             this.isModalOpen = true;
         },
-        updateItem(updatedItem) {
-            if (updatedItem._delete) {
+        async updateItem(updatedItem) {
+            if (updatedItem.delete) {
+                await deleteDoc(doc(db, 'jobs', updatedItem.id));
                 this.jobs = this.jobs.filter(job => job.id !== updatedItem.id);
-                this.closeEditModal();
+                this.isModalOpen = false;
                 return;
             }
 
             if (this.tab === 'jobs') {
                 if (!updatedItem.position || !updatedItem.type || !updatedItem.mode) {
-                    alert('Please fill in all required fields (Position, Type, Mode)');
+                    alert('Please fill in all required fields');
                     return;
-                }
+                }            
+                else if (updatedItem.id) {
+                    // Exclude 'companyName' and 'id' before saving to Firestore
+                    const { companyName, id, ...companyData } = updatedItem;
 
-                // Update an existing job if `id` exists
-                const index = this.jobs.findIndex(job => job.id === updatedItem.id);
-                if (index !== -1) {
-                    this.jobs.splice(index, 1, updatedItem); // Update the job
-                } else {
-                    // Add new job if `id` does not exist
-                    const newJob = { ...updatedItem, id: Date.now() };
-                    this.jobs.push(newJob); // Add to the jobs array
+                    await updateDoc(doc(db, 'jobs', updatedItem.id), companyData);
+                    this.isModalOpen = false;
+                } 
+                else {
+                    // Exclude 'companyName' and 'id' before saving to Firestore
+                    const { companyName, id, ...companyData } = updatedItem;
+
+                    const docRef = await addDoc(collection(db, 'jobs'), companyData);
+                    this.jobs.push({ id: docRef.id, ...companyData });
+                    this.isModalOpen = false;
                 }
             }
-            else if(this.tab === 'students') {
-                const index = this.students.findIndex((student) => student.id === updatedItem.id);
-                if (index !== -1) {
-                    this.students.splice(index, 1, updatedItem);
-                }
-            }
+
+            this.fetchJobs();
         },
         refresh() {
             this.jobSearch = ''
@@ -400,14 +510,19 @@ export default {
             }
 
             const headers = this.tab === 'jobs'
-                ? (this.currentUser.role == 'sponsor' ? ['Position', 'Type', 'Mode'] : ['Company', 'Position', 'Type', 'Mode'])
-                : ['Name', 'Year', 'Email', 'Phone', 'Resume'];
+                ? (this.user.role == 'company' ? ['Position', 'Type', 'Mode'] : ['Company', 'Position', 'Type', 'Mode'])
+                : (this.user.role == 'company' ? ['Name', 'Year', 'Email', 'Phone', 'Resume'] : ['Name', 'Year', 'Email', 'Phone']);
 
             const data = rows.map((row) => {
                 if (this.tab === 'jobs') {
-                    return this.currentUser.role == 'sponsor' ? [row.position, row.type, row.mode] : [row.name, row.position, row.type, row.mode];
+                    return this.user.role == 'company' ? [row.position, row.type, row.mode] : [row.companyName, row.position, row.type, row.mode];
                 } else {
-                    return [row.name, row.year, row.email, row.phone, row.resume || '-'];
+                    if (this.user.role == 'admin') {
+                        return [row.name, row.year, row.email, row.phone || '-'];
+                    }
+                    else {
+                        return [row.name, row.year, row.email, row.phone, row.resume || '-'];
+                    }
                 }
             });
 
@@ -427,9 +542,26 @@ export default {
             document.body.removeChild(link);
         },
     },
+    async created() {
+        try {
+            onAuthStateChanged(auth, async (currentUser) => {
+                if (currentUser) {
+                    const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+                    if (userDoc.exists()) {
+                        this.user = userDoc.data();
+                        await this.fetchJobs();
+                        await this.fetchStudents();
+                        await this.fetchCompanies();
+                    }
+                } else {
+                    this.$router.push('/login');
+                }
+            });
+           
+        }
+        catch (error){
+            console.error("Failed to fetch data:", error);
+        }
+    },
 };
 </script>
-
-<style>
-/* Add custom styles if needed */
-</style>

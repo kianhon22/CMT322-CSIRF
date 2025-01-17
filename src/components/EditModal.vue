@@ -15,7 +15,7 @@
             </div>
             <div class="p-4">
                 <form @submit.prevent="saveChanges">
-                    <div v-for="field in editableFields" :key="field.key" class="mb-4">
+                    <div class="mb-4" v-for="field in jobFields" :key="field.key">
                         <label :for="field.key" class="block font-medium capitalize">{{ field.label }}</label>
                         <input
                             v-if="field.type === 'input'"
@@ -24,7 +24,17 @@
                             class="border rounded px-4 py-2 w-full"
                         />
                         <select
-                            v-if="field.type === 'select'"
+                            v-else-if="field.key === 'companyID' && user.role === 'admin'"
+                            v-model="editableItem.companyID"
+                            :id="field.key"
+                            class="border rounded px-4 py-2 w-full"
+                        >
+                            <option v-for="company in companies" :key="company.id" :value="company.id">
+                                {{ company.name }}
+                            </option>
+                        </select>
+                        <select
+                            v-else
                             v-model="editableItem[field.key]"
                             :id="field.key"
                             class="border rounded px-4 py-2 w-full"
@@ -44,7 +54,8 @@
                             Delete
                         </button>
                         <button
-                            type="submit"
+                            type="button"
+                            @click="saveChanges"
                             :class="[
                                 'px-4 py-2 bg-[#1E1B4B] hover:bg-[#4e4eaa] text-white rounded',
                                 { 'ml-auto': !editableItem.id }
@@ -60,65 +71,77 @@
 </template>
 
 <script>
-import { inject } from 'vue';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth, db } from '@/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 export default {
-    setup() {
-        const currentUser = inject('currentUser')
-        return { currentUser }
-    },
     props: {
         item: {
             type: Object,
+            required: true,
+            // default: () => ({}), // Provide a default empty object
+        },
+        companies: {
+            type: Array,
             required: true,
         },
     },
     data() {
         return {
+            user: null,
             editableItem: { ...this.item },
             jobFields: [],
-            studentFields: [
-                { key: 'name', label: 'Name', type: 'input' },
-                { key: 'email', label: 'Email', type: 'input' },
-                { key: 'phone', label: 'Phone', type: 'input' },
-                { key: 'year', label: 'Year', type: 'select', options: [1, 2, 3, 4] },
-            ],
         };
     },
     computed: {
         isJob() {
-            return this.item.position !== undefined;
-        },
-        editableFields() {
-            return this.isJob ? this.jobFields : this.studentFields;
+            return this.item && this.item.position !== undefined;
         },
     },
     watch: {
-        currentUser: {
+        user: {
             immediate: true,
-            handler() {
-                // Dynamically populate jobFields based on currentUser.role
+            handler(user) {
+                if (!user || !user.role) return; // Safely handle null user
+
+                // Dynamically populate jobFields based on user.role
                 this.jobFields = [
-                    ...(this.currentUser.role == 'admin'
-                        ? [{ key: 'name', label: 'Company', type: 'input' }]
+                    ...(user.role == 'admin'
+                        ? [{ key: 'companyID', label: 'Company', type: 'select' }]
                         : []),
                     { key: 'position', label: 'Position', type: 'input' },
                     { key: 'description', label: 'Description', type: 'input' },
                     { key: 'type', label: 'Type', type: 'select', options: ['Full-Time', 'Part-Time', 'Internship'] },
                     { key: 'mode', label: 'Mode', type: 'select', options: ['On-Site', 'Hybrid', 'WFH'] },
                 ];
+
+                if (user.role == 'company') {
+                    this.editableItem.companyID = user.companyID;
+                }
             },
         },
     },
     methods: {
         saveChanges() {
             this.$emit('update', this.editableItem);
-            this.$emit('close');
         },
         deleteItem() {
-            this.$emit('update', { ...this.editableItem, _delete: true });
+            this.$emit('update', { ...this.editableItem, delete: true });
             this.$emit('close');
         },
+    },
+    async created() {
+        onAuthStateChanged(auth, async (currentUser) => {
+            if (currentUser) {
+                const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+                if (userDoc.exists()) {
+                this.user = userDoc.data();
+                }
+            } else {
+                this.$router.push('/login');
+            }
+        });
     },
 };
 </script>
