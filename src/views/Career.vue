@@ -261,6 +261,7 @@ export default {
     },
     openModal(job) {
       this.selectedJob = job;
+      console.log("selectedjob:",this.selectedJob);
       this.isModalOpen = true;
     },
     closeModal() {

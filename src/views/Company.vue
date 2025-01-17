@@ -116,17 +116,17 @@
                     <div class="p-6">
                         <div class="flex items-center gap-4 mb-4">
                             <img
-                                v-if="company.logo"
+                                v-if="company?.logo"
                                 :src="company.logo"
-                                :alt="job.name"
+                                :alt="company.name"
                                 class="w-16 h-16 object-contain rounded-lg"
                             />
                             <div>
                                 <h5 class="text-2xl font-bold tracking-tight text-gray-900">
-                                    {{ job.name }}
+                                    {{ job.position }}
                                 </h5>
                                 <p class="font-normal text-gray-700">
-                                    {{ job.position }}
+                                    {{ company?.name }}
                                 </p>
                             </div>
                         </div>
@@ -138,24 +138,26 @@
                                 {{ job.mode }}
                             </span>
                         </div>
-                        <button @click="openModal(job)" class="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-center text-white bg-[#1E1B4B] rounded-lg hover:bg-orange-500 focus:ring-4 focus:ring-blue-300 transition-colors duration-300">
+                        <button @click.stop="openModal(job)" class="w-full inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-center text-white bg-[#1E1B4B] rounded-lg hover:bg-orange-500 focus:ring-4 focus:ring-blue-300 transition-colors duration-300">
                             Apply Now
                             <svg class="w-4 h-4 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                             </svg>
                         </button>
                     </div>
                 </fwb-card>
             </div>
 
-            <!-- Job Modal -->
+            <!-- Modal Component -->
             <Modal
-            :isOpen="isModalOpen"
-            :title="selectedJob?.name"
-            :description="selectedJob?.position"
-            :jobDescription="selectedJob?.description"
-            :showCompanyDetails="false"
-            @close="closeModal"
+                :isOpen="isModalOpen"
+                :jobId="selectedJob || ''"
+                :title="selectedJob?.position"
+                :description="selectedJob?.position"
+                :jobDescription="selectedJob?.description"
+                :companyId="id"
+                :showCompanyDetails="false"
+                @close="closeModal"
             />
         </div>
     </section>
@@ -164,80 +166,80 @@
 <script>
 import { initFlowbite } from 'flowbite'
 import Modal from '@/components/JobModal.vue';
-import jobData from '../data/jobData.json';
-import { doc, getDoc, collection, query, where, getDocs, updateDoc, arrayUnion } from 'firebase/firestore';
+import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { db } from '@/firebase';
 
 export default {
+  name: 'CompanyDetails',
   props: ['id'],
   components: { Modal },
   data() {
     return {
       company: null,
-      jobs: jobData,
+      jobs: [],
       isModalOpen: false,
       selectedJob: null,
-      isLoading: false,
-      companyLogos: {},
+      isLoading: true,
     };
   },
   computed: {
     filteredJobs() {
-      if (!this.company) return [];
-      return this.jobs.filter(job => job.name === this.company.name);
+      return this.jobs;
     },
   },
-  watch: {
-    filteredJobs: {
-      immediate: true,
-      handler() {
-        this.loadCompanyLogos();
-      }
-    }
-  },
-  mounted() {
+  async mounted() {
     initFlowbite();
-    this.loadCompanyData();
+    await this.loadCompanyData();
+    await this.fetchJobs();
   },
   methods: {
     async loadCompanyData() {
-      this.isLoading = true;
       try {
-        console.log("Fetching company with sponsorID:", this.id); // Debug the passed ID
-        // Query Firestore to find the company by sponsorID
+        if (this.id) {
+          const companyDoc = await getDoc(doc(db, 'companies', this.id));
+          if (companyDoc.exists()) {
+            this.company = { id: companyDoc.id, ...companyDoc.data() };
 
-        if (this.id != null) {
-            const companyDoc = await getDoc(doc(db, 'companies', this.id));
-            if (companyDoc) {
-                this.company = companyDoc.data();
-            } else {
-                this.company = null;
+            // Fetch the logo URL if available
+            if (this.company.logo) {
+              try {
+                const storage = getStorage();
+                const logoRef = ref(storage, `companies logo${this.company.logo}`);
+                const logoUrl = await getDownloadURL(logoRef);
+                this.company.logo = logoUrl;
+              } catch (error) {
+                console.error("Error fetching logo:", error);
+              }
             }
-
-          // Fetch the logo URL if available
-          if (this.company.logo) {
-            try {
-              const storage = getStorage();
-              const logoRef = ref(storage, `companies logo${this.company.logo}`);
-              const logoUrl = await getDownloadURL(logoRef);
-              this.company.logo = logoUrl;
-            } catch (error) {
-              console.error("Error fetching logo:", error);
-            }
+          } else {
+            this.company = null;
           }
-          console.log("Company data loaded successfully:", this.company);
-        } else {
-          console.log("No company found with sponsorID:", this.id);
         }
       } catch (error) {
         console.error("Error loading company data:", error);
+      }
+    },
+    async fetchJobs() {
+      try {
+        const jobsRef = collection(db, 'jobs');
+        const q = query(jobsRef, where('companyID', '==', this.id));
+        const snapshot = await getDocs(q);
+
+        this.jobs = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+          name: this.company?.name,
+          logo: this.company?.logo
+        }));
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
       } finally {
         this.isLoading = false;
       }
     },
     navigateBack() {
-      this.$router.push({ path: '/', hash: '#company' });
+      this.$router.go(-1);
     },
     openModal(job) {
       this.selectedJob = job;
@@ -246,25 +248,7 @@ export default {
     closeModal() {
       this.isModalOpen = false;
       this.selectedJob = null;
-    },
-
-    async loadCompanyLogos() {
-      for (const job of this.filteredJobs) {
-        try {
-          const companyDoc = doc(db, 'companies', job.name);
-          const docSnap = await getDoc(companyDoc);
-
-          if (docSnap.exists() && docSnap.data().logo) {
-            const storage = getStorage();
-            const logoRef = ref(storage, `companies logo${docSnap.data().logo}`);
-            const logoUrl = await getDownloadURL(logoRef);
-            this.$set(this.companyLogos, job.name, logoUrl);
-          }
-        } catch (error) {
-          console.error('Error fetching company logo:', error);
-        }
-      }
-    },
-  },
+    }
+  }
 };
 </script>
