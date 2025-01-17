@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <section class="bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply min-h-screen p-8">
+  <section v-if="isAuthenticated" class="bg-[url('/csirf-background.png')] bg-gray-500 bg-blend-multiply min-h-screen p-8">
     <div class="max-w-3xl mx-auto">
       <!-- Profile Card -->
       <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 space-y-8">
@@ -166,7 +166,7 @@
 </template>
 
 <script>
-import { signOut } from 'firebase/auth';
+import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '@/firebase';
 
@@ -176,20 +176,22 @@ export default {
       user: {},
       editedUser: {},
       isEditing: false,
-      logoError: ''
+      logoError: '',
     }
   },
 
   async created() {
-    if (auth.currentUser) {
-      const userDoc = await getDoc(doc(db, 'users', auth.currentUser.uid));
-      if (userDoc.exists()) {
-        this.user = userDoc.data();
-        this.editedUser = { ...this.user };
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+        if (userDoc.exists()) {
+          this.user = userDoc.data();
+          this.editedUser = { ...this.user };
+        }
+      } else {
+        this.$router.push('/login');
       }
-    } else {
-      this.$router.push('/login');
-    }
+    });
   },
 
   methods: {
@@ -229,7 +231,12 @@ export default {
       await signOut(auth);
       this.$router.push('/login');
     },
-  }
+  },
+  computed: {
+    isAuthenticated() {
+      return this.user !== null;
+    },
+  },
 }
 </script>
 
