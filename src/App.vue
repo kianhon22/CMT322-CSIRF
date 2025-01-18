@@ -1,7 +1,6 @@
 <script setup>
 import NavigationBar from '@/components/NavigationBar.vue';
 import Footer from '@/components/Footer.vue';
-import userData from "@/data/userData";
 
 </script>
 
