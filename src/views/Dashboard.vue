@@ -350,42 +350,69 @@ export default {
                 })
         },
         async fetchStudents() {
-    if (this.user.role == 'company') {
-        // Fetch all jobs and create a map of job IDs to job names
-        const jobQuery = query(
-            collection(db, 'jobs'),
-            where('companyID', '==', this.user.companyID)
-        );
-        const jobSnapshot = await getDocs(jobQuery);
-        const jobMap = jobSnapshot.docs.reduce((map, doc) => {
-            map[doc.id] = doc.data().position; // Map job ID to job position name
-            return map;
-        }, {});
+            if (this.user.role == 'company') {
+                // Fetch all jobs and create a map of job IDs to job names
+                const jobQuery = query(
+                    collection(db, 'jobs'),
+                    where('companyID', '==', this.user.companyID)
+                );
+                const jobSnapshot = await getDocs(jobQuery);
+                const jobMap = jobSnapshot.docs.reduce((map, doc) => {
+                    map[doc.id] = doc.data().position; // Map job ID to job position name
+                    return map;
+                }, {});
 
-        // Fetch all students
-        const querySnapshot = await getDocs(collection(db, 'users'));
-        this.students = querySnapshot.docs
-            .map((doc) => {
-                const studentData = doc.data();
+                // Fetch all students
+                const querySnapshot = await getDocs(collection(db, 'users'));
+                this.students = querySnapshot.docs
+                    .map((doc) => {
+                        const studentData = doc.data();
 
-                // Map appliedJobs field to job names
-                const appliedJobNames = studentData.appliedJobs
-                    ? studentData.appliedJobs.map((jobId) => jobMap[jobId] || '')
-                    : [];
+                        // Map appliedJobs field to job names
+                        const appliedJobNames = studentData.appliedJobs
+                            ? studentData.appliedJobs.map((jobId) => jobMap[jobId] || '')
+                            : [];
 
-                return {
+                        return {
+                            id: doc.id,
+                            ...studentData,
+                            appliedJobNames, // Add the resolved job names to the student object
+                            resume: studentData.resume ? studentData.resume.fileURL : null, // Add resume file URL
+                        };
+                    })
+                    .filter((student) => student.appliedJobs && student.appliedJobs.length > 0); // Filter students who have appliedJobs
+            } 
+            else if (this.user.role == 'admin') {
+                // Fetch all events
+                const eventSnapshot = await getDocs(collection(db, 'events'));
+                this.events = eventSnapshot.docs.map((doc) => ({                
                     id: doc.id,
-                    ...studentData,
-                    appliedJobNames, // Add the resolved job names to the student object
-                    resume: studentData.resume ? studentData.resume.fileURL : null, // Add resume file URL
-                };
-            })
-            .filter((student) => student.appliedJobs && student.appliedJobs.length > 0); // Filter students who have appliedJobs
-    } else if (this.user.role == 'admin') {
-        // Existing admin-specific fetch logic...
-    }
-}
-,
+                    title: doc.data().title,
+                }));
+                
+                // Automatically set the first event as the default filter if available
+                if (this.events.length > 0) {
+                    this.eventFilter = this.events[0].id;
+                }
+
+                // Fetch all users who registered for events
+                const querySnapshot = await getDocs(collection(db, 'users'));
+                this.students = querySnapshot.docs.flatMap((doc) => {
+                    const studentData = doc.data();
+
+                    if (studentData.role != 'student' || !studentData.registeredEvents || !Array.isArray(studentData.registeredEvents)) {
+                        return []; // Skip users without registeredEvents
+                    }
+                    
+                    // Create a row for each event the student is registered for
+                    return studentData.registeredEvents.map((eventID) => ({
+                        id: doc.id,
+                        ...studentData,
+                        eventID,
+                    }));
+                });
+            }
+        },
         async fetchCompanies() {
             const querySnapshot = await getDocs(collection(db, 'companies'));
             this.companies = querySnapshot.docs.map(doc => ({
