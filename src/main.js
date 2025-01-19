@@ -27,15 +27,14 @@ const checkSessionTimeout = () => {
     }
     const currentTime = Date.now();
     if (currentTime - lastActivityTime > SESSION_TIMEOUT) {
-        // Show a confirmation alert
-        if (window.confirm('Your session has expired. Click confirm logout.')) {
-            signOut(auth).then(() => {
-                router.push('/login'); // Redirect to login page
-            });
-        } else {
-            // User canceled, refresh last activity time to reset timeout
-            lastActivityTime = Date.now();
-        }
+        // Display an alert with only "OK" to confirm logout
+        alert('Your session has expired. You will be logged out.');
+
+        // Automatically log out after the alert is acknowledged
+        signOut(auth).then(() => {
+            toastr.warning('You have been logged out due to inactivity.');
+            router.push('/login'); // Redirect to login page
+        });
     }
 };
 
