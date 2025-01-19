@@ -54,9 +54,11 @@
                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1E1B4B] focus:border-transparent text-gray-900 font-medium"
                        placeholder="Enter your full name"
                 />
+
                 <div v-else class="px-3 py-2 bg-gray-50 rounded-lg text-gray-900">
                   {{ user.name }}
                 </div>
+                <p v-if="nameError" class="text-red-500 text-sm mt-1">{{ nameError }}</p>
               </div>
 
               <div class="space-y-2">
@@ -194,6 +196,7 @@ export default {
       uploadProgress: 0,
       isUploading: false,
       resumeError: '',
+      nameError: '',
     }
   },
 
@@ -204,6 +207,9 @@ export default {
 
     // Sanitize all editable fields before saving
     sanitizeInputs() {
+
+      this.nameError = '';
+
       // Sanitize name
       this.editedUser.name = DOMPurify.sanitize(this.editedUser.name || '');
       if (!this.editedUser.name.trim()) {
@@ -304,6 +310,14 @@ export default {
 
         // Sanitize input data
         this.sanitizeInputs();
+
+        if (!this.editedUser.name|| !/^[A-Za-z\s]+$/.test(this.editedUser.name) ) {
+          this.nameError = 'Name can only contain alphabets and spaces.';
+          return;
+        }
+
+        // Clear any existing errors
+        this.nameError = '';
 
         const userRef = doc(db, 'users', auth.currentUser.uid);
         await updateDoc(userRef, this.editedUser);
