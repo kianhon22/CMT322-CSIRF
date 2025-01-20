@@ -156,10 +156,14 @@
               <h2 class="text-xl font-semibold text-[#1E1B4B]">Company Logo</h2>
               <div class="flex justify-center items-center p-4 bg-gray-50 rounded-lg">
                 <img
-                  :src="`/uploads/companyLogo/${user.logo}`"
-                  alt="Company Logo"
-                  class="max-w-[200px] max-h-[200px] object-contain"
+                    v-if="user.logo"
+                    :src="user.logo"
+                    alt="Company Logo"
+                    class="max-w-[200px] max-h-[200px] object-contain"
                 />
+                <div v-else class="w-[200px] h-[200px] flex items-center justify-center bg-gray-200 rounded-lg">
+                    <span class="text-gray-500">No logo uploaded</span>
+                </div>
               </div>
               <div v-if="isEditing" class="space-y-2">
                 <input
@@ -197,6 +201,7 @@ export default {
       isUploading: false,
       resumeError: '',
       nameError: '',
+      uploadType: '',
     }
   },
 
@@ -245,6 +250,7 @@ export default {
           this.resumeError = 'Please upload a valid document (PDF, DOC, or DOCX)';
           return;
         }
+
 
         // Validate file size (max 5MB)
         const maxSize = 5 * 1024 * 1024; // 5MB in bytes
@@ -295,15 +301,59 @@ export default {
           this.isUploading = false;
         }
       } else if (type === 'logo') {
-        // Existing logo upload logic
-        const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-        if (!allowedTypes.includes(file.type)) {
-          this.logoError = 'Please upload a valid image file (PNG, JPEG, JPG)';
-          return;
-        }
-        const fileName = file.name;
-        this.editedUser.logo = fileName;
+  // Validate image file
+  const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+  if (!allowedTypes.includes(file.type)) {
+    this.logoError = 'Please upload a valid image file (PNG, JPEG, JPG)';
+    return;
+  }
+
+  // Validate file size (max 2MB)
+  const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+  if (file.size > maxSize) {
+    this.logoError = 'File size should not exceed 2MB';
+    return;
+  }
+
+  this.isUploading = true;
+  this.uploadProgress = 0;
+  this.logoError = '';
+  this.uploadType = 'logo';
+
+  try {
+    const storage = getStorage();
+    const fileExtension = file.name.split('.').pop();
+    const fileName = `${auth.currentUser.uid}_${Date.now()}.${fileExtension}`;
+    const logoRef = storageRef(storage, `companies logo/${fileName}`);
+
+    // Upload file with progress tracking
+    const uploadTask = uploadBytesResumable(logoRef, file);
+
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        // Track upload progress
+        this.uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      },
+      (error) => {
+        // Handle upload error
+        console.error('Logo upload error:', error);
+        this.logoError = 'Failed to upload logo. Please try again.';
+        this.isUploading = false;
+      },
+      async () => {
+        // Upload completed successfully
+        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+        this.editedUser.logo = downloadURL;
+        this.isUploading = false;
+        toastr.success('Logo uploaded successfully!');
       }
+    );
+  } catch (error) {
+    console.error('Logo upload error:', error);
+    this.logoError = 'Failed to upload logo. Please try again.';
+    this.isUploading = false;
+  }
+}
     },
     async saveChanges() {
       try {
@@ -334,6 +384,21 @@ export default {
       await signOut(auth);
       this.$router.push('/login');
     },
+    async fetchCompanyLogo() {
+  if (this.user.role === 'company' && this.user.logo) {
+    try {
+      const storage = getStorage();
+      const logoRef = storageRef(storage, `companies logo/${this.user.logo}`);
+      const logoUrl = await getDownloadURL(logoRef);
+      console.log('Logo URL:', logoUrl); // Add this for debugging
+      this.user.logo = logoUrl;
+      this.editedUser.logo = logoUrl;
+    } catch (error) {
+      console.error('Error fetching logo:', error);
+      // Keep the existing logo path if fetch fails
+    }
+  }
+},
   },
   computed: {
     isAuthenticated() {
@@ -347,12 +412,14 @@ export default {
         if (userDoc.exists()) {
           this.user = userDoc.data();
           this.editedUser = { ...this.user };
+          await this.fetchCompanyLogo();
         }
       } else {
         this.$router.push('/login');
       }
     });
   },
+
 }
 </script>
 
