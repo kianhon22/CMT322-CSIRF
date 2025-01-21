@@ -142,6 +142,7 @@
               </span>
             </div>
             <button
+              v-if="user==null || user.role=='student'"
               :class="[
                 'w-full inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg transition-colors duration-300',
                 hasApplied(job)
@@ -188,20 +189,17 @@
 import Modal from '@/components/JobModal.vue';
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import { onAuthStateChanged } from 'firebase/auth';
 import { db, auth } from '@/firebase';
-import { inject } from 'vue';
 
 export default {
   name: 'CareerView',
   components: {
     Modal
   },
-  setup() {
-    const currentUser = inject('currentUser');
-    return { currentUser }
-  },
   data() {
     return {
+      user: null,
       searchQuery: '',
       selectedType: '',
       selectedMode: '',
@@ -326,6 +324,15 @@ export default {
     }
   },
   async mounted() {
+    onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+        if (userDoc.exists()) {
+          this.user = userDoc.data();
+        }
+      }
+    });
+
     await this.fetchJobs();
   }
 }

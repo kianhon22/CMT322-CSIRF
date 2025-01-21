@@ -183,7 +183,7 @@ export default {
         this.$router.push('/');
       } catch (error) {
         this.errorMessage = 'Invalid email or password. Please try again.';
-        // console.error('Error:', error);
+        // console.error(error);
       }
     },
     // Toggle between Login and Register

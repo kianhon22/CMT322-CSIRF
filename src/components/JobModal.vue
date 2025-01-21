@@ -41,6 +41,7 @@
                             Company Details
                         </button>
                         <button
+                            v-if="currentUser==null || currentUser.role=='student'"
                             @click="applyJob"
                             @click.prevent="openModal"
                             :disabled="isApplied"
