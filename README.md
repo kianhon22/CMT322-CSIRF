@@ -7,7 +7,7 @@ Computer Science Internship & Recruitment Fair is an annual event exhibiting a s
 1. Clone the repository from GitHub
 
    ```bash
-   https://github.com/tkhabc/CMT322-VCSIRF.git
+   https://github.com/kianhon22/CMT322-VCSIRF.git
    ```
    
 2. Install dependencies
